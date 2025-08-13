@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,18 +10,27 @@ import { useToast } from "@/hooks/use-toast";
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
 const Index = () => {
+  console.log('Index component is rendering...');
+  
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
     country: ''
   });
-  const {
-    toast
-  } = useToast();
+  
+  const { toast } = useToast();
+
+  useEffect(() => {
+    console.log('Index component mounted successfully');
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submitted with data:', formData);
+    
     if (!formData.name || !formData.phone || !formData.country) {
       toast({
         title: "সব ফিল্ড পূরণ করুন",
@@ -30,10 +39,12 @@ const Index = () => {
       });
       return;
     }
+    
     toast({
       title: "ধন্যবাদ!",
       description: "আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।"
     });
+    
     setFormData({
       name: '',
       phone: '',
@@ -41,7 +52,11 @@ const Index = () => {
       country: ''
     });
   };
-  return <div className="min-h-screen font-bangla bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
+
+  console.log('About to render Index JSX...');
+
+  return (
+    <div className="min-h-screen font-bangla bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
       <Header />
 
       {/* Hero Section */}
@@ -51,16 +66,16 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left animate-fade-in">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mb-6 sm:mb-8 leading-tight" style={{
-              lineHeight: '1.1'
-            }}>
+                lineHeight: '1.1'
+              }}>
                 বিদেশে পড়াশোনা 
                 <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 bg-clip-text text-transparent block mt-2">
                   এখন আরও সহজ!
                 </span>
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-4 sm:mb-6 leading-relaxed" style={{
-              lineHeight: '1.5'
-            }}>
+                lineHeight: '1.5'
+              }}>
                 অস্ট্রেলিয়া, যুক্তরাজ্য, মালয়েশিয়া, নিউজিল্যান্ডে ভর্তি ও ভিসা সাপোর্ট
               </p>
               <p className="text-base sm:text-lg text-gray-600 mb-8 sm:mb-10 leading-relaxed">
@@ -90,34 +105,55 @@ const Index = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <Label htmlFor="name" className="text-gray-700 font-medium">আপনার নাম</Label>
-                    <Input id="name" type="text" placeholder="পূর্ণ নাম লিখুন" value={formData.name} onChange={e => setFormData({
-                    ...formData,
-                    name: e.target.value
-                  })} className="mt-2 text-lg py-3 border-2 focus:border-purple-500" />
+                    <Input 
+                      id="name" 
+                      type="text" 
+                      placeholder="পূর্ণ নাম লিখুন" 
+                      value={formData.name} 
+                      onChange={e => setFormData({
+                        ...formData,
+                        name: e.target.value
+                      })} 
+                      className="mt-2 text-lg py-3 border-2 focus:border-purple-500" 
+                    />
                   </div>
                   
                   <div>
                     <Label htmlFor="phone" className="text-gray-700 font-medium">মোবাইল নাম্বার</Label>
-                    <Input id="phone" type="tel" placeholder="+৮৮০ ১৭xxxxxxxx" value={formData.phone} onChange={e => setFormData({
-                    ...formData,
-                    phone: e.target.value
-                  })} className="mt-2 text-lg py-3 border-2 focus:border-purple-500" />
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      placeholder="+৮৮০ ১৭xxxxxxxx" 
+                      value={formData.phone} 
+                      onChange={e => setFormData({
+                        ...formData,
+                        phone: e.target.value
+                      })} 
+                      className="mt-2 text-lg py-3 border-2 focus:border-purple-500" 
+                    />
                   </div>
                   
                   <div>
                     <Label htmlFor="email" className="text-gray-700 font-medium">ইমেইল (ঐচ্ছিক)</Label>
-                    <Input id="email" type="email" placeholder="your@email.com" value={formData.email} onChange={e => setFormData({
-                    ...formData,
-                    email: e.target.value
-                  })} className="mt-2 text-lg py-3 border-2 focus:border-purple-500" />
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="your@email.com" 
+                      value={formData.email} 
+                      onChange={e => setFormData({
+                        ...formData,
+                        email: e.target.value
+                      })} 
+                      className="mt-2 text-lg py-3 border-2 focus:border-purple-500" 
+                    />
                   </div>
                   
                   <div>
                     <Label htmlFor="country" className="text-gray-700 font-medium">যেতে চান কোন দেশে?</Label>
                     <Select value={formData.country} onValueChange={value => setFormData({
-                    ...formData,
-                    country: value
-                  })}>
+                      ...formData,
+                      country: value
+                    })}>
                       <SelectTrigger className="mt-2 text-lg py-3 border-2 focus:border-purple-500">
                         <SelectValue placeholder="দেশ নির্বাচন করুন" />
                       </SelectTrigger>
@@ -151,8 +187,8 @@ const Index = () => {
           </div>
         </div>
         <div className="absolute bottom-20 left-10 animate-bounce hidden lg:block" style={{
-        animationDelay: '1s'
-      }}>
+          animationDelay: '1s'
+        }}>
           <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
             <Globe className="text-white" size={24} />
           </div>
@@ -365,6 +401,8 @@ const Index = () => {
 
       {/* Footer */}
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Index;

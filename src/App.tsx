@@ -20,30 +20,34 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/study-abroad-process" element={<StudyAbroadProcess />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/lead/:id" element={<LeadDetail />} />
-          <Route path="/admin/lead-manager" element={<LeadManager />} />
-          <Route path="/admin/website-management" element={<WebsiteManagement />} />
-          <Route path="/admin/settings" element={<AdminSettings />} />
-          <Route path="/leadmanager/login" element={<LeadManagerLogin />} />
-          <Route path="/leadmanager/dashboard" element={<LeadManagerDashboard />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  console.log('App component is rendering...');
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/study-abroad-process" element={<StudyAbroadProcess />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/lead/:id" element={<LeadDetail />} />
+            <Route path="/admin/lead-manager" element={<LeadManager />} />
+            <Route path="/admin/website-management" element={<WebsiteManagement />} />
+            <Route path="/admin/settings" element={<AdminSettings />} />
+            <Route path="/leadmanager/login" element={<LeadManagerLogin />} />
+            <Route path="/leadmanager/dashboard" element={<LeadManagerDashboard />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

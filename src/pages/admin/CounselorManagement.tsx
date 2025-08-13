@@ -15,7 +15,9 @@ import {
   Mail, 
   Phone, 
   Calendar,
-  Eye
+  Eye,
+  Users,
+  FileText
 } from 'lucide-react';
 
 const CounselorManagement = () => {

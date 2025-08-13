@@ -23,9 +23,10 @@ import {
 } from 'lucide-react';
 
 const AdminSidebar = () => {
-  const { collapsed } = useSidebar();
+  const { state } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
+  const isCollapsed = state === "collapsed";
 
   const isActive = (path: string) => currentPath === path;
 
@@ -45,7 +46,7 @@ const AdminSidebar = () => {
     isActive ? "bg-primary text-primary-foreground font-medium" : "hover:bg-muted/50";
 
   return (
-    <Sidebar className={collapsed ? "w-14" : "w-60"} collapsible>
+    <Sidebar className={isCollapsed ? "w-14" : "w-60"} collapsible="icon">
       <SidebarContent>
         {/* Main Navigation */}
         <SidebarGroup>
@@ -57,7 +58,7 @@ const AdminSidebar = () => {
                   <SidebarMenuButton asChild>
                     <NavLink to={item.url} className={getNavClassName}>
                       <item.icon className="mr-2 h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
+                      {!isCollapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -76,7 +77,7 @@ const AdminSidebar = () => {
                   <SidebarMenuButton asChild>
                     <NavLink to={item.url} className={getNavClassName}>
                       <item.icon className="mr-2 h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
+                      {!isCollapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -84,7 +85,7 @@ const AdminSidebar = () => {
               <SidebarMenuItem>
                 <SidebarMenuButton className="text-red-600 hover:text-red-700 hover:bg-red-50">
                   <LogOut className="mr-2 h-4 w-4" />
-                  {!collapsed && <span>Logout</span>}
+                  {!isCollapsed && <span>Logout</span>}
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

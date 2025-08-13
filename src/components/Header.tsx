@@ -22,7 +22,7 @@ const Header = () => {
             <div className="w-10 h-10 bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 rounded-full flex items-center justify-center shadow-lg">
               <GraduationCap className="text-white" size={24} />
             </div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 bg-clip-text text-transparent">MH Education</h1>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 bg-clip-text text-transparent">BEGL Education</h1>
           </Link>
           
           <nav className="hidden md:flex items-center space-x-6">

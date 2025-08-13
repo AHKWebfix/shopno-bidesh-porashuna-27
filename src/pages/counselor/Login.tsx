@@ -21,7 +21,7 @@ const LeadManagerLogin = () => {
     e.preventDefault();
     
     // Simple demo authentication
-    if (formData.email === 'leadmanager@mheducation.com' && formData.password === 'leadmanager123') {
+    if (formData.email === 'leadmanager@begleducation.com' && formData.password === 'leadmanager123') {
       toast({
         title: "Login Successful!",
         description: "Welcome to Lead Manager Dashboard.",
@@ -55,7 +55,7 @@ const LeadManagerLogin = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="leadmanager@mheducation.com"
+                placeholder="leadmanager@begleducation.com"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                 className="mt-2"
@@ -95,7 +95,7 @@ const LeadManagerLogin = () => {
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-500">
-              Demo Login: leadmanager@mheducation.com / leadmanager123
+              Demo Login: leadmanager@begleducation.com / leadmanager123
             </p>
           </div>
         </CardContent>

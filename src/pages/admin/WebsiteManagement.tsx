@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,14 +20,14 @@ const WebsiteManagement = () => {
 
   const [aboutContent, setAboutContent] = useState({
     aboutTitle: 'আমাদের সম্পর্কে',
-    aboutDescription: 'MH Education একটি নির্ভরযোগ্য শিক্ষা পরামর্শ প্রতিষ্ঠান...',
+    aboutDescription: 'BEGL Education একটি নির্ভরযোগ্য শিক্ষা পরামর্শ প্রতিষ্ঠান...',
     missionStatement: 'আমাদের লক্ষ্য হলো প্রতিটি শিক্ষার্থীর স্বপ্ন পূরণে সহায়তা করা।',
   });
 
   const [contactContent, setContactContent] = useState({
     address: 'ঢাকা, বাংলাদেশ',
     phone: '+৮৮০ ১৭xxxxxxxx',
-    email: 'info@mheducation.com',
+    email: 'info@begleducation.com',
     workingHours: 'সকাল ৯টা - সন্ধ্যা ৬টা',
   });
 

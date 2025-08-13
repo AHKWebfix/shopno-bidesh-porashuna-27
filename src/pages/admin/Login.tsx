@@ -21,7 +21,7 @@ const AdminLogin = () => {
     e.preventDefault();
     
     // Simple demo authentication
-    if (formData.email === 'admin@mheducation.com' && formData.password === 'admin123') {
+    if (formData.email === 'admin@begleducation.com' && formData.password === 'admin123') {
       toast({
         title: "লগইন সফল!",
         description: "ড্যাশবোর্ডে স্বাগতম।",
@@ -55,7 +55,7 @@ const AdminLogin = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@mheducation.com"
+                placeholder="admin@begleducation.com"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                 className="mt-2"
@@ -95,7 +95,7 @@ const AdminLogin = () => {
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-500">
-              ডেমো লগইন: admin@mheducation.com / admin123
+              ডেমো লগইন: admin@begleducation.com / admin123
             </p>
           </div>
         </CardContent>

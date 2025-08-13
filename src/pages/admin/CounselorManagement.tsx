@@ -4,6 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 import { 
   Plus, 
   Search, 
@@ -13,83 +15,54 @@ import {
   Mail, 
   Phone, 
   Calendar,
-  Activity,
-  Award
+  Eye
 } from 'lucide-react';
 
 const CounselorManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 
   // Mock data for demonstration
   const counselors = [
     {
       id: 1,
       name: 'Sarah Johnson',
-      email: 'sarah.johnson@begleducation.com',
+      email: 'sarah.johnson@company.com',
       phone: '+1-234-567-8901',
+      username: 'sarah_johnson',
       joinDate: '2023-06-15',
       status: 'Active',
       assignedLeads: 25,
-      completedFiles: 18,
-      successRate: 72,
-      specialization: ['Canada', 'Australia'],
-      role: 'Senior Counselor'
+      completedFiles: 18
     },
     {
       id: 2,
       name: 'David Wilson',
-      email: 'david.wilson@begleducation.com',
+      email: 'david.wilson@company.com',
       phone: '+1-234-567-8902',
+      username: 'david_wilson',
       joinDate: '2023-08-20',
       status: 'Active',
       assignedLeads: 22,
-      completedFiles: 15,
-      successRate: 68,
-      specialization: ['UK', 'Ireland'],
-      role: 'Counselor'
+      completedFiles: 15
     },
     {
       id: 3,
       name: 'Emma Brown',
-      email: 'emma.brown@begleducation.com',
+      email: 'emma.brown@company.com',
       phone: '+1-234-567-8903',
+      username: 'emma_brown',
       joinDate: '2023-04-10',
-      status: 'Active',
+      status: 'Inactive',
       assignedLeads: 30,
-      completedFiles: 24,
-      successRate: 80,
-      specialization: ['USA', 'Canada'],
-      role: 'Senior Counselor'
-    },
-    {
-      id: 4,
-      name: 'Michael Davis',
-      email: 'michael.davis@begleducation.com',
-      phone: '+1-234-567-8904',
-      joinDate: '2023-11-05',
-      status: 'On Leave',
-      assignedLeads: 15,
-      completedFiles: 8,
-      successRate: 53,
-      specialization: ['Germany', 'Netherlands'],
-      role: 'Junior Counselor'
+      completedFiles: 24
     }
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Active': return 'bg-green-100 text-green-800';
-      case 'On Leave': return 'bg-yellow-100 text-yellow-800';
       case 'Inactive': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getRoleColor = (role: string) => {
-    switch (role) {
-      case 'Senior Counselor': return 'bg-purple-100 text-purple-800';
-      case 'Counselor': return 'bg-blue-100 text-blue-800';
-      case 'Junior Counselor': return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -103,37 +76,97 @@ const CounselorManagement = () => {
             <h1 className="text-3xl font-bold text-gray-900">Counselor Management</h1>
             <p className="text-gray-600 mt-2">Manage your counseling team</p>
           </div>
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            Add New Counselor
-          </Button>
+          
+          <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+            <DialogTrigger asChild>
+              <Button>
+                <Plus className="h-4 w-4 mr-2" />
+                Add New Counselor
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[500px]">
+              <DialogHeader>
+                <DialogTitle>Add New Counselor</DialogTitle>
+                <DialogDescription>
+                  Create a new counselor account with login credentials
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Full Name
+                  </Label>
+                  <Input id="name" placeholder="Enter full name" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="username" className="text-right">
+                    Username
+                  </Label>
+                  <Input id="username" placeholder="Enter username" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="email" className="text-right">
+                    Email
+                  </Label>
+                  <Input id="email" type="email" placeholder="Enter email" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="phone" className="text-right">
+                    Phone
+                  </Label>
+                  <Input id="phone" placeholder="Enter phone number" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="password" className="text-right">
+                    Password
+                  </Label>
+                  <Input id="password" type="password" placeholder="Enter password" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="department" className="text-right">
+                    Department
+                  </Label>
+                  <Input id="department" placeholder="Enter department" className="col-span-3" />
+                </div>
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                  Cancel
+                </Button>
+                <Button onClick={() => setIsAddDialogOpen(false)}>
+                  Create Counselor
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
-        {/* Search and Stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
-          <div className="lg:col-span-2">
-            <Card>
-              <CardContent className="p-4">
-                <div className="relative">
-                  <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    placeholder="Search counselors by name or email..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          
+        {/* Search */}
+        <Card className="mb-6">
+          <CardContent className="p-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Input
+                placeholder="Search counselors by name or email..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center">
                 <UserCheck className="h-8 w-8 text-green-600 mr-3" />
                 <div>
                   <p className="text-sm font-medium text-gray-600">Active Counselors</p>
-                  <p className="text-2xl font-bold text-gray-900">3</p>
+                  <p className="text-2xl font-bold text-gray-900">
+                    {counselors.filter(c => c.status === 'Active').length}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -142,97 +175,120 @@ const CounselorManagement = () => {
           <Card>
             <CardContent className="p-4">
               <div className="flex items-center">
-                <Award className="h-8 w-8 text-purple-600 mr-3" />
+                <Users className="h-8 w-8 text-blue-600 mr-3" />
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Avg Success Rate</p>
-                  <p className="text-2xl font-bold text-gray-900">68%</p>
+                  <p className="text-sm font-medium text-gray-600">Total Counselors</p>
+                  <p className="text-2xl font-bold text-gray-900">{counselors.length}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex items-center">
+                <FileText className="h-8 w-8 text-purple-600 mr-3" />
+                <div>
+                  <p className="text-sm font-medium text-gray-600">Total Assigned Leads</p>
+                  <p className="text-2xl font-bold text-gray-900">
+                    {counselors.reduce((total, counselor) => total + counselor.assignedLeads, 0)}
+                  </p>
                 </div>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Counselors Grid */}
-        <div className="grid gap-6">
-          {counselors.map((counselor) => (
-            <Card key={counselor.id} className="hover:shadow-lg transition-shadow">
-              <CardContent className="p-6">
-                <div className="flex flex-col lg:flex-row justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-semibold text-gray-900 mb-1">{counselor.name}</h3>
-                        <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
-                          <span className="flex items-center">
-                            <Mail className="h-4 w-4 mr-1" />
+        {/* Counselors Table */}
+        <Card>
+          <CardHeader>
+            <CardTitle>All Counselors</CardTitle>
+            <CardDescription>List of existing counselors and their information</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-3 px-4 font-medium text-gray-900">Name</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-900">Contact</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-900">Username</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-900">Assigned Leads</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-900">Completed</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-900">Status</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-900">Join Date</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-900">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {counselors.map((counselor) => (
+                    <tr key={counselor.id} className="border-b hover:bg-gray-50">
+                      <td className="py-3 px-4">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <span className="text-blue-600 font-medium">
+                              {counselor.name.charAt(0)}
+                            </span>
+                          </div>
+                          <div>
+                            <div className="font-medium">{counselor.name}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="space-y-1">
+                          <div className="flex items-center text-sm">
+                            <Mail size={12} className="mr-1 text-gray-400" />
                             {counselor.email}
-                          </span>
-                          <span className="flex items-center">
-                            <Phone className="h-4 w-4 mr-1" />
+                          </div>
+                          <div className="flex items-center text-sm text-gray-600">
+                            <Phone size={12} className="mr-1 text-gray-400" />
                             {counselor.phone}
-                          </span>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Badge className={getStatusColor(counselor.status)}>
-                            {counselor.status}
-                          </Badge>
-                          <Badge className={getRoleColor(counselor.role)}>
-                            {counselor.role}
-                          </Badge>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-                      <div className="bg-blue-50 p-3 rounded-lg">
-                        <div className="text-2xl font-bold text-blue-600">{counselor.assignedLeads}</div>
-                        <div className="text-sm text-blue-800">Assigned Leads</div>
-                      </div>
-                      <div className="bg-green-50 p-3 rounded-lg">
-                        <div className="text-2xl font-bold text-green-600">{counselor.completedFiles}</div>
-                        <div className="text-sm text-green-800">Completed Files</div>
-                      </div>
-                      <div className="bg-purple-50 p-3 rounded-lg">
-                        <div className="text-2xl font-bold text-purple-600">{counselor.successRate}%</div>
-                        <div className="text-sm text-purple-800">Success Rate</div>
-                      </div>
-                      <div className="bg-orange-50 p-3 rounded-lg">
-                        <div className="flex items-center text-sm text-orange-800">
-                          <Calendar className="h-4 w-4 mr-1" />
-                          Joined {counselor.joinDate}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <span className="font-medium">Specialization:</span>
-                      {counselor.specialization.map((spec, index) => (
-                        <Badge key={index} variant="outline" className="text-xs">
-                          {spec}
+                      </td>
+                      <td className="py-3 px-4 text-sm font-mono">{counselor.username}</td>
+                      <td className="py-3 px-4">
+                        <span className="text-lg font-semibold text-blue-600">
+                          {counselor.assignedLeads}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4">
+                        <span className="text-lg font-semibold text-green-600">
+                          {counselor.completedFiles}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4">
+                        <Badge className={getStatusColor(counselor.status)}>
+                          {counselor.status}
                         </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2 mt-4 lg:mt-0 lg:ml-6">
-                    <Button size="sm" className="w-full lg:w-auto">
-                      <Activity className="h-4 w-4 mr-2" />
-                      View Performance
-                    </Button>
-                    <Button size="sm" variant="outline" className="w-full lg:w-auto">
-                      <Edit className="h-4 w-4 mr-2" />
-                      Edit Profile
-                    </Button>
-                    <Button size="sm" variant="outline" className="w-full lg:w-auto text-red-600 hover:text-red-700">
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Remove
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                      </td>
+                      <td className="py-3 px-4 text-sm text-gray-600">
+                        <div className="flex items-center">
+                          <Calendar size={12} className="mr-1 text-gray-400" />
+                          {counselor.joinDate}
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center space-x-2">
+                          <Button variant="ghost" size="sm">
+                            <Eye size={16} />
+                          </Button>
+                          <Button variant="ghost" size="sm">
+                            <Edit size={16} />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                            <Trash2 size={16} />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

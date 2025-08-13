@@ -19,7 +19,11 @@ import {
   Globe, 
   FileText,
   Settings,
-  LogOut
+  LogOut,
+  Star,
+  Award,
+  HelpCircle,
+  Home
 } from 'lucide-react';
 
 const AdminSidebar = () => {
@@ -32,14 +36,16 @@ const AdminSidebar = () => {
 
   const mainMenuItems = [
     { title: "Dashboard", url: "/admin/dashboard", icon: LayoutDashboard },
-    { title: "Lead Management", url: "/admin/leads", icon: Users },
+    { title: "Lead Manager", url: "/admin/leads", icon: Users },
     { title: "Counselor Management", url: "/admin/counselors", icon: UserCheck },
-    { title: "Website Content", url: "/admin/website", icon: Globe },
-    { title: "Document Portal", url: "/admin/documents", icon: FileText },
   ];
 
-  const settingsItems = [
-    { title: "Settings", url: "/admin/settings", icon: Settings },
+  const websiteMenuItems = [
+    { title: "Hero Section", url: "/admin/website/hero", icon: Home },
+    { title: "Services", url: "/admin/website/services", icon: Settings },
+    { title: "Partnered Universities", url: "/admin/website/universities", icon: Globe },
+    { title: "Success Counters", url: "/admin/website/counters", icon: Award },
+    { title: "FAQ", url: "/admin/website/faq", icon: HelpCircle },
   ];
 
   const getNavClassName = ({ isActive }: { isActive: boolean }) =>
@@ -67,12 +73,12 @@ const AdminSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Settings */}
+        {/* Website Management */}
         <SidebarGroup>
-          <SidebarGroupLabel>System</SidebarGroupLabel>
+          <SidebarGroupLabel>Website</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {settingsItems.map((item) => (
+              {websiteMenuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink to={item.url} className={getNavClassName}>
@@ -82,6 +88,15 @@ const AdminSidebar = () => {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* System */}
+        <SidebarGroup>
+          <SidebarGroupLabel>System</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton className="text-red-600 hover:text-red-700 hover:bg-red-50">
                   <LogOut className="mr-2 h-4 w-4" />

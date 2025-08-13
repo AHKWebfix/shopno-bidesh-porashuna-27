@@ -160,44 +160,7 @@ const Index = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 bg-clip-text text-transparent mb-6">আমাদের কেন বেছে নেবেন?</h2>
-            <p className="text-xl text-gray-600">আপনার সফল ভবিষ্যতের জন্য আমাদের অভিজ্ঞতা ও দক্ষতা</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-10">
-            {[{
-            icon: <Award size={56} className="text-white" />,
-            title: "ব্যক্তিগত সাপোর্ট",
-            description: "প্রতিটি শিক্ষার্থীর জন্য একজন ডেডিকেটেড কাউন্সেলর এবং সম্পূর্ণ ব্যক্তিগত গাইডেন্স",
-            gradient: "from-purple-600 to-pink-600"
-          }, {
-            icon: <Target size={56} className="text-white" />,
-            title: "Expert Team",
-            description: "১০+ বছরের অভিজ্ঞ প্রফেশনাল টিম যারা আপনার স্বপ্ন বাস্তবায়নে কাজ করে",
-            gradient: "from-blue-600 to-green-500"
-          }, {
-            icon: <TrendingUp size={56} className="text-white" />,
-            title: "৯৫% ভিসা সাকসেস রেট",
-            description: "আমাদের প্রমাণিত সাকসেস রেট এবং হাজার হাজার সফল শিক্ষার্থীর ট্র্যাক রেকর্ড",
-            gradient: "from-green-500 to-blue-600"
-          }].map((feature, index) => <Card key={index} className="text-center border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 bg-gradient-to-b from-white to-gray-50 overflow-hidden group">
-                <div className={`h-2 bg-gradient-to-r ${feature.gradient}`}></div>
-                <CardContent className="p-8">
-                  <div className="flex justify-center mb-6">
-                    <div className={`w-20 h-20 bg-gradient-to-r ${feature.gradient} rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                      {feature.icon}
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-lg">{feature.description}</p>
-                </CardContent>
-              </Card>)}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Services Overview */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-purple-50">

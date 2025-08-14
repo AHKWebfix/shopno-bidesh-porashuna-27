@@ -24,9 +24,10 @@ import CounselorAccount from './pages/counselor/Account';
 const AppContent = () => {
   const location = useLocation();
   
-  // Hide header/footer for admin and counselor panels and login pages
-  const hideHeaderFooter = location.pathname.startsWith('/admin') || 
-                          location.pathname.startsWith('/counselor');
+  // More specific check for admin and counselor routes
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  const isCounselorRoute = location.pathname.startsWith('/counselor');
+  const hideHeaderFooter = isAdminRoute || isCounselorRoute;
 
   return (
     <div className="min-h-screen flex flex-col">

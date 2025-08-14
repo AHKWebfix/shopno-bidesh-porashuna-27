@@ -67,22 +67,22 @@ const UploadLinkGenerator = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 lg:p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Document Upload Links</h3>
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 lg:p-6">
+      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Document Upload Links</h3>
       
       {/* Generate New Link Section */}
-      <div className="space-y-4 mb-6">
-        <div className="flex flex-col sm:flex-row gap-3">
+      <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+        <div className="flex flex-col gap-2 sm:gap-3">
           <input
             type="text"
             value={studentName}
             onChange={(e) => setStudentName(e.target.value)}
             placeholder="Student name (optional)"
-            className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm sm:text-base focus:ring-2 focus:ring-primary focus:border-transparent"
           />
           <button 
             onClick={handleGenerateLink}
-            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center justify-center space-x-2 transition-colors whitespace-nowrap"
+            className="w-full sm:w-auto bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center justify-center space-x-2 transition-colors text-sm sm:text-base"
           >
             <Plus className="w-4 h-4" />
             <span>Generate Link</span>
@@ -93,33 +93,37 @@ const UploadLinkGenerator = () => {
       {/* Generated Links List */}
       {generatedLinks.length > 0 && (
         <div className="space-y-3">
-          <h4 className="font-medium text-gray-900">Generated Links</h4>
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+          <h4 className="font-medium text-gray-900 text-sm sm:text-base">Generated Links</h4>
+          <div className="space-y-3 max-h-80 sm:max-h-96 overflow-y-auto">
             {generatedLinks.map((linkData) => (
-              <div key={linkData.id} className="p-4 bg-gray-50 rounded-lg">
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-3 gap-2">
-                  <div className="flex-1">
-                    {linkData.studentName && (
-                      <p className="text-sm font-medium text-gray-900 mb-1">{linkData.studentName}</p>
-                    )}
-                    <p className="text-xs text-gray-500">Created: {linkData.createdAt}</p>
+              <div key={linkData.id} className="p-3 sm:p-4 bg-gray-50 rounded-lg">
+                <div className="flex flex-col gap-2 mb-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                      {linkData.studentName && (
+                        <p className="text-xs sm:text-sm font-medium text-gray-900 mb-1 truncate">{linkData.studentName}</p>
+                      )}
+                      <p className="text-xs text-gray-500">Created: {linkData.createdAt}</p>
+                    </div>
+                    <button 
+                      onClick={() => handleCopyLink(linkData.link)}
+                      className="px-2 sm:px-3 py-1 bg-gray-200 text-gray-700 rounded text-xs sm:text-sm hover:bg-gray-300 flex items-center space-x-1 transition-colors flex-shrink-0"
+                    >
+                      <Copy className="w-3 h-3" />
+                      <span className="hidden xs:inline">Copy</span>
+                    </button>
                   </div>
-                  <button 
-                    onClick={() => handleCopyLink(linkData.link)}
-                    className="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm hover:bg-gray-300 flex items-center space-x-1 transition-colors self-start"
-                  >
-                    <Copy className="w-3 h-3" />
-                    <span>Copy</span>
-                  </button>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Link className="w-4 h-4 text-gray-500 flex-shrink-0" />
-                  <input
-                    type="text"
-                    value={linkData.link}
-                    readOnly
-                    className="flex-1 px-2 py-1 bg-white border border-gray-300 rounded text-sm min-w-0"
-                  />
+                  <Link className="w-3 sm:w-4 h-3 sm:h-4 text-gray-500 flex-shrink-0" />
+                  <div className="flex-1 min-w-0 bg-white border border-gray-300 rounded px-2 py-1">
+                    <input
+                      type="text"
+                      value={linkData.link}
+                      readOnly
+                      className="w-full text-xs sm:text-sm bg-transparent border-none outline-none"
+                    />
+                  </div>
                 </div>
               </div>
             ))}
@@ -128,10 +132,10 @@ const UploadLinkGenerator = () => {
       )}
       
       {generatedLinks.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
-          <Link className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-          <p>No upload links generated yet</p>
-          <p className="text-sm">Generate your first link above</p>
+        <div className="text-center py-6 sm:py-8 text-gray-500">
+          <Link className="w-8 sm:w-12 h-8 sm:h-12 mx-auto mb-2 sm:mb-3 text-gray-300" />
+          <p className="text-sm sm:text-base">No upload links generated yet</p>
+          <p className="text-xs sm:text-sm">Generate your first link above</p>
         </div>
       )}
     </div>

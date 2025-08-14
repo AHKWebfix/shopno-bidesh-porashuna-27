@@ -21,6 +21,7 @@ import Settings from './pages/admin/Settings';
 import CounselorLeads from './pages/counselor/Leads';
 import CounselorDocuments from './pages/counselor/Documents';
 import CounselorAccount from './pages/counselor/Account';
+import CounselorUploadLinks from './pages/counselor/UploadLinks';
 
 const AppContent = () => {
   const location = useLocation();
@@ -57,6 +58,7 @@ const AppContent = () => {
             <Route path="dashboard" element={<CounselorDashboard />} />
             <Route path="leads" element={<CounselorLeads />} />
             <Route path="documents" element={<CounselorDocuments />} />
+            <Route path="upload-links" element={<CounselorUploadLinks />} />
             <Route path="account" element={<CounselorAccount />} />
           </Route>
         </Routes>

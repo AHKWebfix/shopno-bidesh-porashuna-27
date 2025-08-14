@@ -8,8 +8,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { CheckCircle, Globe, GraduationCap, Users, Star, Plane, FileText, MapPin, Award, Target, TrendingUp } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Link } from 'react-router-dom';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 const Index = () => {
   console.log('Index component is rendering...');
@@ -57,8 +55,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen font-bangla bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
-      <Header />
-
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-blue-600/10 to-green-500/10"></div>
@@ -194,9 +190,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Why Choose Us Section */}
-      
 
       {/* Services Overview */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
@@ -398,9 +391,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

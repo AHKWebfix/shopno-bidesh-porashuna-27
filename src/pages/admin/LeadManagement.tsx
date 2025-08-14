@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Eye,
@@ -217,15 +218,15 @@ const LeadManagement = () => {
               />
             </div>
 
-            {/* Filters */}
+            {/* Filters - Updated for mobile full width */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-                <div className="flex items-center space-x-2">
-                  <Filter className="w-4 h-4 text-gray-500" />
+              <div className="flex flex-col space-y-4 lg:flex-row lg:items-center lg:space-y-0 lg:space-x-4 w-full lg:w-auto">
+                <div className="flex items-center space-x-2 w-full lg:w-auto">
+                  <Filter className="w-4 h-4 text-gray-500 flex-shrink-0" />
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="w-full lg:w-auto border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
                   >
                     <option value="all">All Status</option>
                     <option value="Pending">Pending</option>
@@ -239,7 +240,7 @@ const LeadManagement = () => {
                 <select
                   value={counselorFilter}
                   onChange={(e) => setCounselorFilter(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full lg:w-auto border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
                 >
                   <option value="all">All Counselors</option>
                   <option value="Sarah Johnson">Sarah Johnson</option>

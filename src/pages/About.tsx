@@ -3,10 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Globe, Award, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const About = () => {
-  return (
-    <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
+  return <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
       {/* Hero Section */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
@@ -28,23 +26,12 @@ const About = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-800 mb-6 leading-relaxed">আমাদের লক্ষ্য</h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                এমএইচ এডুকেশন কনসালটেন্সির মূল লক্ষ্য হলো বাংলাদেশী শিক্ষার্থীদের বিদেশে 
-                উচ্চশিক্ষার সুযোগ সৃষ্টি করা। আমরা বিশ্বাস করি প্রতিটি মেধাবী শিক্ষার্থীর 
-                বিশ্বমানের শিক্ষা গ্রহণের অধিকার রয়েছে।
-              </p>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">BEGL BD এর মূল লক্ষ্য হলো বাংলাদেশী শিক্ষার্থীদের বিদেশে উচ্চশিক্ষার সুযোগ সৃষ্টি করা। আমরা বিশ্বাস করি প্রতিটি মেধাবী শিক্ষার্থীর বিশ্বমানের শিক্ষা গ্রহণের অধিকার রয়েছে।</p>
               <ul className="space-y-3">
-                {[
-                  "১০০% সৎ ও স্বচ্ছ সেবা প্রদান",
-                  "শিক্ষার্থীদের স্বপ্ন বাস্তবায়নে সহায়তা",
-                  "বিশ্বমানের শিক্ষা প্রতিষ্ঠানে ভর্তির সুযোগ",
-                  "সম্পূর্ণ প্রক্রিয়ায় নির্ভরযোগ্য গাইডেন্স"
-                ].map((item, index) => (
-                  <li key={index} className="flex items-center space-x-3">
+                {["১০০% সৎ ও স্বচ্ছ সেবা প্রদান", "শিক্ষার্থীদের স্বপ্ন বাস্তবায়নে সহায়তা", "বিশ্বমানের শিক্ষা প্রতিষ্ঠানে ভর্তির সুযোগ", "সম্পূর্ণ প্রক্রিয়ায় নির্ভরযোগ্য গাইডেন্স"].map((item, index) => <li key={index} className="flex items-center space-x-3">
                     <CheckCircle className="text-brand-green" size={20} />
                     <span className="text-gray-700 leading-relaxed">{item}</span>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </div>
             <div className="bg-gradient-to-r from-brand-blue to-brand-green p-8 rounded-2xl text-white">
@@ -79,29 +66,23 @@ const About = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                title: "সততা",
-                description: "আমরা সর্বদা সৎ ও স্বচ্ছ সেবা প্রদান করি",
-                icon: <CheckCircle className="text-brand-green" size={48} />
-              },
-              {
-                title: "গুণগত সেবা",
-                description: "প্রতিটি শিক্ষার্থীকে সর্বোচ্চ মানের সেবা দিই",
-                icon: <Award className="text-brand-blue" size={48} />
-              },
-              {
-                title: "নির্ভরযোগ্যতা",
-                description: "আমাদের উপর আস্থা রাখতে পারেন",
-                icon: <Globe className="text-brand-orange" size={48} />
-              },
-              {
-                title: "আন্তর্জাতিক মান",
-                description: "বিশ্বমানের শিক্ষা সেবা নিশ্চিত করি",
-                icon: <Globe className="text-brand-green" size={48} />
-              }
-            ].map((value, index) => (
-              <Card key={index} className="text-center border-0 shadow-md hover:shadow-lg transition-all duration-300">
+            {[{
+            title: "সততা",
+            description: "আমরা সর্বদা সৎ ও স্বচ্ছ সেবা প্রদান করি",
+            icon: <CheckCircle className="text-brand-green" size={48} />
+          }, {
+            title: "গুণগত সেবা",
+            description: "প্রতিটি শিক্ষার্থীকে সর্বোচ্চ মানের সেবা দিই",
+            icon: <Award className="text-brand-blue" size={48} />
+          }, {
+            title: "নির্ভরযোগ্যতা",
+            description: "আমাদের উপর আস্থা রাখতে পারেন",
+            icon: <Globe className="text-brand-orange" size={48} />
+          }, {
+            title: "আন্তর্জাতিক মান",
+            description: "বিশ্বমানের শিক্ষা সেবা নিশ্চিত করি",
+            icon: <Globe className="text-brand-green" size={48} />
+          }].map((value, index) => <Card key={index} className="text-center border-0 shadow-md hover:shadow-lg transition-all duration-300">
                 <CardContent className="p-6">
                   <div className="flex justify-center mb-4">
                     {value.icon}
@@ -109,8 +90,7 @@ const About = () => {
                   <h3 className="text-xl font-bold text-gray-800 mb-3 leading-relaxed">{value.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{value.description}</p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -129,8 +109,6 @@ const About = () => {
           </Link>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default About;

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Save, 
@@ -344,7 +343,8 @@ const Settings = () => {
       {/* Tab Navigation */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
         <div className="border-b border-gray-200">
-          <nav className="flex space-x-8 px-6">
+          {/* Desktop Tab Navigation */}
+          <nav className="hidden sm:flex space-x-8 px-6">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -360,6 +360,21 @@ const Settings = () => {
               </button>
             ))}
           </nav>
+
+          {/* Mobile Tab Navigation */}
+          <div className="sm:hidden px-4 py-3">
+            <select
+              value={activeTab}
+              onChange={(e) => setActiveTab(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            >
+              {tabs.map((tab) => (
+                <option key={tab.id} value={tab.id}>
+                  {tab.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* Tab Content */}

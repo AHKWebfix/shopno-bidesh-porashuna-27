@@ -8,7 +8,6 @@ import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -17,8 +16,9 @@ const Contact = () => {
     subject: '',
     message: ''
   });
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone || !formData.message) {
@@ -29,17 +29,19 @@ const Contact = () => {
       });
       return;
     }
-    
     toast({
       title: "ধন্যবাদ!",
-      description: "আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।",
+      description: "আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।"
     });
-    
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
+    });
   };
-
-  return (
-    <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
+  return <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
       {/* Hero Section */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
@@ -67,67 +69,42 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="name" className="text-gray-700 font-medium">আপনার নাম *</Label>
-                      <Input
-                        id="name"
-                        type="text"
-                        placeholder="পূর্ণ নাম লিখুন"
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="mt-2"
-                      />
+                      <Input id="name" type="text" placeholder="পূর্ণ নাম লিখুন" value={formData.name} onChange={e => setFormData({
+                      ...formData,
+                      name: e.target.value
+                    })} className="mt-2" />
                     </div>
                     <div>
                       <Label htmlFor="phone" className="text-gray-700 font-medium">মোবাইল নাম্বার *</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="+৮৮০ ১৭xxxxxxxx"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="mt-2"
-                      />
+                      <Input id="phone" type="tel" placeholder="+৮৮০ ১৭xxxxxxxx" value={formData.phone} onChange={e => setFormData({
+                      ...formData,
+                      phone: e.target.value
+                    })} className="mt-2" />
                     </div>
                   </div>
                   
                   <div>
-                    <Label htmlFor="email" className="text-gray-700 font-medium">ইমেইল *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="mt-2"
-                    />
+                    
+                    
                   </div>
                   
                   <div>
                     <Label htmlFor="subject" className="text-gray-700 font-medium">বিষয়</Label>
-                    <Input
-                      id="subject"
-                      type="text"
-                      placeholder="আপনার প্রশ্নের বিষয়"
-                      value={formData.subject}
-                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                      className="mt-2"
-                    />
+                    <Input id="subject" type="text" placeholder="আপনার প্রশ্নের বিষয়" value={formData.subject} onChange={e => setFormData({
+                    ...formData,
+                    subject: e.target.value
+                  })} className="mt-2" />
                   </div>
                   
                   <div>
                     <Label htmlFor="message" className="text-gray-700 font-medium">বার্তা *</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="আপনার প্রশ্ন বা মন্তব্য লিখুন..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({...formData, message: e.target.value})}
-                      className="mt-2 min-h-[120px]"
-                    />
+                    <Textarea id="message" placeholder="আপনার প্রশ্ন বা মন্তব্য লিখুন..." value={formData.message} onChange={e => setFormData({
+                    ...formData,
+                    message: e.target.value
+                  })} className="mt-2 min-h-[120px]" />
                   </div>
                   
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-brand-blue hover:bg-blue-600 text-lg py-4 rounded-full"
-                  >
+                  <Button type="submit" className="w-full bg-brand-blue hover:bg-blue-600 text-lg py-4 rounded-full">
                     বার্তা পাঠান
                   </Button>
                 </form>
@@ -230,8 +207,6 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;

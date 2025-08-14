@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   UserPlus, 
@@ -175,8 +174,8 @@ const CounselorManagement = () => {
         </div>
       )}
 
-      {/* Counselors Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      {/* Desktop Table */}
+      <div className="hidden md:block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
@@ -256,6 +255,66 @@ const CounselorManagement = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Mobile Card Layout */}
+      <div className="md:hidden space-y-4">
+        {filteredCounselors.map((counselor) => (
+          <div key={counselor.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                  <User className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-gray-900">{counselor.name}</h3>
+                  <p className="text-sm text-gray-500">@{counselor.username}</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <button 
+                  onClick={() => handleEditCounselor(counselor.id)}
+                  className="text-primary hover:text-primary/80 p-2 rounded transition-colors"
+                  title="Edit Counselor"
+                >
+                  <Edit className="w-4 h-4" />
+                </button>
+                <button className="text-red-600 hover:text-red-800 p-2 rounded transition-colors">
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="space-y-2 mb-4">
+              <div className="flex items-center text-sm text-gray-600">
+                <Mail className="w-3 h-3 mr-2" />
+                {counselor.email}
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="flex items-center justify-center text-sm text-gray-600 mb-1">
+                  <Users className="w-3 h-3 mr-1" />
+                  <span className="text-xs">Assigned</span>
+                </div>
+                <span className="font-semibold text-gray-900">{counselor.assignedLeads}</span>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-gray-600 mb-1">Active</div>
+                <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
+                  {counselor.activeLeads}
+                </span>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-gray-600 mb-1">Completed</div>
+                <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                  {counselor.completedLeads}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Lead Status Update Section */}

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Search, 
@@ -16,6 +15,8 @@ import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
+import LeadViewModal from '@/components/admin/LeadViewModal';
+import LeadEditModal from '@/components/admin/LeadEditModal';
 
 const LeadManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,9 +24,12 @@ const LeadManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [dateFrom, setDateFrom] = useState<Date>();
   const [dateTo, setDateTo] = useState<Date>();
+  const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedLead, setSelectedLead] = useState<any>(null);
   const leadsPerPage = 10;
 
-  const leads = [
+  const [leads, setLeads] = useState([
     {
       id: 1,
       name: 'Ahmed Rahman',
@@ -76,7 +80,7 @@ const LeadManagement = () => {
       dateSubmitted: '2024-01-13',
       counselor: 'Michael Brown'
     }
-  ];
+  ]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -106,19 +110,24 @@ const LeadManagement = () => {
   const paginatedLeads = filteredLeads.slice(startIndex, startIndex + leadsPerPage);
 
   const handleExportPDF = () => {
-    // This would generate and download a PDF
     console.log('Exporting PDF with filters:', { dateFrom, dateTo, statusFilter });
     alert('PDF export functionality would be implemented here');
   };
 
-  const handleViewLead = (leadId: number) => {
-    console.log('Viewing lead:', leadId);
-    alert(`Viewing lead details for ID: ${leadId}`);
+  const handleViewLead = (lead: any) => {
+    setSelectedLead(lead);
+    setViewModalOpen(true);
   };
 
-  const handleEditLead = (leadId: number) => {
-    console.log('Editing lead:', leadId);
-    alert(`Editing lead for ID: ${leadId}`);
+  const handleEditLead = (lead: any) => {
+    setSelectedLead(lead);
+    setEditModalOpen(true);
+  };
+
+  const handleUpdateLead = (leadId: number, newStatus: string) => {
+    setLeads(leads.map(lead => 
+      lead.id === leadId ? { ...lead, status: newStatus } : lead
+    ));
   };
 
   return (
@@ -223,8 +232,8 @@ const LeadManagement = () => {
         </div>
       </div>
 
-      {/* Leads Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      {/* Desktop Table */}
+      <div className="hidden md:block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
@@ -298,14 +307,14 @@ const LeadManagement = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
                       <button 
-                        onClick={() => handleViewLead(lead.id)}
+                        onClick={() => handleViewLead(lead)}
                         className="text-primary hover:text-primary/80 p-1 rounded transition-colors"
                         title="View Lead"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
                       <button 
-                        onClick={() => handleEditLead(lead.id)}
+                        onClick={() => handleEditLead(lead)}
                         className="text-gray-600 hover:text-gray-800 p-1 rounded transition-colors"
                         title="Edit Lead"
                       >
@@ -347,6 +356,109 @@ const LeadManagement = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Card Layout */}
+      <div className="md:hidden space-y-4">
+        {paginatedLeads.map((lead) => (
+          <div key={lead.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                  <User className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-gray-900">{lead.name}</h3>
+                  <p className="text-sm text-gray-500">ID: #{lead.id}</p>
+                </div>
+              </div>
+              <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(lead.status)}`}>
+                {lead.status}
+              </span>
+            </div>
+            
+            <div className="space-y-2 mb-4">
+              <div className="flex items-center text-sm text-gray-600">
+                <Phone className="w-3 h-3 mr-2" />
+                {lead.phone}
+              </div>
+              <div className="flex items-center text-sm text-gray-600">
+                <Mail className="w-3 h-3 mr-2" />
+                {lead.email}
+              </div>
+              <div className="flex items-center text-sm text-gray-600">
+                <MapPin className="w-3 h-3 mr-2" />
+                {lead.country}
+              </div>
+              <div className="flex items-center text-sm text-gray-600">
+                <Calendar className="w-3 h-3 mr-2" />
+                {lead.dateSubmitted}
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+              <span className="text-sm text-gray-600">
+                Counselor: {lead.counselor}
+              </span>
+              <div className="flex items-center space-x-2">
+                <button 
+                  onClick={() => handleViewLead(lead)}
+                  className="text-primary hover:text-primary/80 p-2 rounded transition-colors"
+                  title="View Lead"
+                >
+                  <Eye className="w-4 h-4" />
+                </button>
+                <button 
+                  onClick={() => handleEditLead(lead)}
+                  className="text-gray-600 hover:text-gray-800 p-2 rounded transition-colors"
+                  title="Edit Lead"
+                >
+                  <Edit className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+        
+        {/* Mobile Pagination */}
+        <div className="flex flex-col items-center space-y-3 pt-4">
+          <div className="text-sm text-gray-700">
+            Showing {startIndex + 1} to {Math.min(startIndex + leadsPerPage, filteredLeads.length)} of {filteredLeads.length} results
+          </div>
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            <span className="px-3 py-1 text-sm bg-primary text-white rounded">
+              {currentPage}
+            </span>
+            <button
+              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Modals */}
+      <LeadViewModal 
+        lead={selectedLead}
+        isOpen={viewModalOpen}
+        onClose={() => setViewModalOpen(false)}
+      />
+      
+      <LeadEditModal 
+        lead={selectedLead}
+        isOpen={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        onUpdate={handleUpdateLead}
+      />
     </div>
   );
 };

@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { Users, UserCheck, UserX, FileText, TrendingUp, Calendar, Filter } from 'lucide-react';
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
+import LeadTrendsChart from '@/components/admin/LeadTrendsChart';
 
 const Dashboard = () => {
   const [dateFrom, setDateFrom] = useState<Date>();
@@ -167,16 +167,10 @@ const Dashboard = () => {
 
       {/* Charts and Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Monthly Leads Chart (Placeholder) */}
+        {/* Monthly Leads Chart */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Monthly Leads Trend</h3>
-          <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <TrendingUp className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-              <p className="text-gray-500">Chart visualization would go here</p>
-              <p className="text-sm text-gray-400">Monthly leads submission trend</p>
-            </div>
-          </div>
+          <LeadTrendsChart />
         </div>
 
         {/* Recent Leads */}

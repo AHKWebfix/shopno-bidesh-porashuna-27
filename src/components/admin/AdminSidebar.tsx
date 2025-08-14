@@ -18,9 +18,9 @@ const AdminSidebar = () => {
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/admin/dashboard' },
     { name: 'Lead Management', icon: Users, path: '/admin/leads' },
-    { name: 'Counselor Management', icon: UserCheck, path: '/admin/counselors' },
-    { name: 'Document Management', icon: FileText, path: '/admin/documents' },
-    { name: 'Website Management', icon: Globe, path: '/admin/website' },
+    { name: 'Counselor', icon: UserCheck, path: '/admin/counselors' },
+    { name: 'Document', icon: FileText, path: '/admin/documents' },
+    { name: 'Website', icon: Globe, path: '/admin/website' },
     { name: 'Settings', icon: Settings, path: '/admin/settings' },
   ];
 

@@ -1,21 +1,22 @@
-
 import React, { useState } from 'react';
 import { 
   Search, 
   Filter, 
-  Download, 
-  Eye, 
+  Eye,
   FileText,
   Phone,
   Mail,
   User,
   Calendar
 } from 'lucide-react';
+import DocumentViewModal from '@/components/admin/DocumentViewModal';
 
 const DocumentManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<any>(null);
   const documentsPerPage = 10;
 
   const documents = [
@@ -99,6 +100,11 @@ const DocumentManagement = () => {
   const startIndex = (currentPage - 1) * documentsPerPage;
   const paginatedDocuments = filteredDocuments.slice(startIndex, startIndex + documentsPerPage);
 
+  const handleViewDocument = (document: any) => {
+    setSelectedDocument(document);
+    setViewModalOpen(true);
+  };
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -107,10 +113,6 @@ const DocumentManagement = () => {
           <h1 className="text-3xl font-bold text-gray-900">Document Management</h1>
           <p className="text-gray-600 mt-1">Manage uploaded student documents</p>
         </div>
-        <button className="mt-4 sm:mt-0 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center space-x-2">
-          <Download className="w-4 h-4" />
-          <span>Export All</span>
-        </button>
       </div>
 
       {/* Filters and Search */}
@@ -157,8 +159,8 @@ const DocumentManagement = () => {
         </div>
       </div>
 
-      {/* Documents Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      {/* Desktop Table */}
+      <div className="hidden md:block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
@@ -232,11 +234,11 @@ const DocumentManagement = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
-                      <button className="text-primary hover:text-primary/80 p-1 rounded">
+                      <button 
+                        onClick={() => handleViewDocument(document)}
+                        className="text-primary hover:text-primary/80 p-1 rounded"
+                      >
                         <Eye className="w-4 h-4" />
-                      </button>
-                      <button className="text-green-600 hover:text-green-800 p-1 rounded">
-                        <Download className="w-4 h-4" />
                       </button>
                     </div>
                   </td>
@@ -274,6 +276,102 @@ const DocumentManagement = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Card Layout */}
+      <div className="md:hidden space-y-4">
+        {paginatedDocuments.map((document) => (
+          <div key={document.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                  <User className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-medium text-gray-900">{document.name}</h3>
+                  <p className="text-sm text-gray-500">ID: #{document.id}</p>
+                </div>
+              </div>
+              <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(document.status)}`}>
+                {document.status}
+              </span>
+            </div>
+            
+            <div className="space-y-2 mb-4">
+              <div className="flex items-center text-sm text-gray-600">
+                <Phone className="w-3 h-3 mr-2" />
+                {document.phone}
+              </div>
+              <div className="flex items-center text-sm text-gray-600">
+                <Mail className="w-3 h-3 mr-2" />
+                {document.email}
+              </div>
+              <div className="flex items-center text-sm text-gray-600">
+                <Calendar className="w-3 h-3 mr-2" />
+                {document.uploadDate}
+              </div>
+            </div>
+            
+            <div className="mb-4">
+              <div className="flex items-center">
+                <div className="w-full bg-gray-200 rounded-full h-2 mr-2">
+                  <div 
+                    className="bg-primary h-2 rounded-full" 
+                    style={{ width: `${(document.documentsUploaded / document.totalDocuments) * 100}%` }}
+                  ></div>
+                </div>
+                <span className="text-sm text-gray-600">
+                  {document.documentsUploaded}/{document.totalDocuments}
+                </span>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-end pt-3 border-t border-gray-100">
+              <button 
+                onClick={() => handleViewDocument(document)}
+                className="text-primary hover:text-primary/80 p-2 rounded transition-colors"
+                title="View Documents"
+              >
+                <Eye className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        ))}
+        
+        {/* Mobile Pagination */}
+        <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-gray-700">
+              Showing {startIndex + 1} to {Math.min(startIndex + documentsPerPage, filteredDocuments.length)} of {filteredDocuments.length} results
+            </div>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Previous
+              </button>
+              <span className="px-3 py-1 text-sm bg-primary text-white rounded">
+                {currentPage}
+              </span>
+              <button
+                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* View Modal */}
+      <DocumentViewModal 
+        document={selectedDocument}
+        isOpen={viewModalOpen}
+        onClose={() => setViewModalOpen(false)}
+      />
     </div>
   );
 };

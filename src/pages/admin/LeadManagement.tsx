@@ -12,11 +12,17 @@ import {
   MapPin,
   User
 } from 'lucide-react';
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { format } from "date-fns";
 
 const LeadManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [dateFrom, setDateFrom] = useState<Date>();
+  const [dateTo, setDateTo] = useState<Date>();
   const leadsPerPage = 10;
 
   const leads = [
@@ -25,7 +31,7 @@ const LeadManagement = () => {
       name: 'Ahmed Rahman',
       phone: '+880 1712-345678',
       email: 'ahmed.rahman@email.com',
-      country: 'Canada',
+      country: 'Australia',
       status: 'Contacted',
       dateSubmitted: '2024-01-15',
       counselor: 'Sarah Johnson'
@@ -35,7 +41,7 @@ const LeadManagement = () => {
       name: 'Fatima Khan',
       phone: '+880 1812-456789',
       email: 'fatima.khan@email.com',
-      country: 'Australia',
+      country: 'Malaysia',
       status: 'File Open',
       dateSubmitted: '2024-01-14',
       counselor: 'David Smith'
@@ -55,7 +61,7 @@ const LeadManagement = () => {
       name: 'Rashida Begum',
       phone: '+880 1612-678901',
       email: 'rashida.begum@email.com',
-      country: 'USA',
+      country: 'New Zealand',
       status: 'Contacted',
       dateSubmitted: '2024-01-13',
       counselor: 'Emily Davis'
@@ -65,7 +71,7 @@ const LeadManagement = () => {
       name: 'Karim Hassan',
       phone: '+880 1512-789012',
       email: 'karim.hassan@email.com',
-      country: 'Germany',
+      country: 'Australia',
       status: 'File Open',
       dateSubmitted: '2024-01-13',
       counselor: 'Michael Brown'
@@ -99,6 +105,22 @@ const LeadManagement = () => {
   const startIndex = (currentPage - 1) * leadsPerPage;
   const paginatedLeads = filteredLeads.slice(startIndex, startIndex + leadsPerPage);
 
+  const handleExportPDF = () => {
+    // This would generate and download a PDF
+    console.log('Exporting PDF with filters:', { dateFrom, dateTo, statusFilter });
+    alert('PDF export functionality would be implemented here');
+  };
+
+  const handleViewLead = (leadId: number) => {
+    console.log('Viewing lead:', leadId);
+    alert(`Viewing lead details for ID: ${leadId}`);
+  };
+
+  const handleEditLead = (leadId: number) => {
+    console.log('Editing lead:', leadId);
+    alert(`Editing lead for ID: ${leadId}`);
+  };
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -107,29 +129,26 @@ const LeadManagement = () => {
           <h1 className="text-3xl font-bold text-gray-900">Lead Management</h1>
           <p className="text-gray-600 mt-1">Manage and track all student leads</p>
         </div>
-        <button className="mt-4 sm:mt-0 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors flex items-center space-x-2">
-          <Download className="w-4 h-4" />
-          <span>Export PDF</span>
-        </button>
       </div>
 
       {/* Filters and Search */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
-          {/* Search Bar */}
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <input
-              type="text"
-              placeholder="Search by name, email, or phone..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
+        <div className="space-y-4">
+          {/* First row - Search and basic filters */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
+            {/* Search Bar */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Search by name, email, or phone..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
 
-          {/* Status Filter */}
-          <div className="flex items-center space-x-4">
+            {/* Status Filter */}
             <div className="flex items-center space-x-2">
               <Filter className="w-4 h-4 text-gray-500" />
               <select
@@ -144,17 +163,62 @@ const LeadManagement = () => {
                 <option value="Not Interested">Not Interested</option>
               </select>
             </div>
+          </div>
 
-            {/* Date Range Filter (UI Only) */}
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-4 h-4 text-gray-500" />
-              <select className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
-                <option>Last 7 days</option>
-                <option>Last 30 days</option>
-                <option>Last 3 months</option>
-                <option>All time</option>
-              </select>
+          {/* Second row - Custom date filter and export */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4 p-4 bg-gray-50 rounded-lg">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+              <span className="text-sm font-medium text-gray-700">Custom Date Range:</span>
+              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-full sm:w-auto justify-start text-left font-normal"
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {dateFrom ? format(dateFrom, "PPP") : "From date"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={dateFrom}
+                      onSelect={setDateFrom}
+                      initialFocus
+                      className="pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-full sm:w-auto justify-start text-left font-normal"
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      {dateTo ? format(dateTo, "PPP") : "To date"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={dateTo}
+                      onSelect={setDateTo}
+                      initialFocus
+                      className="pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
             </div>
+            <Button 
+              onClick={handleExportPDF}
+              className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90 flex items-center justify-center space-x-2"
+            >
+              <Download className="w-4 h-4" />
+              <span>Export PDF</span>
+            </Button>
           </div>
         </div>
       </div>
@@ -233,10 +297,18 @@ const LeadManagement = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
-                      <button className="text-primary hover:text-primary/80 p-1 rounded">
+                      <button 
+                        onClick={() => handleViewLead(lead.id)}
+                        className="text-primary hover:text-primary/80 p-1 rounded transition-colors"
+                        title="View Lead"
+                      >
                         <Eye className="w-4 h-4" />
                       </button>
-                      <button className="text-gray-600 hover:text-gray-800 p-1 rounded">
+                      <button 
+                        onClick={() => handleEditLead(lead.id)}
+                        className="text-gray-600 hover:text-gray-800 p-1 rounded transition-colors"
+                        title="Edit Lead"
+                      >
                         <Edit className="w-4 h-4" />
                       </button>
                     </div>
@@ -249,7 +321,7 @@ const LeadManagement = () => {
 
         {/* Pagination */}
         <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
             <div className="text-sm text-gray-700">
               Showing {startIndex + 1} to {Math.min(startIndex + leadsPerPage, filteredLeads.length)} of {filteredLeads.length} results
             </div>

@@ -8,7 +8,8 @@ import {
   Globe, 
   Settings, 
   LogOut,
-  ChevronRight
+  ChevronRight,
+  FileText
 } from 'lucide-react';
 
 const AdminSidebar = () => {
@@ -18,6 +19,7 @@ const AdminSidebar = () => {
     { name: 'Dashboard', icon: LayoutDashboard, path: '/admin/dashboard' },
     { name: 'Lead Management', icon: Users, path: '/admin/leads' },
     { name: 'Counselor Management', icon: UserCheck, path: '/admin/counselors' },
+    { name: 'Document Management', icon: FileText, path: '/admin/documents' },
     { name: 'Website Management', icon: Globe, path: '/admin/website' },
     { name: 'Settings', icon: Settings, path: '/admin/settings' },
   ];

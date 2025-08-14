@@ -8,12 +8,15 @@ import {
   User, 
   Mail, 
   Users,
-  Plus
+  Plus,
+  Link,
+  Copy
 } from 'lucide-react';
 
 const CounselorManagement = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [generatedLink, setGeneratedLink] = useState('');
 
   const counselors = [
     {
@@ -59,6 +62,24 @@ const CounselorManagement = () => {
     counselor.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleEditCounselor = (counselorId: number) => {
+    console.log('Editing counselor:', counselorId);
+    alert(`Edit form would open for counselor ID: ${counselorId}`);
+  };
+
+  const handleGenerateLink = () => {
+    // Generate a random link
+    const randomId = Math.random().toString(36).substr(2, 9);
+    const newLink = `https://beglbd.com/upload/${randomId}`;
+    setGeneratedLink(newLink);
+    console.log('Generated upload link:', newLink);
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(generatedLink);
+    alert('Link copied to clipboard!');
+  };
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -97,7 +118,7 @@ const CounselorManagement = () => {
             <h3 className="text-lg font-semibold text-gray-900">Add New Counselor</h3>
             <button
               onClick={() => setShowAddForm(false)}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-400 hover:text-gray-600 text-xl"
             >
               ×
             </button>
@@ -218,10 +239,14 @@ const CounselorManagement = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
-                      <button className="text-primary hover:text-primary/80 p-1 rounded">
+                      <button 
+                        onClick={() => handleEditCounselor(counselor.id)}
+                        className="text-primary hover:text-primary/80 p-1 rounded transition-colors"
+                        title="Edit Counselor"
+                      >
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button className="text-red-600 hover:text-red-800 p-1 rounded">
+                      <button className="text-red-600 hover:text-red-800 p-1 rounded transition-colors">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -267,31 +292,40 @@ const CounselorManagement = () => {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Document Upload Management</h3>
         <div className="space-y-4">
-          <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 border border-gray-200 rounded-lg space-y-4 sm:space-y-0">
             <div>
               <h4 className="font-medium text-gray-900">Generate Upload Link</h4>
               <p className="text-sm text-gray-600">Create secure upload links for students</p>
             </div>
-            <button className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2">
-              <Plus className="w-4 h-4" />
+            <button 
+              onClick={handleGenerateLink}
+              className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center justify-center space-x-2 transition-colors"
+            >
+              <Link className="w-4 h-4" />
               <span>Generate Link</span>
             </button>
           </div>
           
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <p className="text-sm text-gray-600 mb-2">Generated Upload Link:</p>
-            <div className="flex items-center space-x-2">
-              <input
-                type="text"
-                value="https://beglbd.com/upload/abc123xyz"
-                readOnly
-                className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm"
-              />
-              <button className="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm">
-                Copy
-              </button>
+          {generatedLink && (
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <p className="text-sm text-gray-600 mb-2">Generated Upload Link:</p>
+              <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                <input
+                  type="text"
+                  value={generatedLink}
+                  readOnly
+                  className="flex-1 px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm"
+                />
+                <button 
+                  onClick={handleCopyLink}
+                  className="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm flex items-center justify-center space-x-1 transition-colors"
+                >
+                  <Copy className="w-4 h-4" />
+                  <span>Copy</span>
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

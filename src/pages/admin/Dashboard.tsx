@@ -1,8 +1,15 @@
 
-import React from 'react';
-import { Users, UserCheck, UserX, FileText, TrendingUp, Calendar } from 'lucide-react';
+import React, { useState } from 'react';
+import { Users, UserCheck, UserX, FileText, TrendingUp, Calendar, Filter } from 'lucide-react';
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { format } from "date-fns";
 
 const Dashboard = () => {
+  const [dateFrom, setDateFrom] = useState<Date>();
+  const [dateTo, setDateTo] = useState<Date>();
+
   const stats = [
     {
       title: 'Total Leads Submitted',
@@ -39,11 +46,11 @@ const Dashboard = () => {
   ];
 
   const recentLeads = [
-    { name: 'Ahmed Rahman', country: 'Canada', status: 'Contacted', date: '2024-01-15' },
-    { name: 'Fatima Khan', country: 'Australia', status: 'File Open', date: '2024-01-14' },
+    { name: 'Ahmed Rahman', country: 'Australia', status: 'Contacted', date: '2024-01-15' },
+    { name: 'Fatima Khan', country: 'Malaysia', status: 'File Open', date: '2024-01-14' },
     { name: 'Mohammad Ali', country: 'UK', status: 'Pending', date: '2024-01-14' },
-    { name: 'Rashida Begum', country: 'USA', status: 'Contacted', date: '2024-01-13' },
-    { name: 'Karim Hassan', country: 'Germany', status: 'File Open', date: '2024-01-13' },
+    { name: 'Rashida Begum', country: 'New Zealand', status: 'Contacted', date: '2024-01-13' },
+    { name: 'Karim Hassan', country: 'Australia', status: 'File Open', date: '2024-01-13' },
   ];
 
   return (
@@ -64,6 +71,70 @@ const Dashboard = () => {
               day: 'numeric' 
             })}
           </span>
+        </div>
+      </div>
+
+      {/* Date Filter Section */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
+          <h3 className="text-lg font-semibold text-gray-900">Lead Overview Filter</h3>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="flex items-center space-x-2">
+              <Filter className="w-4 h-4 text-gray-500" />
+              <span className="text-sm text-gray-600">Custom Date Range:</span>
+            </div>
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full sm:w-auto justify-start text-left font-normal"
+                  >
+                    <Calendar className="mr-2 h-4 w-4" />
+                    {dateFrom ? format(dateFrom, "PPP") : "From date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <CalendarComponent
+                    mode="single"
+                    selected={dateFrom}
+                    onSelect={setDateFrom}
+                    initialFocus
+                    className="pointer-events-auto"
+                  />
+                </PopoverContent>
+              </Popover>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full sm:w-auto justify-start text-left font-normal"
+                  >
+                    <Calendar className="mr-2 h-4 w-4" />
+                    {dateTo ? format(dateTo, "PPP") : "To date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <CalendarComponent
+                    mode="single"
+                    selected={dateTo}
+                    onSelect={setDateTo}
+                    initialFocus
+                    className="pointer-events-auto"
+                  />
+                </PopoverContent>
+              </Popover>
+              <Button 
+                className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90"
+                onClick={() => {
+                  // Filter logic would go here
+                  console.log('Filtering from', dateFrom, 'to', dateTo);
+                }}
+              >
+                Apply Filter
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 

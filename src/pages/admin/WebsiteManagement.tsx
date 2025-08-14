@@ -2,295 +2,410 @@
 import React, { useState } from 'react';
 import { 
   Save, 
-  Plus, 
   Edit, 
   Trash2, 
-  Globe, 
-  Users, 
-  Trophy,
+  Plus,
+  Globe,
+  Users,
+  Award,
   HelpCircle,
-  Upload
+  Image,
+  X
 } from 'lucide-react';
 
 const WebsiteManagement = () => {
-  const [activeTab, setActiveTab] = useState('hero');
+  const [showAddService, setShowAddService] = useState(false);
+  const [showAddUniversity, setShowAddUniversity] = useState(false);
+  const [showAddFAQ, setShowAddFAQ] = useState(false);
 
-  const tabs = [
-    { id: 'hero', label: 'Hero Section', icon: Globe },
-    { id: 'services', label: 'Services', icon: Users },
-    { id: 'universities', label: 'Universities', icon: Trophy },
-    { id: 'counters', label: 'Success Counters', icon: Trophy },
-    { id: 'faq', label: 'FAQ', icon: HelpCircle },
+  const countries = ['Australia', 'Malaysia', 'UK', 'New Zealand'];
+
+  const services = [
+    { id: 1, title: 'Study Visa Consultation', description: 'Expert guidance for student visa applications' },
+    { id: 2, title: 'University Selection', description: 'Help choosing the right university for your career' },
+    { id: 3, title: 'Application Support', description: 'Complete assistance with university applications' }
   ];
 
   const universities = [
-    { id: 1, name: 'University of Toronto', country: 'Canada', serial: 1 },
-    { id: 2, name: 'University of Melbourne', country: 'Australia', serial: 2 },
-    { id: 3, name: 'University of Oxford', country: 'UK', serial: 3 },
-    { id: 4, name: 'Harvard University', country: 'USA', serial: 4 },
+    { id: 1, name: 'University of Melbourne', country: 'Australia', order: 1 },
+    { id: 2, name: 'University of Malaya', country: 'Malaysia', order: 2 },
+    { id: 3, name: 'Oxford University', country: 'UK', order: 3 },
+    { id: 4, name: 'University of Auckland', country: 'New Zealand', order: 4 }
   ];
 
   const faqs = [
-    { id: 1, question: 'What documents do I need for application?', answer: 'You will need academic transcripts, IELTS scores, passport copy, and other relevant documents.' },
-    { id: 2, question: 'How long does the process take?', answer: 'The complete process typically takes 3-6 months depending on the country and university.' },
+    { id: 1, question: 'What documents are required for visa application?', answer: 'You will need passport, academic transcripts, IELTS scores, and financial documents.' },
+    { id: 2, question: 'How long does the application process take?', answer: 'The typical process takes 3-6 months depending on the country and university.' }
   ];
 
-  const renderHeroSection = () => (
-    <div className="space-y-6">
-      <h3 className="text-lg font-semibold text-gray-900">Hero Section Content</h3>
-      <div className="grid grid-cols-1 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Main Title</label>
-          <input
-            type="text"
-            defaultValue="Your Gateway to Global Education"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Subtitle</label>
-          <textarea
-            defaultValue="Expert guidance for studying abroad. Turn your dreams into reality with our comprehensive support."
-            rows={3}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Button Text</label>
-          <input
-            type="text"
-            defaultValue="Start Your Journey"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Background Image</label>
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-            <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-            <button className="text-primary hover:text-primary/80">
-              Click to upload or drag and drop
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const handleAddService = () => {
+    setShowAddService(true);
+  };
 
-  const renderServicesSection = () => (
-    <div className="space-y-6">
-      <h3 className="text-lg font-semibold text-gray-900">Services Section</h3>
-      <div className="grid grid-cols-1 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Section Title</label>
-          <input
-            type="text"
-            defaultValue="Our Services"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Section Description</label>
-          <textarea
-            defaultValue="We provide comprehensive study abroad services to help you achieve your academic goals."
-            rows={3}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-        
-        {/* Service Items */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h4 className="font-medium text-gray-900">Service Items</h4>
-            <button className="bg-primary text-white px-3 py-1 rounded-lg text-sm flex items-center space-x-1">
-              <Plus className="w-3 h-3" />
-              <span>Add Service</span>
-            </button>
-          </div>
-          
-          <div className="space-y-3">
-            {['University Selection', 'Application Processing', 'Visa Assistance', 'Pre-departure Support'].map((service, index) => (
-              <div key={index} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                <span className="text-gray-900">{service}</span>
-                <div className="flex items-center space-x-2">
-                  <button className="text-primary hover:text-primary/80">
-                    <Edit className="w-4 h-4" />
-                  </button>
-                  <button className="text-red-600 hover:text-red-800">
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const handleAddUniversity = () => {
+    setShowAddUniversity(true);
+  };
 
-  const renderUniversitiesSection = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900">Partnered Universities</h3>
-        <button className="bg-primary text-white px-4 py-2 rounded-lg flex items-center space-x-2">
-          <Plus className="w-4 h-4" />
-          <span>Add University</span>
-        </button>
-      </div>
-      
-      <div className="overflow-x-auto">
-        <table className="w-full border border-gray-200 rounded-lg">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Serial</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">University Name</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Country</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {universities.map((university) => (
-              <tr key={university.id}>
-                <td className="px-4 py-3 text-sm text-gray-900">{university.serial}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{university.name}</td>
-                <td className="px-4 py-3 text-sm text-gray-900">{university.country}</td>
-                <td className="px-4 py-3 text-sm font-medium">
-                  <div className="flex items-center space-x-2">
-                    <button className="text-primary hover:text-primary/80">
-                      <Edit className="w-4 h-4" />
-                    </button>
-                    <button className="text-red-600 hover:text-red-800">
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-
-  const renderCountersSection = () => (
-    <div className="space-y-6">
-      <h3 className="text-lg font-semibold text-gray-900">Success Counters</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Total Leads Submitted</label>
-          <input
-            type="number"
-            defaultValue="1247"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Students with File Open</label>
-          <input
-            type="number"
-            defaultValue="892"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Students Who Went Abroad</label>
-          <input
-            type="number"
-            defaultValue="456"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderFAQSection = () => (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900">FAQ Management</h3>
-        <button className="bg-primary text-white px-4 py-2 rounded-lg flex items-center space-x-2">
-          <Plus className="w-4 h-4" />
-          <span>Add FAQ</span>
-        </button>
-      </div>
-      
-      <div className="space-y-4">
-        {faqs.map((faq) => (
-          <div key={faq.id} className="border border-gray-200 rounded-lg p-4">
-            <div className="flex items-start justify-between mb-2">
-              <h4 className="font-medium text-gray-900">{faq.question}</h4>
-              <div className="flex items-center space-x-2">
-                <button className="text-primary hover:text-primary/80">
-                  <Edit className="w-4 h-4" />
-                </button>
-                <button className="text-red-600 hover:text-red-800">
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600">{faq.answer}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'hero':
-        return renderHeroSection();
-      case 'services':
-        return renderServicesSection();
-      case 'universities':
-        return renderUniversitiesSection();
-      case 'counters':
-        return renderCountersSection();
-      case 'faq':
-        return renderFAQSection();
-      default:
-        return renderHeroSection();
-    }
+  const handleAddFAQ = () => {
+    setShowAddFAQ(true);
   };
 
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Website Management</h1>
-        <p className="text-gray-600 mt-1">Manage your website content and settings</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Website Management</h1>
+          <p className="text-gray-600 mt-1">Manage website content and settings</p>
+        </div>
       </div>
 
-      {/* Tab Navigation */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-        <div className="border-b border-gray-200">
-          <nav className="flex space-x-8 px-6">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 ${
-                  activeTab === tab.id
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                <tab.icon className="w-4 h-4" />
-                <span>{tab.label}</span>
-              </button>
-            ))}
-          </nav>
+      {/* Hero Section Management */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center space-x-2 mb-4">
+          <Globe className="w-5 h-5 text-primary" />
+          <h3 className="text-lg font-semibold text-gray-900">Hero Section</h3>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Main Title</label>
+            <input
+              type="text"
+              defaultValue="Study Abroad with BEGL BD"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
+            <input
+              type="text"
+              defaultValue="Your gateway to international education"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Button Text</label>
+            <input
+              type="text"
+              defaultValue="Get Started"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Button Link</label>
+            <input
+              type="text"
+              defaultValue="/contact"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+        </div>
+        <div className="mt-6 flex justify-end">
+          <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2">
+            <Save className="w-4 h-4" />
+            <span>Save Changes</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Services Section Management */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <Users className="w-5 h-5 text-primary" />
+            <h3 className="text-lg font-semibold text-gray-900">Services Section</h3>
+          </div>
+          <button 
+            onClick={handleAddService}
+            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add Service</span>
+          </button>
         </div>
 
-        {/* Tab Content */}
-        <div className="p-6">
-          {renderContent()}
-          
-          {/* Save Button */}
-          <div className="flex justify-end mt-6 pt-6 border-t border-gray-200">
-            <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2">
-              <Save className="w-4 h-4" />
-              <span>Save Changes</span>
-            </button>
+        {showAddService && (
+          <div className="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="font-medium text-gray-900">Add New Service</h4>
+              <button
+                onClick={() => setShowAddService(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Service Title</label>
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Enter service title"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Service Description</label>
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Enter service description"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={() => setShowAddService(false)}
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90">
+                Add Service
+              </button>
+            </div>
           </div>
+        )}
+
+        <div className="space-y-4">
+          {services.map((service) => (
+            <div key={service.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+              <div>
+                <h4 className="font-medium text-gray-900">{service.title}</h4>
+                <p className="text-sm text-gray-600">{service.description}</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <button className="text-primary hover:text-primary/80 p-1 rounded">
+                  <Edit className="w-4 h-4" />
+                </button>
+                <button className="text-red-600 hover:text-red-800 p-1 rounded">
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Universities Section Management */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <Award className="w-5 h-5 text-primary" />
+            <h3 className="text-lg font-semibold text-gray-900">Partnered Universities</h3>
+          </div>
+          <button 
+            onClick={handleAddUniversity}
+            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add University</span>
+          </button>
+        </div>
+
+        {showAddUniversity && (
+          <div className="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="font-medium text-gray-900">Add New University</h4>
+              <button
+                onClick={() => setShowAddUniversity(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">University Name</label>
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Enter university name"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                <select className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent">
+                  <option value="">Select Country</option>
+                  {countries.map((country) => (
+                    <option key={country} value={country}>{country}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Display Order</label>
+                <input
+                  type="number"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Enter order number"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={() => setShowAddUniversity(false)}
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90">
+                Add University
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">University Name</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Country</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {universities.map((university) => (
+                <tr key={university.id} className="hover:bg-gray-50">
+                  <td className="px-4 py-4 text-sm font-medium text-gray-900">{university.name}</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">{university.country}</td>
+                  <td className="px-4 py-4 text-sm text-gray-600">{university.order}</td>
+                  <td className="px-4 py-4 text-sm font-medium">
+                    <div className="flex items-center space-x-2">
+                      <button className="text-primary hover:text-primary/80 p-1 rounded">
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button className="text-red-600 hover:text-red-800 p-1 rounded">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Success Counters Management */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center space-x-2 mb-4">
+          <Award className="w-5 h-5 text-primary" />
+          <h3 className="text-lg font-semibold text-gray-900">Success Counters</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Total Leads</label>
+            <input
+              type="number"
+              defaultValue="1247"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">File Open</label>
+            <input
+              type="number"
+              defaultValue="156"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Abroad Success</label>
+            <input
+              type="number"
+              defaultValue="89"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+        </div>
+        <div className="mt-6 flex justify-end">
+          <button className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2">
+            <Save className="w-4 h-4" />
+            <span>Update Counters</span>
+          </button>
+        </div>
+      </div>
+
+      {/* FAQ Management */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <HelpCircle className="w-5 h-5 text-primary" />
+            <h3 className="text-lg font-semibold text-gray-900">FAQ Management</h3>
+          </div>
+          <button 
+            onClick={handleAddFAQ}
+            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 flex items-center space-x-2"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add FAQ</span>
+          </button>
+        </div>
+
+        {showAddFAQ && (
+          <div className="mb-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="font-medium text-gray-900">Add New FAQ</h4>
+              <button
+                onClick={() => setShowAddFAQ(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="space-y-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Question</label>
+                <input
+                  type="text"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Enter FAQ question"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Answer</label>
+                <textarea
+                  rows={3}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Enter FAQ answer"
+                ></textarea>
+              </div>
+            </div>
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={() => setShowAddFAQ(false)}
+                className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90">
+                Add FAQ
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="space-y-4">
+          {faqs.map((faq) => (
+            <div key={faq.id} className="border border-gray-200 rounded-lg p-4">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h4 className="font-medium text-gray-900 mb-2">{faq.question}</h4>
+                  <p className="text-sm text-gray-600">{faq.answer}</p>
+                </div>
+                <div className="flex items-center space-x-2 ml-4">
+                  <button className="text-primary hover:text-primary/80 p-1 rounded">
+                    <Edit className="w-4 h-4" />
+                  </button>
+                  <button className="text-red-600 hover:text-red-800 p-1 rounded">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

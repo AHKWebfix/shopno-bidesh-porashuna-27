@@ -45,7 +45,7 @@ const AppContent = () => {
           <Route path="/contact" element={<Contact />} />
 
           {/* Student Upload Route */}
-          <Route path="/upload/:linkId" element={<StudentDocumentUpload />} />
+          <Route path="/upload/id/:linkId" element={<StudentDocumentUpload />} />
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />

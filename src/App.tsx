@@ -24,16 +24,14 @@ import CounselorAccount from './pages/counselor/Account';
 const AppContent = () => {
   const location = useLocation();
   
-  // Check if current route is admin or counselor route
+  // More specific check for admin and counselor routes
   const isAdminRoute = location.pathname.startsWith('/admin');
   const isCounselorRoute = location.pathname.startsWith('/counselor');
   const hideHeaderFooter = isAdminRoute || isCounselorRoute;
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Global Header - only show on frontend routes */}
       {!hideHeaderFooter && <Header />}
-      
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -61,8 +59,6 @@ const AppContent = () => {
           </Route>
         </Routes>
       </main>
-      
-      {/* Global Footer - only show on frontend routes */}
       {!hideHeaderFooter && <Footer />}
     </div>
   );

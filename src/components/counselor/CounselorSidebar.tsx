@@ -65,16 +65,27 @@ const CounselorSidebar = () => {
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
         fixed w-64 lg:relative
       `}>
-        {/* Logo Section */}
+        {/* Header Section with Close Button */}
         <div className="p-4 sm:p-6 border-b border-gray-200">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 sm:w-10 h-8 sm:h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg sm:text-xl">B</span>
+          <div className="flex items-center justify-between">
+            {/* Logo Section */}
+            <div className="flex items-center space-x-3">
+              <div className="w-8 sm:w-10 h-8 sm:h-10 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg sm:text-xl">B</span>
+              </div>
+              <div>
+                <h1 className="text-lg sm:text-xl font-bold text-gray-900">BEGL BD</h1>
+                <p className="text-xs sm:text-sm text-gray-500">Counselor Panel</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-lg sm:text-xl font-bold text-gray-900">BEGL BD</h1>
-              <p className="text-xs sm:text-sm text-gray-500">Counselor Panel</p>
-            </div>
+            
+            {/* Close Button - Only visible on mobile */}
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="lg:hidden p-1 rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-5 h-5 text-gray-500" />
+            </button>
           </div>
         </div>
 

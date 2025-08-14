@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import { Save, Edit, Plus, Trash2, Globe, Users, School, HelpCircle, Phone, Mail, MapPin, Clock, MessageCircle, Eye, Image, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ServiceModal from '@/components/admin/ServiceModal';
+import UniversityModal from '@/components/admin/UniversityModal';
+import FAQModal from '@/components/admin/FAQModal';
+
 const WebsiteManagement = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [editingItem, setEditingItem] = useState<string | null>(null);
+
+  // Modal states
+  const [serviceModalOpen, setServiceModalOpen] = useState(false);
+  const [universityModalOpen, setUniversityModalOpen] = useState(false);
+  const [faqModalOpen, setFaqModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
+  const [selectedService, setSelectedService] = useState<any>(null);
+  const [selectedUniversity, setSelectedUniversity] = useState<any>(null);
+  const [selectedFaq, setSelectedFaq] = useState<any>(null);
 
   // Hero Section Data
   const [heroData, setHeroData] = useState({
@@ -113,6 +126,80 @@ const WebsiteManagement = () => {
     officeHours: 'Sunday - Thursday: 9:00 AM - 6:00 PM',
     whatsapp: '+8801712345678'
   });
+
+  // Modal handlers
+  const handleAddService = () => {
+    setModalMode('add');
+    setSelectedService(null);
+    setServiceModalOpen(true);
+  };
+
+  const handleEditService = (service: any) => {
+    setModalMode('edit');
+    setSelectedService(service);
+    setServiceModalOpen(true);
+  };
+
+  const handleSaveService = (service: any) => {
+    if (modalMode === 'add') {
+      setServicesData([...servicesData, service]);
+    } else {
+      setServicesData(servicesData.map(s => s.id === service.id ? service : s));
+    }
+  };
+
+  const handleDeleteService = (id: number) => {
+    setServicesData(servicesData.filter(s => s.id !== id));
+  };
+
+  const handleAddUniversity = () => {
+    setModalMode('add');
+    setSelectedUniversity(null);
+    setUniversityModalOpen(true);
+  };
+
+  const handleEditUniversity = (university: any) => {
+    setModalMode('edit');
+    setSelectedUniversity(university);
+    setUniversityModalOpen(true);
+  };
+
+  const handleSaveUniversity = (university: any) => {
+    if (modalMode === 'add') {
+      setUniversitiesData([...universitiesData, university]);
+    } else {
+      setUniversitiesData(universitiesData.map(u => u.id === university.id ? university : u));
+    }
+  };
+
+  const handleDeleteUniversity = (id: number) => {
+    setUniversitiesData(universitiesData.filter(u => u.id !== id));
+  };
+
+  const handleAddFaq = () => {
+    setModalMode('add');
+    setSelectedFaq(null);
+    setFaqModalOpen(true);
+  };
+
+  const handleEditFaq = (faq: any) => {
+    setModalMode('edit');
+    setSelectedFaq(faq);
+    setFaqModalOpen(true);
+  };
+
+  const handleSaveFaq = (faq: any) => {
+    if (modalMode === 'add') {
+      setFaqData([...faqData, faq]);
+    } else {
+      setFaqData(faqData.map(f => f.id === faq.id ? faq : f));
+    }
+  };
+
+  const handleDeleteFaq = (id: number) => {
+    setFaqData(faqData.filter(f => f.id !== id));
+  };
+
   const sections = [{
     id: 'hero',
     name: 'Hero Section',
@@ -134,6 +221,7 @@ const WebsiteManagement = () => {
     name: 'Contact Information',
     icon: Phone
   }];
+
   const renderHeroSection = () => <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Hero Section</h3>
@@ -190,10 +278,11 @@ const WebsiteManagement = () => {
         </Button>
       </div>
     </div>;
+
   const renderServicesSection = () => <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Our Services</h3>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" onClick={handleAddService}>
           <Plus className="w-4 h-4 mr-2" />
           Add Service
         </Button>
@@ -216,10 +305,10 @@ const WebsiteManagement = () => {
                 </div>
               </div>
               <div className="flex space-x-1">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={() => handleEditService(service)}>
                   <Edit className="w-3 h-3" />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-red-500">
+                <Button variant="ghost" size="sm" className="text-red-500" onClick={() => handleDeleteService(service.id)}>
                   <Trash2 className="w-3 h-3" />
                 </Button>
               </div>
@@ -235,10 +324,11 @@ const WebsiteManagement = () => {
           </div>)}
       </div>
     </div>;
+
   const renderUniversitiesSection = () => <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Partner Universities</h3>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" onClick={handleAddUniversity}>
           <Plus className="w-4 h-4 mr-2" />
           Add University
         </Button>
@@ -259,10 +349,10 @@ const WebsiteManagement = () => {
                 </div>
               </div>
               <div className="flex space-x-1">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={() => handleEditUniversity(university)}>
                   <Edit className="w-3 h-3" />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-red-500">
+                <Button variant="ghost" size="sm" className="text-red-500" onClick={() => handleDeleteUniversity(university.id)}>
                   <Trash2 className="w-3 h-3" />
                 </Button>
               </div>
@@ -277,10 +367,11 @@ const WebsiteManagement = () => {
           </div>)}
       </div>
     </div>;
+
   const renderFAQSection = () => <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">FAQ Section</h3>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" onClick={handleAddFaq}>
           <Plus className="w-4 h-4 mr-2" />
           Add FAQ
         </Button>
@@ -294,10 +385,10 @@ const WebsiteManagement = () => {
                 <p className="text-sm text-gray-600">{faq.answer}</p>
               </div>
               <div className="flex space-x-1 ml-4">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={() => handleEditFaq(faq)}>
                   <Edit className="w-3 h-3" />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-red-500">
+                <Button variant="ghost" size="sm" className="text-red-500" onClick={() => handleDeleteFaq(faq.id)}>
                   <Trash2 className="w-3 h-3" />
                 </Button>
               </div>
@@ -305,6 +396,7 @@ const WebsiteManagement = () => {
           </div>)}
       </div>
     </div>;
+
   const renderContactSection = () => <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Contact Information</h3>
@@ -384,6 +476,7 @@ const WebsiteManagement = () => {
         </Button>
       </div>
     </div>;
+
   const renderContent = () => {
     switch (activeSection) {
       case 'hero':
@@ -400,6 +493,7 @@ const WebsiteManagement = () => {
         return renderHeroSection();
     }
   };
+
   return <div className="min-h-screen bg-gray-50">
       <div className="p-6">
         <div className="mb-6">
@@ -432,6 +526,32 @@ const WebsiteManagement = () => {
           </div>
         </div>
       </div>
+
+      {/* Modals */}
+      <ServiceModal
+        isOpen={serviceModalOpen}
+        onClose={() => setServiceModalOpen(false)}
+        onSave={handleSaveService}
+        service={selectedService}
+        mode={modalMode}
+      />
+
+      <UniversityModal
+        isOpen={universityModalOpen}
+        onClose={() => setUniversityModalOpen(false)}
+        onSave={handleSaveUniversity}
+        university={selectedUniversity}
+        mode={modalMode}
+      />
+
+      <FAQModal
+        isOpen={faqModalOpen}
+        onClose={() => setFaqModalOpen(false)}
+        onSave={handleSaveFaq}
+        faq={selectedFaq}
+        mode={modalMode}
+      />
     </div>;
 };
+
 export default WebsiteManagement;

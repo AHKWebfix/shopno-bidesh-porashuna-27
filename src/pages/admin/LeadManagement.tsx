@@ -39,7 +39,11 @@ const LeadManagement = () => {
       country: 'Australia',
       status: 'Contacted',
       dateSubmitted: '2024-01-15',
-      counselor: 'Sarah Johnson'
+      counselor: 'Sarah Johnson',
+      counselorId: 'sarah_j',
+      counselorName: 'Sarah Johnson',
+      notes: 'Student is interested in Computer Science programs. Has good academic background with 85% in HSC. Discussed scholarship opportunities and application timeline.',
+      lastContact: '2024-01-22'
     },
     {
       id: 2,
@@ -49,7 +53,11 @@ const LeadManagement = () => {
       country: 'Malaysia',
       status: 'File Open',
       dateSubmitted: '2024-01-14',
-      counselor: 'David Smith'
+      counselor: 'David Smith',
+      counselorId: 'david_s',
+      counselorName: 'David Smith',
+      notes: 'Documents submitted for review. IELTS score: 7.5. Applied for Business Administration program. Waiting for university response.',
+      lastContact: '2024-01-21'
     },
     {
       id: 3,
@@ -185,16 +193,16 @@ const LeadManagement = () => {
             </div>
           </div>
 
-          {/* Second row - Custom date filter and export */}
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4 p-4 bg-gray-50 rounded-lg">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-              <span className="text-sm font-medium text-gray-700">Custom Date Range:</span>
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+          {/* Second row - Custom date filter and export - RESPONSIVE */}
+          <div className="flex flex-col space-y-4 p-4 bg-gray-50 rounded-lg">
+            <span className="text-sm font-medium text-gray-700">Custom Date Range:</span>
+            <div className="flex flex-col space-y-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-full sm:w-auto justify-start text-left font-normal"
+                      className="w-full justify-start text-left font-normal"
                     >
                       <Calendar className="mr-2 h-4 w-4" />
                       {dateFrom ? format(dateFrom, "PPP") : "From date"}
@@ -214,7 +222,7 @@ const LeadManagement = () => {
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-full sm:w-auto justify-start text-left font-normal"
+                      className="w-full justify-start text-left font-normal"
                     >
                       <Calendar className="mr-2 h-4 w-4" />
                       {dateTo ? format(dateTo, "PPP") : "To date"}
@@ -230,23 +238,25 @@ const LeadManagement = () => {
                     />
                   </PopoverContent>
                 </Popover>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Button 
                   onClick={handleSearchWithDateRange}
                   disabled={isSearching}
-                  className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90 flex items-center justify-center space-x-2"
+                  className="w-full bg-primary text-white hover:bg-primary/90 flex items-center justify-center space-x-2"
                 >
                   <Search className="w-4 h-4" />
                   <span>{isSearching ? 'Searching...' : 'Search'}</span>
                 </Button>
+                <Button 
+                  onClick={handleExportPDF}
+                  className="w-full bg-green-600 text-white hover:bg-green-700 flex items-center justify-center space-x-2"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export PDF</span>
+                </Button>
               </div>
             </div>
-            <Button 
-              onClick={handleExportPDF}
-              className="w-full sm:w-auto bg-green-600 text-white hover:bg-green-700 flex items-center justify-center space-x-2"
-            >
-              <Download className="w-4 h-4" />
-              <span>Export PDF</span>
-            </Button>
           </div>
         </div>
       </div>

@@ -1,126 +1,37 @@
+
 import React, { useState } from 'react';
 import { 
   Search, 
   Filter, 
-  Eye,
+  Download, 
+  Eye, 
   FileText,
-  Phone,
-  Mail,
-  User,
   Calendar,
-  ExternalLink
+  User
 } from 'lucide-react';
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
-import DocumentViewModal from '@/components/admin/DocumentViewModal';
 
 const DocumentManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [currentPage, setCurrentPage] = useState(1);
   const [dateFrom, setDateFrom] = useState<Date>();
   const [dateTo, setDateTo] = useState<Date>();
-  const [viewModalOpen, setViewModalOpen] = useState(false);
-  const [selectedDocument, setSelectedDocument] = useState<any>(null);
   const [isSearching, setIsSearching] = useState(false);
-  const documentsPerPage = 10;
-
-  const documents = [
-    {
-      id: 1,
-      name: 'Ahmed Rahman',
-      phone: '+880 1712-345678',
-      email: 'ahmed.rahman@email.com',
-      documentsUploaded: 5,
-      totalDocuments: 8,
-      uploadDate: '2024-01-15',
-      status: 'Incomplete',
-      documents: ['Transcript', 'IELTS', 'Passport', 'CV', 'SOP']
-    },
-    {
-      id: 2,
-      name: 'Fatima Khan',
-      phone: '+880 1812-456789',
-      email: 'fatima.khan@email.com',
-      documentsUploaded: 8,
-      totalDocuments: 8,
-      uploadDate: '2024-01-14',
-      status: 'Complete',
-      documents: ['Transcript', 'IELTS', 'Passport', 'CV', 'SOP', 'Recommendation', 'Financial', 'Other']
-    },
-    {
-      id: 3,
-      name: 'Mohammad Ali',
-      phone: '+880 1912-567890',
-      email: 'mohammad.ali@email.com',
-      documentsUploaded: 3,
-      totalDocuments: 8,
-      uploadDate: '2024-01-14',
-      status: 'Incomplete',
-      documents: ['Transcript', 'IELTS', 'Passport']
-    },
-    {
-      id: 4,
-      name: 'Rashida Begum',
-      phone: '+880 1612-678901',
-      email: 'rashida.begum@email.com',
-      documentsUploaded: 6,
-      totalDocuments: 8,
-      uploadDate: '2024-01-13',
-      status: 'Incomplete',
-      documents: ['Transcript', 'IELTS', 'Passport', 'CV', 'SOP', 'Recommendation']
-    },
-    {
-      id: 5,
-      name: 'Karim Hassan',
-      phone: '+880 1512-789012',
-      email: 'karim.hassan@email.com',
-      documentsUploaded: 8,
-      totalDocuments: 8,
-      uploadDate: '2024-01-13',
-      status: 'Complete',
-      documents: ['Transcript', 'IELTS', 'Passport', 'CV', 'SOP', 'Recommendation', 'Financial', 'Other']
-    }
-  ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Complete':
-        return 'bg-green-100 text-green-800';
-      case 'Incomplete':
-        return 'bg-yellow-100 text-yellow-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
 
   const handleSearchWithDateRange = () => {
     setIsSearching(true);
-    console.log('Searching documents with date range:', { dateFrom, dateTo, statusFilter });
-    // Simulate search delay
+    console.log('Searching with date range:', { dateFrom, dateTo, statusFilter });
     setTimeout(() => {
       setIsSearching(false);
-      setCurrentPage(1); // Reset to first page
     }, 1000);
   };
 
-  const filteredDocuments = documents.filter(doc => {
-    const matchesSearch = doc.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doc.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doc.phone.includes(searchTerm);
-    const matchesStatus = statusFilter === 'all' || doc.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
-
-  const totalPages = Math.ceil(filteredDocuments.length / documentsPerPage);
-  const startIndex = (currentPage - 1) * documentsPerPage;
-  const paginatedDocuments = filteredDocuments.slice(startIndex, startIndex + documentsPerPage);
-
-  const handleViewDocument = (document: any) => {
-    setSelectedDocument(document);
-    setViewModalOpen(true);
+  const handleExportPDF = () => {
+    console.log('Exporting PDF with filters:', { dateFrom, dateTo, statusFilter });
+    alert('PDF export functionality would be implemented here');
   };
 
   return (
@@ -129,28 +40,26 @@ const DocumentManagement = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Document Management</h1>
-          <p className="text-gray-600 mt-1">Manage uploaded student documents</p>
+          <p className="text-gray-600 mt-1">Manage student documents and files</p>
         </div>
       </div>
 
-      {/* Filters and Search */}
+      {/* Filters and Search - RESPONSIVE */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <div className="space-y-4">
           {/* First row - Search and basic filters */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
-            {/* Search Bar */}
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search by name, email, or phone..."
+                placeholder="Search by student name or document type..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
 
-            {/* Status Filter */}
             <div className="flex items-center space-x-2">
               <Filter className="w-4 h-4 text-gray-500" />
               <select
@@ -158,23 +67,24 @@ const DocumentManagement = () => {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
               >
-                <option value="all">All Status</option>
-                <option value="Complete">Complete</option>
-                <option value="Incomplete">Incomplete</option>
+                <option value="all">All Documents</option>
+                <option value="pending">Pending Review</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
               </select>
             </div>
           </div>
 
-          {/* Second row - Custom date filter */}
-          <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-4 p-4 bg-gray-50 rounded-lg">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-              <span className="text-sm font-medium text-gray-700">Custom Date Range:</span>
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+          {/* Second row - Custom date filter and export - FULL WIDTH ON MOBILE */}
+          <div className="flex flex-col space-y-4 p-4 bg-gray-50 rounded-lg">
+            <span className="text-sm font-medium text-gray-700">Custom Date Range:</span>
+            <div className="flex flex-col space-y-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-full sm:w-auto justify-start text-left font-normal"
+                      className="w-full justify-start text-left font-normal"
                     >
                       <Calendar className="mr-2 h-4 w-4" />
                       {dateFrom ? format(dateFrom, "PPP") : "From date"}
@@ -194,7 +104,7 @@ const DocumentManagement = () => {
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-full sm:w-auto justify-start text-left font-normal"
+                      className="w-full justify-start text-left font-normal"
                     >
                       <Calendar className="mr-2 h-4 w-4" />
                       {dateTo ? format(dateTo, "PPP") : "To date"}
@@ -210,13 +120,22 @@ const DocumentManagement = () => {
                     />
                   </PopoverContent>
                 </Popover>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Button 
                   onClick={handleSearchWithDateRange}
                   disabled={isSearching}
-                  className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90 flex items-center justify-center space-x-2"
+                  className="w-full bg-primary text-white hover:bg-primary/90 flex items-center justify-center space-x-2"
                 >
                   <Search className="w-4 h-4" />
                   <span>{isSearching ? 'Searching...' : 'Search'}</span>
+                </Button>
+                <Button 
+                  onClick={handleExportPDF}
+                  className="w-full bg-green-600 text-white hover:bg-green-700 flex items-center justify-center space-x-2"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export PDF</span>
                 </Button>
               </div>
             </div>
@@ -224,219 +143,14 @@ const DocumentManagement = () => {
         </div>
       </div>
 
-      {/* Desktop Table */}
-      <div className="hidden md:block bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Student
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Contact Info
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Documents Progress
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Upload Date
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {paginatedDocuments.map((document) => (
-                <tr key={document.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                        <User className="w-5 h-5 text-white" />
-                      </div>
-                      <div className="ml-3">
-                        <div className="text-sm font-medium text-gray-900">{document.name}</div>
-                        <div className="text-sm text-gray-500">ID: #{document.id}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="space-y-1">
-                      <div className="flex items-center text-sm text-gray-900">
-                        <Phone className="w-3 h-3 mr-1" />
-                        {document.phone}
-                      </div>
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Mail className="w-3 h-3 mr-1" />
-                        {document.email}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="w-full bg-gray-200 rounded-full h-2 mr-2">
-                        <div 
-                          className="bg-primary h-2 rounded-full" 
-                          style={{ width: `${(document.documentsUploaded / document.totalDocuments) * 100}%` }}
-                        ></div>
-                      </div>
-                      <span className="text-sm text-gray-600">
-                        {document.documentsUploaded}/{document.totalDocuments}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {document.uploadDate}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(document.status)}`}>
-                      {document.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex items-center space-x-2">
-                      <button 
-                        onClick={() => handleViewDocument(document)}
-                        className="text-primary hover:text-primary/80 p-1 rounded"
-                      >
-                        <Eye className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Pagination */}
-        <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-700">
-              Showing {startIndex + 1} to {Math.min(startIndex + documentsPerPage, filteredDocuments.length)} of {filteredDocuments.length} results
-            </div>
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Previous
-              </button>
-              <span className="px-3 py-1 text-sm bg-primary text-white rounded">
-                {currentPage}
-              </span>
-              <button
-                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                disabled={currentPage === totalPages}
-                className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Next
-              </button>
-            </div>
-          </div>
+      {/* Document List */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="text-center text-gray-500 py-8">
+          <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+          <h3 className="text-lg font-medium">Document Management</h3>
+          <p className="text-sm">Document management functionality will be implemented here</p>
         </div>
       </div>
-
-      {/* Mobile Card Layout */}
-      <div className="md:hidden space-y-4">
-        {paginatedDocuments.map((document) => (
-          <div key={document.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                  <User className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-gray-900">{document.name}</h3>
-                  <p className="text-sm text-gray-500">ID: #{document.id}</p>
-                </div>
-              </div>
-              <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(document.status)}`}>
-                {document.status}
-              </span>
-            </div>
-            
-            <div className="space-y-2 mb-4">
-              <div className="flex items-center text-sm text-gray-600">
-                <Phone className="w-3 h-3 mr-2" />
-                {document.phone}
-              </div>
-              <div className="flex items-center text-sm text-gray-600">
-                <Mail className="w-3 h-3 mr-2" />
-                {document.email}
-              </div>
-              <div className="flex items-center text-sm text-gray-600">
-                <Calendar className="w-3 h-3 mr-2" />
-                {document.uploadDate}
-              </div>
-            </div>
-            
-            <div className="mb-4">
-              <div className="flex items-center">
-                <div className="w-full bg-gray-200 rounded-full h-2 mr-2">
-                  <div 
-                    className="bg-primary h-2 rounded-full" 
-                    style={{ width: `${(document.documentsUploaded / document.totalDocuments) * 100}%` }}
-                  ></div>
-                </div>
-                <span className="text-sm text-gray-600">
-                  {document.documentsUploaded}/{document.totalDocuments}
-                </span>
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-end pt-3 border-t border-gray-100">
-              <button 
-                onClick={() => handleViewDocument(document)}
-                className="text-primary hover:text-primary/80 p-2 rounded transition-colors"
-                title="View Documents"
-              >
-                <Eye className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        ))}
-        
-        {/* Mobile Pagination */}
-        <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-700">
-              Showing {startIndex + 1} to {Math.min(startIndex + documentsPerPage, filteredDocuments.length)} of {filteredDocuments.length} results
-            </div>
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Previous
-              </button>
-              <span className="px-3 py-1 text-sm bg-primary text-white rounded">
-                {currentPage}
-              </span>
-              <button
-                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                disabled={currentPage === totalPages}
-                className="px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* View Modal */}
-      <DocumentViewModal 
-        document={selectedDocument}
-        isOpen={viewModalOpen}
-        onClose={() => setViewModalOpen(false)}
-      />
     </div>
   );
 };

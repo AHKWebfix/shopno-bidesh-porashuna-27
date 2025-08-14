@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Save, Upload, Eye, EyeOff, Globe, Shield, User, Image } from 'lucide-react';
+
 const Settings = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [activeTab, setActiveTab] = useState('general');
+  
   const tabs = [{
     id: 'general',
     label: 'General Settings',
@@ -20,6 +22,7 @@ const Settings = () => {
     label: 'Profile',
     icon: User
   }];
+
   const renderGeneralSettings = () => <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">General Website Settings</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -218,6 +221,7 @@ const Settings = () => {
         </div>
       </div>
     </div>;
+
   const renderContent = () => {
     switch (activeTab) {
       case 'general':
@@ -232,6 +236,7 @@ const Settings = () => {
         return renderGeneralSettings();
     }
   };
+
   return <div className="space-y-6">
       {/* Page Header */}
       <div>
@@ -239,15 +244,29 @@ const Settings = () => {
         <p className="text-gray-600 mt-1">Manage your application settings and preferences</p>
       </div>
 
-      {/* Tab Navigation */}
+      {/* Tab Navigation - RESPONSIVE */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
         <div className="border-b border-gray-200">
-          <nav className="flex space-x-8 px-6">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-8 px-6">
             {tabs.map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 ${activeTab === tab.id ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
                 <tab.icon className="w-4 h-4" />
                 <span>{tab.label}</span>
               </button>)}
           </nav>
+          
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <select 
+              value={activeTab} 
+              onChange={(e) => setActiveTab(e.target.value)}
+              className="w-full p-4 text-sm font-medium border-0 bg-transparent focus:ring-0 focus:outline-none"
+            >
+              {tabs.map(tab => (
+                <option key={tab.id} value={tab.id}>{tab.label}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* Tab Content */}
@@ -265,4 +284,5 @@ const Settings = () => {
       </div>
     </div>;
 };
+
 export default Settings;

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { User, Phone, Mail, MapPin, Calendar, UserCheck } from 'lucide-react';
+import { User, Phone, Mail, MapPin, Calendar, UserCheck, FileText, MessageCircle } from 'lucide-react';
 
 interface Lead {
   id: number;
@@ -12,6 +12,10 @@ interface Lead {
   status: string;
   dateSubmitted: string;
   counselor: string;
+  counselorId?: string;
+  counselorName?: string;
+  notes?: string;
+  lastContact?: string;
 }
 
 interface LeadViewModalProps {
@@ -23,9 +27,16 @@ interface LeadViewModalProps {
 const LeadViewModal: React.FC<LeadViewModalProps> = ({ lead, isOpen, onClose }) => {
   if (!lead) return null;
 
+  // Mock counselor data - in real app this would come from the lead data
+  const counselorInfo = {
+    name: lead.counselorName || lead.counselor || 'Sarah Johnson',
+    id: lead.counselorId || 'sarah_j',
+    lastContact: lead.lastContact || '2024-01-22'
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <User className="w-5 h-5" />
@@ -64,11 +75,6 @@ const LeadViewModal: React.FC<LeadViewModalProps> = ({ lead, isOpen, onClose }) 
               <Calendar className="w-4 h-4 text-gray-500" />
               <span className="text-sm">Submitted: {lead.dateSubmitted}</span>
             </div>
-            
-            <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-              <UserCheck className="w-4 h-4 text-gray-500" />
-              <span className="text-sm">Counselor: {lead.counselor}</span>
-            </div>
           </div>
 
           <div className="pt-2">
@@ -81,6 +87,38 @@ const LeadViewModal: React.FC<LeadViewModalProps> = ({ lead, isOpen, onClose }) 
               {lead.status}
             </span>
           </div>
+
+          {/* Counselor Information Section */}
+          <div className="border-t border-gray-200 pt-4">
+            <h4 className="font-medium text-gray-900 mb-3">Counselor Information</h4>
+            <div className="p-3 bg-blue-50 rounded-lg">
+              <div className="flex items-start space-x-3">
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                  <UserCheck className="w-4 h-4 text-white" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-blue-900">{counselorInfo.name}</p>
+                  <p className="text-xs text-blue-700">@{counselorInfo.id}</p>
+                  <p className="text-xs text-blue-600 mt-1">Last contact: {counselorInfo.lastContact}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Notes Section */}
+          {lead.notes && (
+            <div className="border-t border-gray-200 pt-4">
+              <h4 className="font-medium text-gray-900 mb-3">Counselor Notes</h4>
+              <div className="p-3 bg-green-50 rounded-lg">
+                <div className="flex items-start space-x-2">
+                  <MessageCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                  <div className="flex-1">
+                    <p className="text-sm text-green-800 whitespace-pre-wrap">{lead.notes}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

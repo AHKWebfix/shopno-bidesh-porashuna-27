@@ -5,10 +5,10 @@ import {
   LayoutDashboard, 
   Users, 
   FileText, 
-  User, 
   Settings, 
   LogOut,
-  ChevronRight
+  ChevronRight,
+  Link
 } from 'lucide-react';
 
 const CounselorSidebar = () => {
@@ -18,7 +18,8 @@ const CounselorSidebar = () => {
     { name: 'Dashboard', icon: LayoutDashboard, path: '/counselor/dashboard' },
     { name: 'My Leads', icon: Users, path: '/counselor/leads' },
     { name: 'Documents', icon: FileText, path: '/counselor/documents' },
-    { name: 'Account', icon: User, path: '/counselor/account' },
+    { name: 'Upload Links', icon: Link, path: '/counselor/upload-links' },
+    { name: 'Account', icon: Settings, path: '/counselor/account' },
   ];
 
   const handleLogout = () => {
@@ -64,18 +65,8 @@ const CounselorSidebar = () => {
         </ul>
       </nav>
 
-      {/* User Info */}
+      {/* Logout Button */}
       <div className="p-4 border-t border-gray-200">
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-            <User className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <p className="text-sm font-medium text-gray-900">Sarah Johnson</p>
-            <p className="text-xs text-gray-500">Counselor</p>
-          </div>
-        </div>
-        
         <button
           onClick={handleLogout}
           className="flex items-center w-full px-4 py-3 text-gray-700 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors duration-200"

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Eye,
@@ -25,6 +24,8 @@ interface Lead {
   dateSubmitted: string;
   lastContact: string;
   notes: string;
+  counselorId?: string;
+  counselorName?: string;
 }
 
 const CounselorLeads = () => {
@@ -36,7 +37,7 @@ const CounselorLeads = () => {
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const leads: Lead[] = [
+  const [leads, setLeads] = useState<Lead[]>([
     {
       id: 1,
       name: 'Ahmed Rahman',
@@ -46,7 +47,9 @@ const CounselorLeads = () => {
       status: 'Contacted',
       dateSubmitted: '2024-01-15',
       lastContact: '2024-01-20',
-      notes: 'Interested in Computer Science program. Follow up needed.'
+      notes: 'Interested in Computer Science program. Follow up needed.',
+      counselorId: 'sarah_j',
+      counselorName: 'Sarah Johnson'
     },
     {
       id: 2,
@@ -57,7 +60,9 @@ const CounselorLeads = () => {
       status: 'File Open',
       dateSubmitted: '2024-01-14',
       lastContact: '2024-01-22',
-      notes: 'Documents submitted. Awaiting university response.'
+      notes: 'Documents submitted. Awaiting university response.',
+      counselorId: 'sarah_j',
+      counselorName: 'Sarah Johnson'
     },
     {
       id: 3,
@@ -68,9 +73,11 @@ const CounselorLeads = () => {
       status: 'Pending',
       dateSubmitted: '2024-01-14',
       lastContact: '2024-01-16',
-      notes: 'Initial inquiry about MBA programs.'
+      notes: 'Initial inquiry about MBA programs.',
+      counselorId: 'sarah_j',
+      counselorName: 'Sarah Johnson'
     }
-  ];
+  ]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -115,8 +122,12 @@ const CounselorLeads = () => {
   };
 
   const handleUpdateLead = (leadId: number, updatedData: Partial<Lead>) => {
-    console.log('Updating lead:', leadId, updatedData);
-    // Handle lead update logic here
+    setLeads(prev => prev.map(lead => 
+      lead.id === leadId 
+        ? { ...lead, ...updatedData }
+        : lead
+    ));
+    console.log('Updated lead:', leadId, updatedData);
   };
 
   const clearDateFilters = () => {

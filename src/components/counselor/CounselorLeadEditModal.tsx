@@ -14,6 +14,8 @@ interface Lead {
   dateSubmitted: string;
   lastContact: string;
   notes: string;
+  counselorId?: string;
+  counselorName?: string;
 }
 
 interface CounselorLeadEditModalProps {
@@ -32,7 +34,9 @@ const CounselorLeadEditModal: React.FC<CounselorLeadEditModalProps> = ({
   const [formData, setFormData] = useState({
     status: lead?.status || '',
     notes: lead?.notes || '',
-    lastContact: new Date().toISOString().split('T')[0]
+    lastContact: new Date().toISOString().split('T')[0],
+    counselorId: 'sarah_j', // Current counselor ID
+    counselorName: 'Sarah Johnson' // Current counselor name
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -89,14 +93,14 @@ const CounselorLeadEditModal: React.FC<CounselorLeadEditModalProps> = ({
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Notes
+              Counselor Notes
             </label>
             <textarea
               value={formData.notes}
               onChange={(e) => handleInputChange('notes', e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-              rows={3}
-              placeholder="Add notes about this lead..."
+              rows={4}
+              placeholder="Add detailed notes about this lead, conversation history, next steps, etc..."
             />
           </div>
 

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Index';
@@ -20,35 +20,51 @@ import CounselorLeads from './pages/counselor/Leads';
 import CounselorDocuments from './pages/counselor/Documents';
 import CounselorAccount from './pages/counselor/Account';
 
+const AppContent = () => {
+  const location = useLocation();
+  
+  // Hide header/footer for admin and counselor panels and login pages
+  const hideHeaderFooter = location.pathname.startsWith('/admin') || 
+                          location.pathname.startsWith('/counselor');
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {!hideHeaderFooter && <Header />}
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/study-abroad-process" element={<StudyAbroadProcess />} />
+          <Route path="/contact" element={<Contact />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="leads" element={<Leads />} />
+            <Route path="counselors" element={<Counselors />} />
+            <Route path="documents" element={<Documents />} />
+          </Route>
+          
+          {/* Counselor Routes */}
+          <Route path="/counselor/login" element={<CounselorLogin />} />
+          <Route path="/counselor" element={<CounselorLayout />}>
+            <Route path="dashboard" element={<CounselorDashboard />} />
+            <Route path="leads" element={<CounselorLeads />} />
+            <Route path="documents" element={<CounselorDocuments />} />
+            <Route path="account" element={<CounselorAccount />} />
+          </Route>
+        </Routes>
+      </main>
+      {!hideHeaderFooter && <Footer />}
+    </div>
+  );
+};
+
 function App() {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/study-abroad-process" element={<StudyAbroadProcess />} />
-        <Route path="/contact" element={<Contact />} />
-
-        {/* Admin Routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="dashboard" element={<AdminDashboard />} />
-          <Route path="leads" element={<Leads />} />
-          <Route path="counselors" element={<Counselors />} />
-          <Route path="documents" element={<Documents />} />
-        </Route>
-        
-        {/* Counselor Routes */}
-        <Route path="/counselor/login" element={<CounselorLogin />} />
-        <Route path="/counselor" element={<CounselorLayout />}>
-          <Route path="dashboard" element={<CounselorDashboard />} />
-          <Route path="leads" element={<CounselorLeads />} />
-          <Route path="documents" element={<CounselorDocuments />} />
-          <Route path="account" element={<CounselorAccount />} />
-        </Route>
-      </Routes>
-      <Footer />
+      <AppContent />
     </Router>
   );
 }

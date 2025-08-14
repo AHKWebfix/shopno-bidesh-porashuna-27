@@ -9,7 +9,8 @@ import {
   Mail,
   MapPin,
   User,
-  Calendar
+  Calendar,
+  CalendarDays
 } from 'lucide-react';
 import CounselorLeadViewModal from '@/components/counselor/CounselorLeadViewModal';
 import CounselorLeadEditModal from '@/components/counselor/CounselorLeadEditModal';
@@ -29,6 +30,8 @@ interface Lead {
 const CounselorLeads = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -89,7 +92,16 @@ const CounselorLeads = () => {
                          lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          lead.phone.includes(searchTerm);
     const matchesStatus = statusFilter === 'all' || lead.status === statusFilter;
-    return matchesSearch && matchesStatus;
+    
+    // Date range filtering
+    let matchesDateRange = true;
+    if (dateFrom || dateTo) {
+      const leadDate = new Date(lead.dateSubmitted);
+      if (dateFrom && new Date(dateFrom) > leadDate) matchesDateRange = false;
+      if (dateTo && new Date(dateTo) < leadDate) matchesDateRange = false;
+    }
+    
+    return matchesSearch && matchesStatus && matchesDateRange;
   });
 
   const handleViewLead = (lead: Lead) => {
@@ -107,6 +119,11 @@ const CounselorLeads = () => {
     // Handle lead update logic here
   };
 
+  const clearDateFilters = () => {
+    setDateFrom('');
+    setDateTo('');
+  };
+
   return (
     <div className="p-4 lg:p-6 bg-gray-50 min-h-screen">
       <div className="mb-6">
@@ -116,7 +133,8 @@ const CounselorLeads = () => {
 
       {/* Search and Filter */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 lg:p-6 mb-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
+        <div className="space-y-4">
+          {/* Search Bar */}
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
@@ -128,19 +146,58 @@ const CounselorLeads = () => {
             />
           </div>
 
-          <div className="flex items-center space-x-2">
-            <Filter className="w-4 h-4 text-gray-500" />
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-            >
-              <option value="all">All Status</option>
-              <option value="Pending">Pending</option>
-              <option value="Contacted">Contacted</option>
-              <option value="File Open">File Open</option>
-              <option value="Not Interested">Not Interested</option>
-            </select>
+          {/* Filters Row */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
+            {/* Status Filter */}
+            <div className="flex items-center space-x-2">
+              <Filter className="w-4 h-4 text-gray-500" />
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option value="all">All Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Contacted">Contacted</option>
+                <option value="File Open">File Open</option>
+                <option value="Not Interested">Not Interested</option>
+              </select>
+            </div>
+
+            {/* Date Range Filter */}
+            <div className="flex items-center space-x-2">
+              <CalendarDays className="w-4 h-4 text-gray-500" />
+              <div className="flex items-center space-x-2">
+                <input
+                  type="date"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  placeholder="From"
+                />
+                <span className="text-gray-500 text-sm">to</span>
+                <input
+                  type="date"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  placeholder="To"
+                />
+                {(dateFrom || dateTo) && (
+                  <button
+                    onClick={clearDateFilters}
+                    className="text-red-500 hover:text-red-700 text-sm px-2 py-1 rounded"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Results Count */}
+          <div className="text-sm text-gray-600">
+            Showing {filteredLeads.length} of {leads.length} leads
           </div>
         </div>
       </div>

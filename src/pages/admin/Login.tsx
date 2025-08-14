@@ -1,105 +1,119 @@
 
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
-import { GraduationCap, Eye, EyeOff } from 'lucide-react';
-import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff, LogIn, Shield } from 'lucide-react';
 
 const AdminLogin = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const { toast } = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Admin login attempt:', formData);
     
     // Simple demo authentication
     if (formData.email === 'admin@begleducation.com' && formData.password === 'admin123') {
-      toast({
-        title: "লগইন সফল!",
-        description: "ড্যাশবোর্ডে স্বাগতম।",
-      });
       localStorage.setItem('adminAuth', 'true');
       navigate('/admin/dashboard');
     } else {
-      toast({
-        title: "ভুল তথ্য",
-        description: "ইমেইল বা পাসওয়ার্ড ভুল।",
-        variant: "destructive"
-      });
+      alert('Invalid credentials. Use: admin@begleducation.com / admin123');
     }
   };
 
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
   return (
-    <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-2xl border-0">
-        <CardContent className="p-8">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-brand-blue to-brand-green rounded-full flex items-center justify-center mx-auto mb-4">
-              <GraduationCap className="text-white" size={32} />
-            </div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">অ্যাডমিন লগইন</h1>
-            <p className="text-gray-600">আপনার অ্যাকাউন্টে প্রবেশ করুন</p>
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-white to-secondary/5 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        {/* Logo Section */}
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span className="text-white font-bold text-2xl">B</span>
           </div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">BEGL BD</h1>
+          <p className="text-gray-600">Admin Portal</p>
+        </div>
+
+        {/* Login Form */}
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+              <Shield className="w-6 h-6 text-primary" />
+            </div>
+          </div>
+          
+          <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
+            Admin Login
+          </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <Label htmlFor="email" className="text-gray-700 font-medium">ইমেইল</Label>
-              <Input
-                id="email"
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
                 type="email"
-                placeholder="admin@begleducation.com"
                 value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                className="mt-2"
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                placeholder="Enter your email"
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="password" className="text-gray-700 font-medium">পাসওয়ার্ড</Label>
-              <div className="relative mt-2">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
                   value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
-                  className="pr-10"
+                  onChange={(e) => handleInputChange('password', e.target.value)}
+                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                  placeholder="Enter your password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
 
-            <Button 
-              type="submit" 
-              className="w-full bg-brand-blue hover:bg-blue-600 text-lg py-3 rounded-full"
+            <button
+              type="submit"
+              className="w-full bg-primary text-white py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors font-medium flex items-center justify-center space-x-2"
             >
-              লগইন করুন
-            </Button>
+              <LogIn className="w-5 h-5" />
+              <span>Sign In</span>
+            </button>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500">
-              ডেমো লগইন: admin@begleducation.com / admin123
+            <p className="text-sm text-gray-600">
+              Demo credentials:{' '}
+              <span className="text-primary font-medium">admin@begleducation.com / admin123</span>
             </p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center mt-8">
+          <p className="text-sm text-gray-500">
+            © 2024 BEGL BD. All rights reserved.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -18,6 +18,7 @@ import WebsiteManagement from "./pages/admin/WebsiteManagement";
 import Settings from "./pages/admin/Settings";
 import DocumentUpload from "./pages/admin/DocumentUpload";
 import CounselorLogin from "./pages/counselor/Login";
+import CounselorLayout from "./components/counselor/CounselorLayout";
 import CounselorDashboard from "./pages/counselor/Dashboard";
 
 const queryClient = new QueryClient();
@@ -49,7 +50,12 @@ function App() {
 
             {/* Counselor Routes */}
             <Route path="/counselor/login" element={<CounselorLogin />} />
-            <Route path="/counselor/dashboard" element={<CounselorDashboard />} />
+            <Route path="/counselor" element={<CounselorLayout />}>
+              <Route path="dashboard" element={<CounselorDashboard />} />
+              <Route path="leads" element={<CounselorDashboard />} />
+              <Route path="documents" element={<div className="p-6"><h1 className="text-2xl font-bold">Documents</h1><p>Documents management coming soon...</p></div>} />
+              <Route path="account" element={<div className="p-6"><h1 className="text-2xl font-bold">Account Settings</h1><p>Account management coming soon...</p></div>} />
+            </Route>
 
             {/* 404 Route */}
             <Route path="*" element={<NotFound />} />

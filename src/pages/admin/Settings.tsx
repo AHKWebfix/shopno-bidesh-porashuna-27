@@ -1,85 +1,55 @@
-
 import React, { useState } from 'react';
-import { 
-  Save, 
-  Upload, 
-  Eye, 
-  EyeOff, 
-  Globe, 
-  Shield, 
-  User,
-  Image
-} from 'lucide-react';
-
+import { Save, Upload, Eye, EyeOff, Globe, Shield, User, Image } from 'lucide-react';
 const Settings = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [activeTab, setActiveTab] = useState('general');
-
-  const tabs = [
-    { id: 'general', label: 'General Settings', icon: Globe },
-    { id: 'branding', label: 'Branding', icon: Image },
-    { id: 'security', label: 'Security', icon: Shield },
-    { id: 'profile', label: 'Profile', icon: User },
-  ];
-
-  const renderGeneralSettings = () => (
-    <div className="space-y-6">
+  const tabs = [{
+    id: 'general',
+    label: 'General Settings',
+    icon: Globe
+  }, {
+    id: 'branding',
+    label: 'Branding',
+    icon: Image
+  }, {
+    id: 'security',
+    label: 'Security',
+    icon: Shield
+  }, {
+    id: 'profile',
+    label: 'Profile',
+    icon: User
+  }];
+  const renderGeneralSettings = () => <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">General Website Settings</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Website Title</label>
-          <input
-            type="text"
-            defaultValue="BEGL BD - Study Abroad Consultancy"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <input type="text" defaultValue="BEGL BD - Study Abroad Consultancy" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Website Tagline</label>
-          <input
-            type="text"
-            defaultValue="Your Gateway to Global Education"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <input type="text" defaultValue="Your Gateway to Global Education" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
         <div className="md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">Meta Description</label>
-          <textarea
-            defaultValue="BEGL BD provides expert study abroad consultancy services to help students achieve their international education goals."
-            rows={3}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <textarea defaultValue="BEGL BD provides expert study abroad consultancy services to help students achieve their international education goals." rows={3} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
-          <input
-            type="email"
-            defaultValue="info@beglbd.com"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <input type="email" defaultValue="info@beglbd.com" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Contact Phone</label>
-          <input
-            type="tel"
-            defaultValue="+880 1712-345678"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <input type="tel" defaultValue="+880 1712-345678" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
         <div className="md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">Office Address</label>
-          <textarea
-            defaultValue="123 Main Street, Dhaka, Bangladesh"
-            rows={2}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <textarea defaultValue="123 Main Street, Dhaka, Bangladesh" rows={2} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
       </div>
-    </div>
-  );
-
-  const renderBrandingSettings = () => (
-    <div className="space-y-6">
+    </div>;
+  const renderBrandingSettings = () => <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">Branding & Visual Identity</h3>
       
       {/* Logo Upload */}
@@ -119,20 +89,12 @@ const Settings = () => {
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Footer Description</label>
-            <textarea
-              defaultValue="BEGL BD is a leading study abroad consultancy helping students achieve their international education dreams."
-              rows={3}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
+            <textarea defaultValue="BEGL BD is a leading study abroad consultancy helping students achieve their international education dreams." rows={3} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Copyright Text</label>
-              <input
-                type="text"
-                defaultValue="© 2024 BEGL BD. All rights reserved."
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
+              <input type="text" defaultValue="© 2024 BEGL BD. All rights reserved." className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Footer Logo</label>
@@ -146,11 +108,8 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
-
-  const renderSecuritySettings = () => (
-    <div className="space-y-6">
+    </div>;
+  const renderSecuritySettings = () => <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">Security Settings</h3>
       
       <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
@@ -166,41 +125,21 @@ const Settings = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
           <div className="relative">
-            <input
-              type={showPassword ? 'text' : 'password'}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 focus:ring-2 focus:ring-primary focus:border-transparent"
-              placeholder="Enter current password"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center"
-            >
-              {showPassword ? (
-                <EyeOff className="w-4 h-4 text-gray-400" />
-              ) : (
-                <Eye className="w-4 h-4 text-gray-400" />
-              )}
+            <input type={showPassword ? 'text' : 'password'} className="w-full border border-gray-300 rounded-lg px-3 py-2 pr-10 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter current password" />
+            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center">
+              {showPassword ? <EyeOff className="w-4 h-4 text-gray-400" /> : <Eye className="w-4 h-4 text-gray-400" />}
             </button>
           </div>
         </div>
         
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-          <input
-            type="password"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-            placeholder="Enter new password"
-          />
+          <input type="password" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Enter new password" />
         </div>
         
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
-          <input
-            type="password"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-            placeholder="Confirm new password"
-          />
+          <input type="password" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Confirm new password" />
         </div>
         
         <div className="pt-4">
@@ -223,22 +162,11 @@ const Settings = () => {
               Active
             </span>
           </div>
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div>
-              <p className="text-sm font-medium text-gray-900">Mobile Session</p>
-              <p className="text-xs text-gray-500">Safari on iPhone • 2 hours ago</p>
-            </div>
-            <button className="text-red-600 hover:text-red-800 text-xs">
-              End Session
-            </button>
-          </div>
+          
         </div>
       </div>
-    </div>
-  );
-
-  const renderProfileSettings = () => (
-    <div className="space-y-6">
+    </div>;
+  const renderProfileSettings = () => <div className="space-y-6">
       <h3 className="text-lg font-semibold text-gray-900">Admin Profile</h3>
       
       <div className="flex items-center space-x-6">
@@ -256,36 +184,19 @@ const Settings = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-          <input
-            type="text"
-            defaultValue="Admin User"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <input type="text" defaultValue="Admin User" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-          <input
-            type="email"
-            defaultValue="admin@beglbd.com"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <input type="email" defaultValue="admin@beglbd.com" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-          <input
-            type="tel"
-            defaultValue="+880 1712-345678"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
+          <input type="tel" defaultValue="+880 1712-345678" className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent" />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-          <input
-            type="text"
-            value="Super Administrator"
-            disabled
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-100 text-gray-500"
-          />
+          <input type="text" value="Super Administrator" disabled className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-100 text-gray-500" />
         </div>
       </div>
 
@@ -315,9 +226,7 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
-
+    </div>;
   const renderContent = () => {
     switch (activeTab) {
       case 'general':
@@ -332,9 +241,7 @@ const Settings = () => {
         return renderGeneralSettings();
     }
   };
-
-  return (
-    <div className="space-y-6">
+  return <div className="space-y-6">
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
@@ -345,20 +252,10 @@ const Settings = () => {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
         <div className="border-b border-gray-200">
           <nav className="flex space-x-8 px-6">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 ${
-                  activeTab === tab.id
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
+            {tabs.map(tab => <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`py-4 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 ${activeTab === tab.id ? 'border-primary text-primary' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
                 <tab.icon className="w-4 h-4" />
                 <span>{tab.label}</span>
-              </button>
-            ))}
+              </button>)}
           </nav>
         </div>
 
@@ -375,8 +272,6 @@ const Settings = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Settings;

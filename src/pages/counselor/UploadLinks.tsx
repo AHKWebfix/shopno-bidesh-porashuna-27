@@ -10,7 +10,9 @@ const CounselorUploadLinks = () => {
         <p className="text-gray-600">Generate secure upload links for students</p>
       </div>
 
-      <UploadLinkGenerator />
+      <div className="max-w-4xl mx-auto">
+        <UploadLinkGenerator />
+      </div>
     </div>
   );
 };

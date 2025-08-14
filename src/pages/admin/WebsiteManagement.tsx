@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Save, Edit, Plus, Trash2, Globe, Users, School, HelpCircle, 
@@ -7,7 +6,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const AdminWebsiteManagement = () => {
+const WebsiteManagement = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [editingItem, setEditingItem] = useState<string | null>(null);
 
@@ -162,7 +161,7 @@ const AdminWebsiteManagement = () => {
             type="text"
             value={heroData.title}
             onChange={(e) => setHeroData({...heroData, title: e.target.value})}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         
@@ -172,7 +171,7 @@ const AdminWebsiteManagement = () => {
             type="text"
             value={heroData.subtitle}
             onChange={(e) => setHeroData({...heroData, subtitle: e.target.value})}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         
@@ -182,7 +181,7 @@ const AdminWebsiteManagement = () => {
             value={heroData.description}
             onChange={(e) => setHeroData({...heroData, description: e.target.value})}
             rows={3}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         
@@ -193,7 +192,7 @@ const AdminWebsiteManagement = () => {
               type="text"
               value={heroData.primaryButton}
               onChange={(e) => setHeroData({...heroData, primaryButton: e.target.value})}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           <div>
@@ -202,14 +201,14 @@ const AdminWebsiteManagement = () => {
               type="text"
               value={heroData.secondaryButton}
               onChange={(e) => setHeroData({...heroData, secondaryButton: e.target.value})}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
       </div>
       
       <div className="flex justify-end">
-        <Button className="bg-primary text-white">
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
           <Save className="w-4 h-4 mr-2" />
           Save Changes
         </Button>
@@ -367,7 +366,7 @@ const AdminWebsiteManagement = () => {
               type="text"
               value={contactData.phone1}
               onChange={(e) => setContactData({...contactData, phone1: e.target.value})}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           
@@ -377,7 +376,7 @@ const AdminWebsiteManagement = () => {
               type="text"
               value={contactData.phone2}
               onChange={(e) => setContactData({...contactData, phone2: e.target.value})}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           
@@ -387,7 +386,7 @@ const AdminWebsiteManagement = () => {
               type="email"
               value={contactData.email1}
               onChange={(e) => setContactData({...contactData, email1: e.target.value})}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           
@@ -397,7 +396,7 @@ const AdminWebsiteManagement = () => {
               type="email"
               value={contactData.email2}
               onChange={(e) => setContactData({...contactData, email2: e.target.value})}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -409,7 +408,7 @@ const AdminWebsiteManagement = () => {
               value={contactData.address}
               onChange={(e) => setContactData({...contactData, address: e.target.value})}
               rows={3}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           
@@ -419,7 +418,7 @@ const AdminWebsiteManagement = () => {
               type="text"
               value={contactData.officeHours}
               onChange={(e) => setContactData({...contactData, officeHours: e.target.value})}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           
@@ -430,9 +429,13 @@ const AdminWebsiteManagement = () => {
                 type="text"
                 value={contactData.whatsapp}
                 onChange={(e) => setContactData({...contactData, whatsapp: e.target.value})}
-                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
-              <Button variant="outline" size="sm">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => window.open(`https://wa.me/${contactData.whatsapp.replace(/[^0-9]/g, '')}`, '_blank')}
+              >
                 <MessageCircle className="w-4 h-4 mr-1" />
                 Test
               </Button>
@@ -443,7 +446,7 @@ const AdminWebsiteManagement = () => {
       </div>
       
       <div className="flex justify-end">
-        <Button className="bg-primary text-white">
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
           <Save className="w-4 h-4 mr-2" />
           Save Changes
         </Button>
@@ -463,43 +466,45 @@ const AdminWebsiteManagement = () => {
   };
 
   return (
-    <div className="p-4 lg:p-6 bg-gray-50 min-h-screen">
-      <div className="mb-6">
-        <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Website Management</h1>
-        <p className="text-gray-600">Manage your website content and sections</p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Sidebar Navigation */}
-        <div className="lg:col-span-1">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-            <h3 className="font-semibold mb-4">Website Sections</h3>
-            <nav className="space-y-2">
-              {sections.map((section) => {
-                const Icon = section.icon;
-                return (
-                  <button
-                    key={section.id}
-                    onClick={() => setActiveSection(section.id)}
-                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                      activeSection === section.id
-                        ? 'bg-primary text-white'
-                        : 'hover:bg-gray-100 text-gray-700'
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    <span className="text-sm font-medium">{section.name}</span>
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="p-6">
+        <div className="mb-6">
+          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Website Management</h1>
+          <p className="text-gray-600">Manage your website content and sections</p>
         </div>
 
-        {/* Main Content */}
-        <div className="lg:col-span-3">
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            {renderContent()}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Sidebar Navigation */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+              <h3 className="font-semibold mb-4">Website Sections</h3>
+              <nav className="space-y-2">
+                {sections.map((section) => {
+                  const Icon = section.icon;
+                  return (
+                    <button
+                      key={section.id}
+                      onClick={() => setActiveSection(section.id)}
+                      className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
+                        activeSection === section.id
+                          ? 'bg-blue-600 text-white'
+                          : 'hover:bg-gray-100 text-gray-700'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span className="text-sm font-medium">{section.name}</span>
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="lg:col-span-3">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              {renderContent()}
+            </div>
           </div>
         </div>
       </div>
@@ -507,4 +512,4 @@ const AdminWebsiteManagement = () => {
   );
 };
 
-export default AdminWebsiteManagement;
+export default WebsiteManagement;

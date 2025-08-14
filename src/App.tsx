@@ -16,6 +16,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import Leads from './pages/admin/LeadManagement';
 import Counselors from './pages/admin/CounselorManagement';
 import Documents from './pages/admin/DocumentManagement';
+import WebsiteManagement from './pages/admin/WebsiteManagement';
 import CounselorLeads from './pages/counselor/Leads';
 import CounselorDocuments from './pages/counselor/Documents';
 import CounselorAccount from './pages/counselor/Account';
@@ -44,6 +45,7 @@ const AppContent = () => {
             <Route path="leads" element={<Leads />} />
             <Route path="counselors" element={<Counselors />} />
             <Route path="documents" element={<Documents />} />
+            <Route path="website" element={<WebsiteManagement />} />
           </Route>
           
           {/* Counselor Routes */}

@@ -73,6 +73,10 @@ const CounselorLogin = () => {
               <span>Sign In</span>
             </button>
           </form>
+
+          <p className="text-xs text-gray-500 text-center mt-4">
+            Demo: counselor@begleducation.com / counselor123
+          </p>
         </div>
       </div>
     </div>

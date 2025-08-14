@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { GraduationCap, Facebook, Instagram, Youtube, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -13,7 +12,7 @@ const Footer = () => {
               <div className="w-10 h-10 bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 rounded-full flex items-center justify-center shadow-lg">
                 <GraduationCap className="text-white" size={24} />
               </div>
-              <h3 className="text-xl font-bold">BEGL Education</h3>
+              <h3 className="text-xl font-bold">BEGL BD</h3>
             </div>
             <p className="text-gray-300 leading-relaxed mb-4">
               আপনার স্বপ্ন পূরণে আমরা আছি পাশে। বিদেশে উচ্চশিক্ষার জন্য পান সম্পূর্ণ ফ্রি পরামর্শ ও গাইডেন্স।
@@ -69,7 +68,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 pt-8 text-center">
           <p className="text-gray-300 text-lg font-medium">আপনার স্বপ্ন পূরণে আমরা আছি পাশে</p>
           <p className="text-gray-400 text-sm mt-2">
-            © ২০২৪ BEGL Education। সর্বস্বত্ব সংরক্ষিত। | Design & Developed by Ahasanul Haque Khairul
+            © ২০২৪ BEGL BD। সর্বস্বত্ব সংরক্ষিত। | Design & Developed by Ahasanul Haque Khairul
           </p>
         </div>
       </div>

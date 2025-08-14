@@ -55,16 +55,16 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4"> {/* Reduced spacing */}
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600 mt-1">Overview of your lead management system</p>
+          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1> {/* Reduced from text-3xl */}
+          <p className="text-gray-600 mt-0.5 text-sm">Overview of your lead management system</p> {/* Reduced margin and font size */}
         </div>
-        <div className="flex items-center space-x-3">
-          <Calendar className="w-5 h-5 text-gray-500" />
-          <span className="text-sm text-gray-600">
+        <div className="flex items-center space-x-2"> {/* Reduced space */}
+          <Calendar className="w-4 h-4 text-gray-500" /> {/* Reduced size */}
+          <span className="text-xs text-gray-600"> {/* Reduced font size */}
             {new Date().toLocaleDateString('en-GB', { 
               weekday: 'long', 
               year: 'numeric', 
@@ -76,22 +76,22 @@ const Dashboard = () => {
       </div>
 
       {/* Date Filter Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
-          <h3 className="text-lg font-semibold text-gray-900">Lead Overview Filter</h3>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-            <div className="flex items-center space-x-2">
-              <Filter className="w-4 h-4 text-gray-500" />
-              <span className="text-sm text-gray-600">Custom Date Range:</span>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4"> {/* Reduced padding */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-3 md:space-y-0 md:space-x-3"> {/* Reduced spacing */}
+          <h3 className="text-base font-semibold text-gray-900">Lead Overview Filter</h3> {/* Reduced font size */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3"> {/* Reduced spacing */}
+            <div className="flex items-center space-x-1.5"> {/* Reduced space */}
+              <Filter className="w-3.5 h-3.5 text-gray-500" /> {/* Reduced size */}
+              <span className="text-xs text-gray-600">Custom Date Range:</span> {/* Reduced font size */}
             </div>
-            <div className="flex flex-col space-y-2 w-full sm:flex-row sm:space-y-0 sm:space-x-2 sm:w-auto">
+            <div className="flex flex-col space-y-1.5 w-full sm:flex-row sm:space-y-0 sm:space-x-1.5 sm:w-auto"> {/* Reduced spacing */}
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-full sm:w-auto justify-start text-left font-normal"
+                    className="w-full sm:w-auto justify-start text-left font-normal text-xs py-1.5 px-2.5" /* Reduced font size and padding */
                   >
-                    <Calendar className="mr-2 h-4 w-4" />
+                    <Calendar className="mr-1.5 h-3 w-3" /> {/* Reduced size and margin */}
                     {dateFrom ? format(dateFrom, "PPP") : "From date"}
                   </Button>
                 </PopoverTrigger>
@@ -109,9 +109,9 @@ const Dashboard = () => {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-full sm:w-auto justify-start text-left font-normal"
+                    className="w-full sm:w-auto justify-start text-left font-normal text-xs py-1.5 px-2.5" /* Reduced font size and padding */
                   >
-                    <Calendar className="mr-2 h-4 w-4" />
+                    <Calendar className="mr-1.5 h-3 w-3" /> {/* Reduced size and margin */}
                     {dateTo ? format(dateTo, "PPP") : "To date"}
                   </Button>
                 </PopoverTrigger>
@@ -126,7 +126,7 @@ const Dashboard = () => {
                 </PopoverContent>
               </Popover>
               <Button 
-                className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90"
+                className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90 text-xs py-1.5 px-2.5" /* Reduced font size and padding */
                 onClick={() => {
                   // Filter logic would go here
                   console.log('Filtering from', dateFrom, 'to', dateTo);
@@ -140,26 +140,26 @@ const Dashboard = () => {
       </div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"> {/* Reduced gap */}
         {stats.map((stat, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+          <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow"> {/* Reduced padding */}
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 mb-2">{stat.title}</p>
-                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                <div className="flex items-center mt-2">
-                  <TrendingUp className={`w-4 h-4 mr-1 ${
+                <p className="text-xs font-medium text-gray-600 mb-1.5">{stat.title}</p> {/* Reduced font size and margin */}
+                <p className="text-2xl font-bold text-gray-900">{stat.value}</p> {/* Reduced from text-3xl */}
+                <div className="flex items-center mt-1.5"> {/* Reduced margin */}
+                  <TrendingUp className={`w-3 h-3 mr-1 ${ /* Reduced size */
                     stat.changeType === 'increase' ? 'text-green-500' : 'text-red-500'
                   }`} />
-                  <span className={`text-sm font-medium ${
+                  <span className={`text-xs font-medium ${ /* Reduced font size */
                     stat.changeType === 'increase' ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {stat.change} from last month
                   </span>
                 </div>
               </div>
-              <div className={`${stat.color} p-3 rounded-lg`}>
-                <stat.icon className="w-6 h-6 text-white" />
+              <div className={`${stat.color} p-2.5 rounded-lg`}> {/* Reduced padding */}
+                <stat.icon className="w-5 h-5 text-white" /> {/* Reduced size */}
               </div>
             </div>
           </div>
@@ -167,39 +167,39 @@ const Dashboard = () => {
       </div>
 
       {/* Charts and Recent Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4"> {/* Reduced gap */}
         {/* Monthly Leads Chart */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Monthly Leads Trend</h3>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4"> {/* Reduced padding */}
+          <h3 className="text-base font-semibold text-gray-900 mb-3">Monthly Leads Trend</h3> {/* Reduced font size and margin */}
           <LeadTrendsChart />
         </div>
 
         {/* Recent Leads */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Leads</h3>
-          <div className="space-y-4">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4"> {/* Reduced padding */}
+          <h3 className="text-base font-semibold text-gray-900 mb-3">Recent Leads</h3> {/* Reduced font size and margin */}
+          <div className="space-y-3"> {/* Reduced spacing */}
             {recentLeads.map((lead, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                    <span className="text-white font-medium text-sm">
+              <div key={index} className="flex items-center justify-between p-2.5 bg-gray-50 rounded-lg"> {/* Reduced padding */}
+                <div className="flex items-center space-x-2.5"> {/* Reduced space */}
+                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center"> {/* Reduced size */}
+                    <span className="text-white font-medium text-xs"> {/* Reduced font size */}
                       {lead.name.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
                   <div>
-                    <p className="font-medium text-gray-900">{lead.name}</p>
-                    <p className="text-sm text-gray-500">{lead.country}</p>
+                    <p className="font-medium text-gray-900 text-sm">{lead.name}</p> {/* Reduced font size */}
+                    <p className="text-xs text-gray-500">{lead.country}</p> {/* Reduced font size */}
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
+                  <span className={`inline-flex px-1.5 py-0.5 text-xs font-medium rounded-full ${ /* Reduced padding */
                     lead.status === 'File Open' ? 'bg-green-100 text-green-800' :
                     lead.status === 'Contacted' ? 'bg-blue-100 text-blue-800' :
                     'bg-yellow-100 text-yellow-800'
                   }`}>
                     {lead.status}
                   </span>
-                  <p className="text-xs text-gray-500 mt-1">{lead.date}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{lead.date}</p> {/* Reduced margin */}
                 </div>
               </div>
             ))}

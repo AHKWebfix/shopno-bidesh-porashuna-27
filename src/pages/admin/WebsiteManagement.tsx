@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Save, Edit, Plus, Trash2, Globe, Users, School, HelpCircle, Phone } from 'lucide-react';
+import { Save, Edit, Plus, Trash2, Globe, Users, School, HelpCircle, Phone, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ServiceModal from '@/components/admin/ServiceModal';
 import UniversityModal from '@/components/admin/UniversityModal';
@@ -24,6 +24,13 @@ const WebsiteManagement = () => {
     description: 'We help students achieve their dreams of studying abroad with personalized guidance, university partnerships, and comprehensive support throughout their journey.',
     primaryButton: 'Get Started Today',
     secondaryButton: 'Learn More'
+  });
+
+  // Statistics Data
+  const [statisticsData, setStatisticsData] = useState({
+    interestedStudents: 2500,
+    filesOpened: 1800,
+    successfullyDeparted: 1200
   });
 
   // Services Data
@@ -198,6 +205,10 @@ const WebsiteManagement = () => {
     name: 'Hero Section',
     icon: Globe
   }, {
+    id: 'statistics',
+    name: 'Statistics Counter',
+    icon: TrendingUp
+  }, {
     id: 'services',
     name: 'Our Services',
     icon: Users
@@ -271,6 +282,86 @@ const WebsiteManagement = () => {
         </Button>
       </div>
     </div>;
+
+  const renderStatisticsSection = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold">Statistics Counter</h3>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label className="block text-sm font-medium mb-2">Total Interested Students</label>
+          <input 
+            type="number" 
+            value={statisticsData.interestedStudents} 
+            onChange={(e) => setStatisticsData({
+              ...statisticsData,
+              interestedStudents: parseInt(e.target.value) || 0
+            })} 
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+            min="0"
+          />
+          <p className="text-xs text-gray-500 mt-1">Number of students who have shown interest</p>
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium mb-2">Files Opened</label>
+          <input 
+            type="number" 
+            value={statisticsData.filesOpened} 
+            onChange={(e) => setStatisticsData({
+              ...statisticsData,
+              filesOpened: parseInt(e.target.value) || 0
+            })} 
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+            min="0"
+          />
+          <p className="text-xs text-gray-500 mt-1">Number of student files that have been opened</p>
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium mb-2">Successfully Departed</label>
+          <input 
+            type="number" 
+            value={statisticsData.successfullyDeparted} 
+            onChange={(e) => setStatisticsData({
+              ...statisticsData,
+              successfullyDeparted: parseInt(e.target.value) || 0
+            })} 
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+            min="0"
+          />
+          <p className="text-xs text-gray-500 mt-1">Number of students who have successfully flown</p>
+        </div>
+      </div>
+      
+      <div className="bg-gray-50 p-4 rounded-lg">
+        <h4 className="font-medium mb-2">Preview</h4>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+          <div className="bg-white p-4 rounded-lg border">
+            <div className="text-2xl font-bold text-blue-600">{statisticsData.interestedStudents.toLocaleString()}+</div>
+            <div className="text-sm text-gray-600">Interested Students</div>
+          </div>
+          <div className="bg-white p-4 rounded-lg border">
+            <div className="text-2xl font-bold text-green-600">{statisticsData.filesOpened.toLocaleString()}+</div>
+            <div className="text-sm text-gray-600">Files Opened</div>
+          </div>
+          <div className="bg-white p-4 rounded-lg border">
+            <div className="text-2xl font-bold text-purple-600">{statisticsData.successfullyDeparted.toLocaleString()}+</div>
+            <div className="text-sm text-gray-600">Successfully Departed</div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="flex justify-end">
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+          <Save className="w-4 h-4 mr-2" />
+          Save Changes
+        </Button>
+      </div>
+    </div>
+  );
 
   const renderServicesSection = () => <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -474,6 +565,8 @@ const WebsiteManagement = () => {
     switch (activeSection) {
       case 'hero':
         return renderHeroSection();
+      case 'statistics':
+        return renderStatisticsSection();
       case 'services':
         return renderServicesSection();
       case 'universities':

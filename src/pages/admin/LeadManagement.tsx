@@ -39,7 +39,11 @@ const LeadManagement = () => {
       country: 'Australia',
       status: 'Contacted',
       dateSubmitted: '2024-01-15',
-      counselor: 'Sarah Johnson'
+      counselor: 'Sarah Johnson',
+      counselorName: 'Sarah Johnson',
+      counselorId: 'sarah_j',
+      notes: 'Student is very interested in Computer Science programs. Has good academic background with 3.8 GPA. Needs guidance on IELTS preparation and university selection. Planning to apply for Fall 2024 intake.',
+      lastContact: '2024-01-22'
     },
     {
       id: 2,
@@ -49,7 +53,11 @@ const LeadManagement = () => {
       country: 'Malaysia',
       status: 'File Open',
       dateSubmitted: '2024-01-14',
-      counselor: 'David Smith'
+      counselor: 'David Smith',
+      counselorName: 'David Smith',
+      counselorId: 'david_s',
+      notes: 'Application submitted to University of Malaya for Business Administration. All documents verified and complete. Waiting for university response. Student is confident about acceptance.',
+      lastContact: '2024-01-20'
     },
     {
       id: 3,
@@ -59,7 +67,9 @@ const LeadManagement = () => {
       country: 'UK',
       status: 'Pending',
       dateSubmitted: '2024-01-14',
-      counselor: 'Not Assigned'
+      counselor: 'Not Assigned',
+      notes: null,
+      lastContact: null
     },
     {
       id: 4,
@@ -69,7 +79,11 @@ const LeadManagement = () => {
       country: 'New Zealand',
       status: 'Contacted',
       dateSubmitted: '2024-01-13',
-      counselor: 'Emily Davis'
+      counselor: 'Emily Davis',
+      counselorName: 'Emily Davis',
+      counselorId: 'emily_d',
+      notes: 'Student interested in Nursing program. Has relevant work experience in healthcare. Discussed entry requirements and course structure. Needs to improve English proficiency score.',
+      lastContact: '2024-01-19'
     },
     {
       id: 5,
@@ -79,7 +93,11 @@ const LeadManagement = () => {
       country: 'Australia',
       status: 'File Open',
       dateSubmitted: '2024-01-13',
-      counselor: 'Michael Brown'
+      counselor: 'Michael Brown',
+      counselorName: 'Michael Brown',
+      counselorId: 'michael_b',
+      notes: 'Engineering student with excellent academic record. Application in progress for multiple universities including University of Melbourne and UNSW. Strong candidate for scholarship opportunities.',
+      lastContact: '2024-01-21'
     }
   ]);
 
@@ -189,7 +207,7 @@ const LeadManagement = () => {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4 p-4 bg-gray-50 rounded-lg">
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
               <span className="text-sm font-medium text-gray-700">Custom Date Range:</span>
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+              <div className="flex flex-col space-y-2 w-full sm:flex-row sm:space-y-0 sm:space-x-2 sm:w-auto">
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button

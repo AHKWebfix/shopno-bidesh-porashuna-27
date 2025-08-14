@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Users, UserCheck, UserX, FileText, TrendingUp, Calendar, Filter } from 'lucide-react';
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
@@ -83,7 +84,7 @@ const Dashboard = () => {
               <Filter className="w-4 h-4 text-gray-500" />
               <span className="text-sm text-gray-600">Custom Date Range:</span>
             </div>
-            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+            <div className="flex flex-col space-y-2 w-full sm:flex-row sm:space-y-0 sm:space-x-2 sm:w-auto">
               <Popover>
                 <PopoverTrigger asChild>
                   <Button

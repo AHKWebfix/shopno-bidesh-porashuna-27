@@ -169,30 +169,27 @@ const CounselorLeads = () => {
       {/* Search and Filter */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 lg:p-6 mb-6">
         <div className="space-y-4">
-          {/* Search Bar */}
-          <div className="relative w-full max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <input
-              type="text"
-              placeholder="Search leads..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
+          {/* Search Bar and Status Filter - Horizontal Layout */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            {/* Search Bar */}
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Search leads..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
 
-          {/* Filters - Fully Responsive */}
-          <div className="space-y-4">
             {/* Status Filter */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <div className="flex items-center space-x-2 min-w-0">
-                <Filter className="w-4 h-4 text-gray-500 flex-shrink-0" />
-                <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Status:</label>
-              </div>
+            <div className="flex items-center space-x-2 sm:min-w-[200px]">
+              <Filter className="w-4 h-4 text-gray-500 flex-shrink-0" />
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="flex-1 sm:flex-none sm:min-w-[180px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
               >
                 <option value="all">All Status</option>
                 <option value="Pending">Pending</option>
@@ -202,45 +199,45 @@ const CounselorLeads = () => {
                 <option value="Not Interested">Not Interested</option>
               </select>
             </div>
+          </div>
 
-            {/* Date Range Filter - Fully Responsive */}
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center space-x-2">
-                <CalendarDays className="w-4 h-4 text-gray-500 flex-shrink-0" />
-                <label className="text-sm font-medium text-gray-700">Date Range:</label>
+          {/* Date Range Filter */}
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center space-x-2">
+              <CalendarDays className="w-4 h-4 text-gray-500 flex-shrink-0" />
+              <label className="text-sm font-medium text-gray-700">Date Range:</label>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
+              <div className="flex flex-col xs:flex-row gap-2 xs:items-center flex-1">
+                <label className="text-xs text-gray-600 whitespace-nowrap xs:min-w-[40px]">From:</label>
+                <input
+                  type="date"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                  className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                />
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
-                <div className="flex flex-col xs:flex-row gap-2 xs:items-center flex-1">
-                  <label className="text-xs text-gray-600 whitespace-nowrap xs:min-w-[40px]">From:</label>
-                  <input
-                    type="date"
-                    value={dateFrom}
-                    onChange={(e) => setDateFrom(e.target.value)}
-                    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
-                  />
-                </div>
-                
-                <div className="flex flex-col xs:flex-row gap-2 xs:items-center flex-1">
-                  <label className="text-xs text-gray-600 whitespace-nowrap xs:min-w-[25px]">To:</label>
-                  <input
-                    type="date"
-                    value={dateTo}
-                    onChange={(e) => setDateTo(e.target.value)}
-                    className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
-                  />
-                </div>
-                
-                {(dateFrom || dateTo) && (
-                  <button
-                    onClick={clearDateFilters}
-                    className="flex items-center justify-center space-x-1 text-red-500 hover:text-red-700 text-sm px-3 py-2 rounded-lg hover:bg-red-50 transition-colors whitespace-nowrap"
-                  >
-                    <X className="w-3 h-3" />
-                    <span>Clear</span>
-                  </button>
-                )}
+              <div className="flex flex-col xs:flex-row gap-2 xs:items-center flex-1">
+                <label className="text-xs text-gray-600 whitespace-nowrap xs:min-w-[25px]">To:</label>
+                <input
+                  type="date"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                  className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                />
               </div>
+              
+              {(dateFrom || dateTo) && (
+                <button
+                  onClick={clearDateFilters}
+                  className="flex items-center justify-center space-x-1 text-red-500 hover:text-red-700 text-sm px-3 py-2 rounded-lg hover:bg-red-50 transition-colors whitespace-nowrap"
+                >
+                  <X className="w-3 h-3" />
+                  <span>Clear</span>
+                </button>
+              )}
             </div>
           </div>
 

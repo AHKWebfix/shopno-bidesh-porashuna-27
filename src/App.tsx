@@ -16,12 +16,14 @@ import AdminLayout from './components/admin/AdminLayout';
 import Leads from './pages/admin/LeadManagement';
 import Counselors from './pages/admin/CounselorManagement';
 import Documents from './pages/admin/DocumentManagement';
+import DocumentUpload from './pages/admin/DocumentUpload';
 import WebsiteManagement from './pages/admin/WebsiteManagement';
 import Settings from './pages/admin/Settings';
 import CounselorLeads from './pages/counselor/Leads';
 import CounselorDocuments from './pages/counselor/Documents';
 import CounselorAccount from './pages/counselor/Account';
 import CounselorUploadLinks from './pages/counselor/UploadLinks';
+import StudentDocumentUpload from './pages/student/DocumentUpload';
 
 const AppContent = () => {
   const location = useLocation();
@@ -29,7 +31,8 @@ const AppContent = () => {
   // More specific check for admin and counselor routes
   const isAdminRoute = location.pathname.startsWith('/admin');
   const isCounselorRoute = location.pathname.startsWith('/counselor');
-  const hideHeaderFooter = isAdminRoute || isCounselorRoute;
+  const isStudentUploadRoute = location.pathname.startsWith('/upload/');
+  const hideHeaderFooter = isAdminRoute || isCounselorRoute || isStudentUploadRoute;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -41,6 +44,9 @@ const AppContent = () => {
           <Route path="/study-abroad-process" element={<StudyAbroadProcess />} />
           <Route path="/contact" element={<Contact />} />
 
+          {/* Student Upload Route */}
+          <Route path="/upload/:linkId" element={<StudentDocumentUpload />} />
+
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminLayout />}>
@@ -48,6 +54,7 @@ const AppContent = () => {
             <Route path="leads" element={<Leads />} />
             <Route path="counselors" element={<Counselors />} />
             <Route path="documents" element={<Documents />} />
+            <Route path="document-upload" element={<DocumentUpload />} />
             <Route path="website" element={<WebsiteManagement />} />
             <Route path="settings" element={<Settings />} />
           </Route>

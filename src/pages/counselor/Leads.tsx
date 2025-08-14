@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Eye,
@@ -9,7 +10,8 @@ import {
   MapPin,
   User,
   Calendar,
-  CalendarDays
+  CalendarDays,
+  Plane
 } from 'lucide-react';
 import CounselorLeadViewModal from '@/components/counselor/CounselorLeadViewModal';
 import CounselorLeadEditModal from '@/components/counselor/CounselorLeadEditModal';
@@ -76,6 +78,19 @@ const CounselorLeads = () => {
       notes: 'Initial inquiry about MBA programs.',
       counselorId: 'sarah_j',
       counselorName: 'Sarah Johnson'
+    },
+    {
+      id: 4,
+      name: 'Rashida Begum',
+      phone: '+880 1612-234567',
+      email: 'rashida.begum@email.com',
+      country: 'New Zealand',
+      status: 'Successfully Departed',
+      dateSubmitted: '2024-01-13',
+      lastContact: '2024-02-15',
+      notes: 'Successfully departed for Auckland University. Nursing program started in February 2024.',
+      counselorId: 'sarah_j',
+      counselorName: 'Sarah Johnson'
     }
   ]);
 
@@ -89,9 +104,18 @@ const CounselorLeads = () => {
         return 'bg-yellow-100 text-yellow-800';
       case 'Not Interested':
         return 'bg-red-100 text-red-800';
+      case 'Successfully Departed':
+        return 'bg-purple-100 text-purple-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const getStatusIcon = (status: string) => {
+    if (status === 'Successfully Departed') {
+      return <Plane className="w-3 h-3 mr-1" />;
+    }
+    return null;
   };
 
   const filteredLeads = leads.filter(lead => {
@@ -171,6 +195,7 @@ const CounselorLeads = () => {
                 <option value="Pending">Pending</option>
                 <option value="Contacted">Contacted</option>
                 <option value="File Open">File Open</option>
+                <option value="Successfully Departed">Successfully Departed</option>
                 <option value="Not Interested">Not Interested</option>
               </select>
             </div>
@@ -272,7 +297,8 @@ const CounselorLeads = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(lead.status)}`}>
+                    <span className={`inline-flex items-center px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(lead.status)}`}>
+                      {getStatusIcon(lead.status)}
                       {lead.status}
                     </span>
                   </td>
@@ -319,7 +345,8 @@ const CounselorLeads = () => {
                   <p className="text-sm text-gray-500">ID: #{lead.id}</p>
                 </div>
               </div>
-              <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(lead.status)}`}>
+              <span className={`inline-flex items-center px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(lead.status)}`}>
+                {getStatusIcon(lead.status)}
                 {lead.status}
               </span>
             </div>

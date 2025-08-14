@@ -64,6 +64,7 @@ const LeadEditModal: React.FC<LeadEditModalProps> = ({ lead, isOpen, onClose, on
               <option value="Pending">Pending</option>
               <option value="Contacted">Contacted</option>
               <option value="File Open">File Open</option>
+              <option value="Successfully Departed">Successfully Departed</option>
               <option value="Not Interested">Not Interested</option>
             </select>
           </div>

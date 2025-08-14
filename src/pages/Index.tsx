@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,8 +19,52 @@ const Index = () => {
   });
   const { toast } = useToast();
 
+  // Counter animation state
+  const [counters, setCounters] = useState({
+    totalInterested: 0,
+    filesOpened: 0,
+    successfullyDeparted: 0
+  });
+
+  const finalCounts = {
+    totalInterested: 2500,
+    filesOpened: 1200,
+    successfullyDeparted: 800
+  };
+
   useEffect(() => {
     console.log('Index component mounted successfully');
+    
+    // Animate counters
+    const animateCounters = () => {
+      const duration = 2000; // 2 seconds
+      const steps = 60;
+      const stepDuration = duration / steps;
+
+      let currentStep = 0;
+      const timer = setInterval(() => {
+        currentStep++;
+        const progress = currentStep / steps;
+        
+        setCounters({
+          totalInterested: Math.floor(finalCounts.totalInterested * progress),
+          filesOpened: Math.floor(finalCounts.filesOpened * progress),
+          successfullyDeparted: Math.floor(finalCounts.successfullyDeparted * progress)
+        });
+
+        if (currentStep >= steps) {
+          clearInterval(timer);
+          setCounters(finalCounts);
+        }
+      }, stepDuration);
+    };
+
+    // Start animation after a short delay
+    const timeout = setTimeout(animateCounters, 500);
+    
+    return () => {
+      clearTimeout(timeout);
+    };
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -292,60 +335,67 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonial Section */}
+      {/* Statistics Counter Section */}
       <section className="py-20 bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">আমাদের সফল শিক্ষার্থীদের কথা</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">আমাদের সাফল্যের পরিসংখ্যান</h2>
             <p className="text-xl opacity-90">যারা আমাদের সাথে তাদের স্বপ্ন পূরণ করেছেন</p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "রাহুল আহমেদ",
-                university: "University of Melbourne",
-                country: "অস্ট্রেলিয়া",
-                quote: "MH Education এর সাহায্যে আমি অস্ট্রেলিয়ার টপ ইউনিভার্সিটিতে ভর্তি হতে পেরেছি। তাদের গাইডেন্স ছাড়া এটা সম্ভব হতো না।",
-                rating: 5
-              },
-              {
-                name: "ফাতিমা খান",
-                university: "University of Oxford",
-                country: "যুক্তরাজ্য",
-                quote: "সম্পূর্ণ ফ্রি সেবা পেয়ে আমি অবাক হয়েছি। ভিসা প্রসেস থেকে শুরু করে যুক্তরাজ্যে পৌঁছানো পর্যন্ত তারা পাশে ছিল।",
-                rating: 5
-              },
-              {
-                name: "মোহাম্মদ হাসান",
-                university: "University of Malaya",
-                country: "মালয়েশিয়া",
-                quote: "মালয়েশিয়ায় স্কলারশিপ নিয়ে পড়াশোনার স্বপ্ন ছিল। MH Education সেই স্বপ্ন বাস্তবায়নে অসাধারণ সাহায্য করেছে।",
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-300 group">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
-                      <Users className="text-white" size={24} />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-lg">{testimonial.name}</h4>
-                      <p className="text-white/80 text-sm">{testimonial.university}</p>
-                      <p className="text-white/70 text-xs">{testimonial.country}</p>
-                    </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-300 group text-center">
+              <CardContent className="p-8">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Users className="text-white" size={32} />
                   </div>
-                  <div className="flex mb-3">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="text-yellow-400 fill-current" size={16} />
-                    ))}
+                </div>
+                <div className="text-4xl sm:text-5xl font-bold mb-2 bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
+                  {counters.totalInterested.toLocaleString()}+
+                </div>
+                <h3 className="text-xl font-bold mb-2">আগ্রহী শিক্ষার্থী</h3>
+                <p className="text-white/80 text-sm">যারা আমাদের সাথে যোগাযোগ করেছেন</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-300 group text-center">
+              <CardContent className="p-8">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <FileText className="text-white" size={32} />
                   </div>
-                  <p className="italic text-white/90 leading-relaxed">"{testimonial.quote}"</p>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+                <div className="text-4xl sm:text-5xl font-bold mb-2 bg-gradient-to-r from-green-200 to-blue-200 bg-clip-text text-transparent">
+                  {counters.filesOpened.toLocaleString()}+
+                </div>
+                <h3 className="text-xl font-bold mb-2">ফাইল ওপেন</h3>
+                <p className="text-white/80 text-sm">যাদের আবেদন প্রক্রিয়া শুরু হয়েছে</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-300 group text-center">
+              <CardContent className="p-8">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Plane className="text-white" size={32} />
+                  </div>
+                </div>
+                <div className="text-4xl sm:text-5xl font-bold mb-2 bg-gradient-to-r from-pink-200 to-purple-200 bg-clip-text text-transparent">
+                  {counters.successfullyDeparted.toLocaleString()}+
+                </div>
+                <h3 className="text-xl font-bold mb-2">সফল বিদায়</h3>
+                <p className="text-white/80 text-sm">যারা সফলভাবে বিদেশে পৌঁছেছেন</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20">
+              <CheckCircle className="text-green-300" size={20} />
+              <span className="text-white/90 font-medium">৯৫% সাফল্যের হার ভিসা অনুমোদনে</span>
+            </div>
           </div>
         </div>
       </section>

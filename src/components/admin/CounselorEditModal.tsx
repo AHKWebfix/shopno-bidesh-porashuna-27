@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Edit, User, Mail, Key, Toggle } from 'lucide-react';
+import { Edit, User, Mail, Key, ToggleLeft } from 'lucide-react';
 
 interface Counselor {
   id: number;
@@ -125,7 +124,7 @@ const CounselorEditModal: React.FC<CounselorEditModalProps> = ({
 
           <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
             <div className="flex items-center space-x-2">
-              <Toggle className="w-4 h-4 text-gray-500" />
+              <ToggleLeft className="w-4 h-4 text-gray-500" />
               <span className="text-sm font-medium text-gray-700">Account Status</span>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">

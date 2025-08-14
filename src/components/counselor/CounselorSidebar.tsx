@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Users, FileText, Settings, LogOut, ChevronRight, Link, Menu, X } from 'lucide-react';
@@ -34,7 +35,7 @@ const CounselorSidebar = () => {
   };
   return <>
       {/* Mobile Menu Button */}
-      <div className="lg:hidden fixed top-4 left-4 z-50">
+      <div className="lg:hidden fixed top-4 right-4 z-50">
         <button onClick={toggleMobileMenu} className="bg-white shadow-lg p-2 rounded-lg border border-gray-200">
           {isMobileMenuOpen ? <X className="w-6 h-6 text-gray-700" /> : <Menu className="w-6 h-6 text-gray-700" />}
         </button>

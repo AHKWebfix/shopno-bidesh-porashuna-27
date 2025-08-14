@@ -370,10 +370,7 @@ const WebsiteManagement = () => {
               ...contactData,
               whatsapp: e.target.value
             })} className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-              <Button variant="outline" size="sm" onClick={() => window.open(`https://wa.me/${contactData.whatsapp.replace(/[^0-9]/g, '')}`, '_blank')}>
-                <MessageCircle className="w-4 h-4 mr-1" />
-                Test
-              </Button>
+              
             </div>
             <p className="text-xs text-gray-500 mt-1">Clicking will open WhatsApp chat</p>
           </div>

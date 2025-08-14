@@ -9,7 +9,6 @@ import StudyAbroadProcess from './pages/StudyAbroadProcess';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
-import AdminSettings from './pages/admin/Settings';
 import CounselorLogin from './pages/counselor/Login';
 import CounselorDashboard from './pages/counselor/Dashboard';
 import CounselorLayout from './components/counselor/CounselorLayout';
@@ -48,7 +47,6 @@ const AppContent = () => {
             <Route path="counselors" element={<Counselors />} />
             <Route path="documents" element={<Documents />} />
             <Route path="website" element={<WebsiteManagement />} />
-            <Route path="settings" element={<AdminSettings />} />
           </Route>
           
           {/* Counselor Routes */}

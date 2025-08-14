@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Users, UserCheck, UserX, FileText, TrendingUp, Calendar, Filter } from 'lucide-react';
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
@@ -79,17 +78,17 @@ const Dashboard = () => {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
           <h3 className="text-lg font-semibold text-gray-900">Lead Overview Filter</h3>
-          <div className="flex flex-col items-start space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
             <div className="flex items-center space-x-2">
               <Filter className="w-4 h-4 text-gray-500" />
               <span className="text-sm text-gray-600">Custom Date Range:</span>
             </div>
-            <div className="w-full grid grid-cols-1 gap-3">
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-full justify-start text-left font-normal"
+                    className="w-full sm:w-auto justify-start text-left font-normal"
                   >
                     <Calendar className="mr-2 h-4 w-4" />
                     {dateFrom ? format(dateFrom, "PPP") : "From date"}
@@ -109,7 +108,7 @@ const Dashboard = () => {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-full justify-start text-left font-normal"
+                    className="w-full sm:w-auto justify-start text-left font-normal"
                   >
                     <Calendar className="mr-2 h-4 w-4" />
                     {dateTo ? format(dateTo, "PPP") : "To date"}
@@ -126,7 +125,7 @@ const Dashboard = () => {
                 </PopoverContent>
               </Popover>
               <Button 
-                className="w-full bg-primary text-white hover:bg-primary/90"
+                className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90"
                 onClick={() => {
                   // Filter logic would go here
                   console.log('Filtering from', dateFrom, 'to', dateTo);

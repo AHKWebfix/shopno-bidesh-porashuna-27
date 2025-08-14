@@ -8,17 +8,25 @@ import {
   X, 
   Phone,
   Shield,
-  AlertCircle,
-  ArrowLeft
+  AlertCircle
 } from 'lucide-react';
 
 const StudentDocumentUpload = () => {
   const { linkId } = useParams();
   const [isVerified, setIsVerified] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [otp, setOtp] = useState('');
-  const [showOtpInput, setShowOtpInput] = useState(false);
+  const [verificationError, setVerificationError] = useState('');
+  const [isChecking, setIsChecking] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
+
+  // Mock lead list - in real implementation this would come from your database
+  const registeredPhoneNumbers = [
+    '+880 1712-345678',
+    '+880 1812-456789',
+    '+880 1912-567890',
+    '+880 1612-234567',
+    '+880 1512-345678'
+  ];
 
   const documentTypes = [
     { id: 'transcript', label: 'Academic Transcript', required: true },
@@ -31,18 +39,29 @@ const StudentDocumentUpload = () => {
     { id: 'other', label: 'Other Documents', required: false },
   ];
 
-  const handleSendOtp = () => {
-    if (phoneNumber.length >= 10) {
-      setShowOtpInput(true);
-      console.log('Sending OTP to:', phoneNumber);
+  const handlePhoneVerification = () => {
+    if (phoneNumber.length < 10) {
+      setVerificationError('Please enter a valid phone number');
+      return;
     }
-  };
 
-  const handleVerifyOtp = () => {
-    if (otp.length === 6) {
-      setIsVerified(true);
-      console.log('OTP verified:', otp);
-    }
+    setIsChecking(true);
+    setVerificationError('');
+
+    // Simulate checking against database
+    setTimeout(() => {
+      const isRegistered = registeredPhoneNumbers.some(registered => 
+        registered.replace(/\s/g, '') === phoneNumber.replace(/\s/g, '')
+      );
+
+      if (isRegistered) {
+        setIsVerified(true);
+        setVerificationError('');
+      } else {
+        setVerificationError('Please try with registered phone number');
+      }
+      setIsChecking(false);
+    }, 1000);
   };
 
   const handleFileUpload = (documentType: string, files: FileList | null) => {
@@ -88,75 +107,38 @@ const StudentDocumentUpload = () => {
 
           {/* Verification Form */}
           <div className="space-y-4">
-            {!showOtpInput ? (
-              <>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone Number
-                  </label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <input
-                      type="tel"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      placeholder="+880 1712-345678"
-                      className="pl-10 pr-4 py-2.5 sm:py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm lg:text-base"
-                    />
-                  </div>
-                </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Phone Number
+              </label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <input
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                    setVerificationError('');
+                  }}
+                  placeholder="+880 1712-345678"
+                  className="pl-10 pr-4 py-2.5 sm:py-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm lg:text-base"
+                />
+              </div>
+              {verificationError && (
+                <p className="mt-2 text-sm text-red-600 flex items-center">
+                  <AlertCircle className="w-4 h-4 mr-1" />
+                  {verificationError}
+                </p>
+              )}
+            </div>
 
-                <button
-                  onClick={handleSendOtp}
-                  disabled={phoneNumber.length < 10}
-                  className="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm lg:text-base transition-colors"
-                >
-                  Send Verification Code
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  onClick={() => setShowOtpInput(false)}
-                  className="flex items-center text-primary hover:text-primary/80 text-sm mb-2"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-1" />
-                  Change phone number
-                </button>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Verification Code
-                  </label>
-                  <p className="text-xs text-gray-500 mb-2">
-                    Enter the 6-digit code sent to {phoneNumber}
-                  </p>
-                  <input
-                    type="text"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                    placeholder="000000"
-                    className="w-full px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-center text-lg font-mono tracking-widest"
-                    maxLength={6}
-                  />
-                </div>
-
-                <button
-                  onClick={handleVerifyOtp}
-                  disabled={otp.length !== 6}
-                  className="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm lg:text-base transition-colors"
-                >
-                  Verify Code
-                </button>
-
-                <button
-                  onClick={() => console.log('Resending OTP')}
-                  className="w-full text-primary hover:text-primary/80 py-2 text-sm"
-                >
-                  Resend Code
-                </button>
-              </>
-            )}
+            <button
+              onClick={handlePhoneVerification}
+              disabled={phoneNumber.length < 10 || isChecking}
+              className="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm lg:text-base transition-colors"
+            >
+              {isChecking ? 'Checking...' : 'Check Phone Number'}
+            </button>
           </div>
 
           {/* Security Note */}

@@ -308,10 +308,7 @@ const WebsiteManagement = () => {
   const renderContactSection = () => <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Contact Information</h3>
-        <Button variant="outline" size="sm">
-          <Eye className="w-4 h-4 mr-2" />
-          Preview
-        </Button>
+        
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

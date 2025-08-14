@@ -11,13 +11,16 @@ import {
   Link,
   Copy
 } from 'lucide-react';
+import CounselorEditModal from '@/components/admin/CounselorEditModal';
 
 const CounselorManagement = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [generatedLink, setGeneratedLink] = useState('');
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedCounselor, setSelectedCounselor] = useState<any>(null);
 
-  const counselors = [
+  const [counselors, setCounselors] = useState([
     {
       id: 1,
       name: 'Sarah Johnson',
@@ -25,7 +28,8 @@ const CounselorManagement = () => {
       username: 'sarah_j',
       assignedLeads: 23,
       activeLeads: 12,
-      completedLeads: 45
+      completedLeads: 45,
+      isActive: true
     },
     {
       id: 2,
@@ -34,7 +38,8 @@ const CounselorManagement = () => {
       username: 'david_s',
       assignedLeads: 18,
       activeLeads: 8,
-      completedLeads: 32
+      completedLeads: 32,
+      isActive: true
     },
     {
       id: 3,
@@ -43,7 +48,8 @@ const CounselorManagement = () => {
       username: 'emily_d',
       assignedLeads: 31,
       activeLeads: 15,
-      completedLeads: 67
+      completedLeads: 67,
+      isActive: false
     },
     {
       id: 4,
@@ -52,18 +58,26 @@ const CounselorManagement = () => {
       username: 'michael_b',
       assignedLeads: 26,
       activeLeads: 11,
-      completedLeads: 38
+      completedLeads: 38,
+      isActive: true
     }
-  ];
+  ]);
 
   const filteredCounselors = counselors.filter(counselor =>
     counselor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     counselor.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleEditCounselor = (counselorId: number) => {
-    console.log('Editing counselor:', counselorId);
-    alert(`Edit form would open for counselor ID: ${counselorId}`);
+  const handleEditCounselor = (counselor: any) => {
+    setSelectedCounselor(counselor);
+    setEditModalOpen(true);
+  };
+
+  const handleUpdateCounselor = (counselorId: number, updatedData: any) => {
+    setCounselors(counselors.map(counselor => 
+      counselor.id === counselorId ? { ...counselor, ...updatedData } : counselor
+    ));
+    console.log('Updated counselor:', counselorId, updatedData);
   };
 
   const handleGenerateLink = () => {
@@ -239,7 +253,7 @@ const CounselorManagement = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
                       <button 
-                        onClick={() => handleEditCounselor(counselor.id)}
+                        onClick={() => handleEditCounselor(counselor)}
                         className="text-primary hover:text-primary/80 p-1 rounded transition-colors"
                         title="Edit Counselor"
                       >
@@ -273,7 +287,7 @@ const CounselorManagement = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <button 
-                  onClick={() => handleEditCounselor(counselor.id)}
+                  onClick={() => handleEditCounselor(counselor)}
                   className="text-primary hover:text-primary/80 p-2 rounded transition-colors"
                   title="Edit Counselor"
                 >
@@ -387,6 +401,14 @@ const CounselorManagement = () => {
           )}
         </div>
       </div>
+
+      {/* Edit Modal */}
+      <CounselorEditModal 
+        counselor={selectedCounselor}
+        isOpen={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        onUpdate={handleUpdateCounselor}
+      />
     </div>
   );
 };

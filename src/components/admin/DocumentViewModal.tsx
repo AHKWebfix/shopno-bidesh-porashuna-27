@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { FileText, User } from 'lucide-react';
+import { FileText, User, ExternalLink } from 'lucide-react';
 
 interface Document {
   id: number;
@@ -22,9 +22,16 @@ interface DocumentViewModalProps {
 const DocumentViewModal: React.FC<DocumentViewModalProps> = ({ document, isOpen, onClose }) => {
   if (!document) return null;
 
+  const handleViewDocument = (docName: string) => {
+    // Simulate opening document in new tab
+    const simulatedUrl = `https://example.com/documents/${document.id}/${docName.toLowerCase().replace(/\s+/g, '-')}.pdf`;
+    window.open(simulatedUrl, '_blank');
+    console.log('Opening document:', docName, 'for student:', document.name);
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="sm:max-w-lg max-h-[80vh] overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle className="flex items-center space-x-2">
             <FileText className="w-5 h-5" />
@@ -32,7 +39,7 @@ const DocumentViewModal: React.FC<DocumentViewModalProps> = ({ document, isOpen,
           </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-4">
+        <div className="overflow-y-auto flex-1 space-y-4 pr-2">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
               <User className="w-6 h-6 text-white" />
@@ -58,9 +65,18 @@ const DocumentViewModal: React.FC<DocumentViewModalProps> = ({ document, isOpen,
                     <FileText className="w-4 h-4 text-gray-500" />
                     <span className="text-sm font-medium">{doc}</span>
                   </div>
-                  <span className="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">
-                    Uploaded
-                  </span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">
+                      Uploaded
+                    </span>
+                    <button
+                      onClick={() => handleViewDocument(doc)}
+                      className="text-primary hover:text-primary/80 p-1 rounded transition-colors"
+                      title="View Document"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

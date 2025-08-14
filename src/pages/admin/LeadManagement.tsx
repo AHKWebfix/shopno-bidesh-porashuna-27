@@ -27,6 +27,7 @@ const LeadManagement = () => {
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedLead, setSelectedLead] = useState<any>(null);
+  const [isSearching, setIsSearching] = useState(false);
   const leadsPerPage = 10;
 
   const [leads, setLeads] = useState([
@@ -112,6 +113,16 @@ const LeadManagement = () => {
   const handleExportPDF = () => {
     console.log('Exporting PDF with filters:', { dateFrom, dateTo, statusFilter });
     alert('PDF export functionality would be implemented here');
+  };
+
+  const handleSearchWithDateRange = () => {
+    setIsSearching(true);
+    console.log('Searching with date range:', { dateFrom, dateTo, statusFilter });
+    // Simulate search delay
+    setTimeout(() => {
+      setIsSearching(false);
+      setCurrentPage(1); // Reset to first page
+    }, 1000);
   };
 
   const handleViewLead = (lead: any) => {
@@ -219,11 +230,19 @@ const LeadManagement = () => {
                     />
                   </PopoverContent>
                 </Popover>
+                <Button 
+                  onClick={handleSearchWithDateRange}
+                  disabled={isSearching}
+                  className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90 flex items-center justify-center space-x-2"
+                >
+                  <Search className="w-4 h-4" />
+                  <span>{isSearching ? 'Searching...' : 'Search'}</span>
+                </Button>
               </div>
             </div>
             <Button 
               onClick={handleExportPDF}
-              className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90 flex items-center justify-center space-x-2"
+              className="w-full sm:w-auto bg-green-600 text-white hover:bg-green-700 flex items-center justify-center space-x-2"
             >
               <Download className="w-4 h-4" />
               <span>Export PDF</span>

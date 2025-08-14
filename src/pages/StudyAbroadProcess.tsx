@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Users, FileText, GraduationCap, Globe, Shield, Plane, Clock, Award, Target } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
-
 const StudyAbroadProcess = () => {
   const agencyServices = [{
     icon: <GraduationCap className="text-purple-600" size={32} />,
@@ -50,7 +49,6 @@ const StudyAbroadProcess = () => {
     title: "প্রাক-যাত্রা ব্রিফিং বা মৌলিক প্রশিক্ষণ",
     description: "বিদেশ যাওয়ার আগে প্রয়োজনীয় তথ্য ও প্রশিক্ষণ প্রদান"
   }];
-
   const studentSteps = [{
     icon: <FileText className="text-gray-700" size={28} />,
     title: "পাসপোর্টের জন্য আবেদন করুন",
@@ -88,9 +86,7 @@ const StudyAbroadProcess = () => {
     title: "মূল ব্যক্তিগত ডকুমেন্ট জমা দিন",
     description: "প্রয়োজন অনুযায়ী মূল কাগজপত্র জমা দিন"
   }];
-
-  return (
-    <div className="min-h-screen font-bangla bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
+  return <div className="min-h-screen font-bangla bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
       {/* Hero Section */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4">
@@ -177,15 +173,13 @@ const StudyAbroadProcess = () => {
               </Button>
             </Link>
             <Link to="/about">
-              <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-purple-600 text-lg px-8 py-4 rounded-full font-medium transition-all duration-300 transform hover:scale-105">
+              <Button variant="outline" className="border-2 border-white hover:bg-white text-lg px-8 py-4 rounded-full font-medium transition-all duration-300 transform hover:scale-105 text-purple-600">
                 আরও জানুন
               </Button>
             </Link>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default StudyAbroadProcess;

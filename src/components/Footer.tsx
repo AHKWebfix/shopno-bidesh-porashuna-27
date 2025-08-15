@@ -8,12 +8,12 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="flex items-center space-x-3 mb-4">
+            <Link to="/" className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 rounded-full flex items-center justify-center shadow-lg">
                 <GraduationCap className="text-white" size={24} />
               </div>
               <h3 className="text-xl font-bold">BEGL BD</h3>
-            </div>
+            </Link>
             <p className="text-gray-300 leading-relaxed mb-4">
               আপনার স্বপ্ন পূরণে আমরা আছি পাশে। বিদেশে উচ্চশিক্ষার জন্য পান সম্পূর্ণ ফ্রি পরামর্শ ও গাইডেন্স।
             </p>

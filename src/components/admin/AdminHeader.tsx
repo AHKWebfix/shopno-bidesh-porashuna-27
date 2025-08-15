@@ -1,9 +1,30 @@
 
 import React, { useState } from 'react';
-import { Bell, Search, ChevronDown, User, Settings, LogOut } from 'lucide-react';
+import { Bell, Search, ChevronDown, User, Settings, LogOut, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AdminHeader = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const handleProfileClick = () => {
+    console.log('Profile clicked');
+    setIsProfileOpen(false);
+  };
+
+  const handleSettingsClick = () => {
+    console.log('Settings clicked');
+    setIsProfileOpen(false);
+  };
+
+  const handleLogoutClick = () => {
+    console.log('Logout clicked');
+    localStorage.removeItem('adminAuth');
+    window.location.href = '/admin/login';
+  };
+
+  const handleWebsiteVisit = () => {
+    window.open('/', '_blank');
+  };
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
@@ -14,7 +35,7 @@ const AdminHeader = () => {
           <p className="text-sm text-gray-500">Welcome back, Admin</p>
         </div>
 
-        {/* Right Side - Search, Notifications, Profile */}
+        {/* Right Side - Search, Website Visit, Notifications, Profile */}
         <div className="flex items-center space-x-4">
           {/* Search Bar */}
           <div className="relative hidden md:block">
@@ -25,6 +46,15 @@ const AdminHeader = () => {
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
             />
           </div>
+
+          {/* Website Visit Button */}
+          <button 
+            onClick={handleWebsiteVisit}
+            className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+            title="Visit Website"
+          >
+            <ExternalLink className="w-5 h-5" />
+          </button>
 
           {/* Notifications */}
           <button className="relative p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
@@ -51,28 +81,29 @@ const AdminHeader = () => {
             {/* Dropdown Menu */}
             {isProfileOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                <a
-                  href="#"
-                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                <button
+                  onClick={handleProfileClick}
+                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                 >
                   <User className="w-4 h-4 mr-3" />
                   Profile
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                </button>
+                <Link
+                  to="/admin/settings"
+                  onClick={handleSettingsClick}
+                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                 >
                   <Settings className="w-4 h-4 mr-3" />
                   Settings
-                </a>
+                </Link>
                 <hr className="my-2" />
-                <a
-                  href="#"
-                  className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                <button
+                  onClick={handleLogoutClick}
+                  className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
                 >
                   <LogOut className="w-4 h-4 mr-3" />
                   Logout
-                </a>
+                </button>
               </div>
             )}
           </div>

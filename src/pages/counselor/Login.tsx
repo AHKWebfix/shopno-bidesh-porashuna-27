@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, LogIn, GraduationCap } from 'lucide-react';
+import { Eye, EyeOff, LogIn, GraduationCap, ExternalLink } from 'lucide-react';
 
 const CounselorLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +20,10 @@ const CounselorLogin = () => {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleWebsiteVisit = () => {
+    window.open('/', '_blank');
   };
 
   return (
@@ -73,6 +77,16 @@ const CounselorLogin = () => {
               <span>Sign In</span>
             </button>
           </form>
+
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <button
+              onClick={handleWebsiteVisit}
+              className="w-full flex items-center justify-center space-x-2 text-green-600 hover:text-green-700 transition-colors"
+            >
+              <ExternalLink size={16} />
+              <span>Visit Website</span>
+            </button>
+          </div>
 
           <p className="text-xs text-gray-500 text-center mt-4">
             Demo: counselor@begleducation.com / counselor123

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { 
   Upload, 
   FileText, 
@@ -9,10 +9,13 @@ import {
   Shield,
   AlertCircle
 } from 'lucide-react';
+import ThankYouPage from '../../components/student/ThankYouPage';
 
 const StudentDocumentUpload = () => {
   const { linkId } = useParams();
+  const navigate = useNavigate();
   const [isVerified, setIsVerified] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationError, setVerificationError] = useState('');
   const [isChecking, setIsChecking] = useState(false);
@@ -87,6 +90,16 @@ const StudentDocumentUpload = () => {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
+
+  const handleSubmitDocuments = () => {
+    // Simulate submission process
+    setIsSubmitted(true);
+  };
+
+  // Show Thank You page after submission
+  if (isSubmitted) {
+    return <ThankYouPage />;
+  }
 
   if (!isVerified) {
     return (
@@ -288,7 +301,10 @@ const StudentDocumentUpload = () => {
                 </span>
               </p>
             </div>
-            <button className="bg-primary text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-primary/90 font-medium w-full lg:w-auto text-sm sm:text-base transition-colors">
+            <button 
+              onClick={handleSubmitDocuments}
+              className="bg-primary text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-primary/90 font-medium w-full lg:w-auto text-sm sm:text-base transition-colors"
+            >
               Submit Documents
             </button>
           </div>

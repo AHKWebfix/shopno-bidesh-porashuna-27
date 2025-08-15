@@ -1,12 +1,18 @@
 
 import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogOut } from 'lucide-react';
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleMobileLogout = () => {
+    navigate('/admin/login');
+    setSidebarOpen(false);
+  };
 
   return (
     <div className="flex h-screen bg-gray-50 font-bangla overflow-hidden">
@@ -32,6 +38,17 @@ const AdminLayout = () => {
           </button>
         </div>
         <AdminSidebar />
+        
+        {/* Mobile Logout Button */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+          <button
+            onClick={handleMobileLogout}
+            className="flex items-center w-full px-4 py-3 text-gray-700 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors duration-200"
+          >
+            <LogOut className="w-5 h-5 mr-3" />
+            <span className="font-medium">Logout</span>
+          </button>
+        </div>
       </div>
 
       {/* Desktop sidebar */}

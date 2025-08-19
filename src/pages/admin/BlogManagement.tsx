@@ -8,7 +8,7 @@ import BlogPostModal from '@/components/admin/BlogPostModal';
 
 const BlogManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingPost, setEditingPost] = useState(null);
+  const [editingPost, setEditingPost] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
@@ -47,25 +47,25 @@ const BlogManagement = () => {
       views: 1567,
       featured: false
     }
-  ];
+  ]);
 
   const handleCreatePost = () => {
     setEditingPost(null);
     setIsModalOpen(true);
   };
 
-  const handleEditPost = (post) => {
+  const handleEditPost = (post: any) => {
     setEditingPost(post);
     setIsModalOpen(true);
   };
 
-  const handleDeletePost = (postId) => {
+  const handleDeletePost = (postId: number) => {
     if (confirm('আপনি কি নিশ্চিত যে এই পোস্টটি মুছে দিতে চান?')) {
       setBlogPosts(blogPosts.filter(post => post.id !== postId));
     }
   };
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'published': return 'bg-green-100 text-green-800';
       case 'draft': return 'bg-yellow-100 text-yellow-800';
@@ -74,7 +74,7 @@ const BlogManagement = () => {
     }
   };
 
-  const getStatusText = (status) => {
+  const getStatusText = (status: string) => {
     switch (status) {
       case 'published': return 'প্রকাশিত';
       case 'draft': return 'খসড়া';

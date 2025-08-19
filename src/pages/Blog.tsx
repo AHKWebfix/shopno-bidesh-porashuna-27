@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, Tag, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 const Blog = () => {
   // Mock blog data
   const blogPosts = [{
@@ -66,12 +67,15 @@ const Blog = () => {
     image: '/placeholder.svg',
     featured: false
   }];
+
   const categories = ['সব', 'কানাডা', 'অস্ট্রেলিয়া', 'যুক্তরাজ্য', 'আমেরিকা', 'জার্মানি', 'পরীক্ষা প্রস্তুতি'];
   const [selectedCategory, setSelectedCategory] = React.useState('সব');
   const featuredPost = blogPosts.find(post => post.featured);
   const regularPosts = blogPosts.filter(post => !post.featured);
   const filteredPosts = selectedCategory === 'সব' ? regularPosts : regularPosts.filter(post => post.category === selectedCategory);
-  return <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
+
+  return (
+    <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
       {/* Hero Section */}
       <section className="py-12 lg:py-24">
         <div className="container mx-auto px-4 max-w-7xl">
@@ -87,15 +91,76 @@ const Blog = () => {
       </section>
 
       {/* Featured Post */}
-      {featuredPost}
+      {featuredPost && (
+        <section className="py-8">
+          <div className="container mx-auto px-4 max-w-7xl">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">বিশেষ পোস্ট</h2>
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-0 shadow-lg">
+              <div className="grid md:grid-cols-2 gap-0">
+                <div className="aspect-video md:aspect-square overflow-hidden">
+                  <img 
+                    src={featuredPost.image} 
+                    alt={featuredPost.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
+                  />
+                </div>
+                <CardContent className="p-8 flex flex-col justify-center">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="bg-brand-blue text-white px-3 py-1 rounded-full text-sm font-medium">
+                      বিশেষ
+                    </span>
+                    <span className="bg-brand-green/10 text-brand-green px-2 py-1 rounded-full text-xs font-medium">
+                      {featuredPost.category}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4 leading-tight">
+                    {featuredPost.title}
+                  </h3>
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {featuredPost.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4 text-sm text-gray-500">
+                      <div className="flex items-center space-x-1">
+                        <User size={14} />
+                        <span>{featuredPost.author}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Calendar size={14} />
+                        <span>{featuredPost.date}</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Clock size={14} />
+                        <span>{featuredPost.readTime}</span>
+                      </div>
+                    </div>
+                    <Link to={`/blog/${featuredPost.id}`}>
+                      <Button className="bg-brand-blue hover:bg-brand-blue/90 text-white">
+                        বিস্তারিত পড়ুন
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </div>
+            </Card>
+          </div>
+        </section>
+      )}
 
       {/* Category Filter */}
       <section className="py-8">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {categories.map(category => <Button key={category} variant={selectedCategory === category ? "default" : "outline"} onClick={() => setSelectedCategory(category)} className={`${selectedCategory === category ? 'bg-brand-blue text-white' : 'border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white'}`}>
+            {categories.map(category => (
+              <Button 
+                key={category} 
+                variant={selectedCategory === category ? "default" : "outline"} 
+                onClick={() => setSelectedCategory(category)} 
+                className={`${selectedCategory === category ? 'bg-brand-blue text-white' : 'border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white'}`}
+              >
                 {category}
-              </Button>)}
+              </Button>
+            ))}
           </div>
         </div>
       </section>
@@ -104,7 +169,8 @@ const Blog = () => {
       <section className="py-8 pb-16">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredPosts.map(post => <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-0 shadow-lg">
+            {filteredPosts.map(post => (
+              <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-0 shadow-lg">
                 <div className="aspect-video overflow-hidden">
                   <img src={post.image} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
@@ -142,10 +208,13 @@ const Blog = () => {
                     </Link>
                   </div>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
+
 export default Blog;

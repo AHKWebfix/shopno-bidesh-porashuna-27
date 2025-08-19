@@ -78,9 +78,8 @@ const Blog = () => {
   const categories = ['সব', 'কানাডা', 'অস্ট্রেলিয়া', 'যুক্তরাজ্য', 'আমেরিকা', 'জার্মানি', 'পরীক্ষা প্রস্তুতি'];
   const [selectedCategory, setSelectedCategory] = React.useState('সব');
   
-  const featuredPost = blogPosts.find(post => post.featured);
-  const regularPosts = blogPosts.filter(post => !post.featured);
-  const filteredPosts = selectedCategory === 'সব' ? regularPosts : regularPosts.filter(post => post.category === selectedCategory);
+  const allPosts = blogPosts;
+  const filteredPosts = selectedCategory === 'সব' ? allPosts : allPosts.filter(post => post.category === selectedCategory);
 
   return (
     <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
@@ -97,58 +96,6 @@ const Blog = () => {
           </div>
         </div>
       </section>
-
-      {/* Featured Post */}
-      {featuredPost && (
-        <section className="py-8">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">বিশেষ নিবন্ধ</h2>
-            <Card className="overflow-hidden shadow-2xl border-0 lg:flex">
-              <div className="lg:w-1/2 aspect-video lg:aspect-auto overflow-hidden">
-                <img 
-                  src={featuredPost.image} 
-                  alt={featuredPost.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <CardContent className="lg:w-1/2 p-8">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="bg-brand-blue text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {featuredPost.category}
-                  </span>
-                  <div className="flex items-center space-x-1 text-sm text-gray-500">
-                    <Clock size={14} />
-                    <span>{featuredPost.readTime}</span>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-4 leading-tight">
-                  {featuredPost.title}
-                </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {featuredPost.excerpt}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-gray-500">
-                    <div className="flex items-center space-x-1">
-                      <User size={14} />
-                      <span>{featuredPost.author}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Calendar size={14} />
-                      <span>{featuredPost.date}</span>
-                    </div>
-                  </div>
-                  <Link to={`/blog/${featuredPost.id}`}>
-                    <Button className="bg-brand-blue hover:bg-brand-blue/90 text-white">
-                      বিস্তারিত পড়ুন
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      )}
 
       {/* Category Filter */}
       <section className="py-8">

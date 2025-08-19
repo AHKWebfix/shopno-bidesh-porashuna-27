@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -85,7 +84,6 @@ const BlogManagement = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <AdminHeader title="ব্লগ ম্যানেজমেন্ট" subtitle="ব্লগ পোস্ট তৈরি ও পরিচালনা করুন" />
       
       <div className="p-6">
         <div className="max-w-7xl mx-auto">
@@ -117,71 +115,6 @@ const BlogManagement = () => {
               <Plus className="w-4 h-4 mr-2" />
               নতুন পোস্ট
             </Button>
-          </div>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">মোট পোস্ট</p>
-                    <p className="text-3xl font-bold text-gray-900">{blogPosts.length}</p>
-                  </div>
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Edit className="w-6 h-6 text-primary" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">প্রকাশিত</p>
-                    <p className="text-3xl font-bold text-green-600">
-                      {blogPosts.filter(post => post.status === 'published').length}
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Eye className="w-6 h-6 text-green-600" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">খসড়া</p>
-                    <p className="text-3xl font-bold text-yellow-600">
-                      {blogPosts.filter(post => post.status === 'draft').length}
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                    <Edit className="w-6 h-6 text-yellow-600" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">মোট ভিউ</p>
-                    <p className="text-3xl font-bold text-blue-600">
-                      {blogPosts.reduce((total, post) => total + post.views, 0).toLocaleString()}
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Eye className="w-6 h-6 text-blue-600" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
 
           {/* Blog Posts Table */}

@@ -3,7 +3,12 @@ import React, { useState } from 'react';
 import { Bell, Search, ChevronDown, User, Settings, LogOut, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const AdminHeader = () => {
+interface AdminHeaderProps {
+  title?: string;
+  subtitle?: string;
+}
+
+const AdminHeader = ({ title = "Dashboard", subtitle = "Welcome back, Admin" }: AdminHeaderProps) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const handleProfileClick = () => {
@@ -29,10 +34,10 @@ const AdminHeader = () => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
-        {/* Page Title - This will be dynamic based on current route */}
+        {/* Page Title - Now dynamic based on props */}
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-          <p className="text-sm text-gray-500">Welcome back, Admin</p>
+          <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
+          <p className="text-sm text-gray-500">{subtitle}</p>
         </div>
 
         {/* Right Side - Search, Website Visit, Notifications, Profile */}

@@ -7,6 +7,8 @@ import Home from './pages/Index';
 import About from './pages/About';
 import StudyAbroadProcess from './pages/StudyAbroadProcess';
 import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import CounselorLogin from './pages/counselor/Login';
@@ -18,6 +20,7 @@ import Counselors from './pages/admin/CounselorManagement';
 import Documents from './pages/admin/DocumentManagement';
 import DocumentUpload from './pages/admin/DocumentUpload';
 import WebsiteManagement from './pages/admin/WebsiteManagement';
+import BlogManagement from './pages/admin/BlogManagement';
 import Settings from './pages/admin/Settings';
 import CounselorLeads from './pages/counselor/Leads';
 import CounselorDocuments from './pages/counselor/Documents';
@@ -43,6 +46,8 @@ const AppContent = () => {
           <Route path="/about" element={<About />} />
           <Route path="/study-abroad-process" element={<StudyAbroadProcess />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
 
           {/* Student Upload Route */}
           <Route path="/upload/id/:linkId" element={<StudentDocumentUpload />} />
@@ -55,6 +60,7 @@ const AppContent = () => {
             <Route path="counselors" element={<Counselors />} />
             <Route path="documents" element={<Documents />} />
             <Route path="document-upload" element={<DocumentUpload />} />
+            <Route path="blog" element={<BlogManagement />} />
             <Route path="website" element={<WebsiteManagement />} />
             <Route path="settings" element={<Settings />} />
           </Route>

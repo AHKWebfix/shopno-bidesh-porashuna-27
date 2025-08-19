@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { GraduationCap, Menu, X } from 'lucide-react';
@@ -12,6 +11,7 @@ const Header = () => {
     { label: 'হোম', path: '/' },
     { label: 'আমাদের সম্পর্কে', path: '/about' },
     { label: 'বিদেশে পড়াশোনার প্রক্রিয়া', path: '/study-abroad-process' },
+    { label: 'ব্লগ', path: '/blog' },
     { label: 'যোগাযোগ', path: '/contact' }
   ];
 

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -39,7 +38,8 @@ import {
   Trash2, 
   Upload,
   Eye,
-  Download
+  Download,
+  Replace
 } from 'lucide-react';
 
 const MaterialManagement = () => {
@@ -57,7 +57,8 @@ const MaterialManagement = () => {
       type: 'pdf',
       fileSize: '2.5 MB',
       uploadDate: '2024-01-15',
-      status: 'Active'
+      status: 'Active',
+      downloads: 245
     },
     {
       id: 2,
@@ -66,7 +67,8 @@ const MaterialManagement = () => {
       type: 'pdf',
       fileSize: '1.2 MB',
       uploadDate: '2024-01-12',
-      status: 'Active'
+      status: 'Active',
+      downloads: 189
     },
     {
       id: 3,
@@ -75,7 +77,8 @@ const MaterialManagement = () => {
       type: 'image',
       fileSize: '850 KB',
       uploadDate: '2024-01-10',
-      status: 'Active'
+      status: 'Active',
+      downloads: 156
     },
     {
       id: 4,
@@ -84,7 +87,8 @@ const MaterialManagement = () => {
       type: 'pdf',
       fileSize: '1.8 MB',
       uploadDate: '2024-01-08',
-      status: 'Draft'
+      status: 'Draft',
+      downloads: 78
     }
   ]);
 
@@ -129,6 +133,11 @@ const MaterialManagement = () => {
     console.log('Saving edit for material:', selectedMaterial?.id);
     setIsEditModalOpen(false);
     setSelectedMaterial(null);
+  };
+
+  const handleFileReplace = () => {
+    console.log('Replacing file for material:', selectedMaterial?.id);
+    // File replacement logic would go here
   };
 
   return (
@@ -202,7 +211,7 @@ const MaterialManagement = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Materials</CardTitle>
@@ -211,17 +220,6 @@ const MaterialManagement = () => {
           <CardContent>
             <div className="text-2xl font-bold">24</div>
             <p className="text-xs text-muted-foreground">+2 from last month</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Materials</CardTitle>
-            <Eye className="w-4 h-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">21</div>
-            <p className="text-xs text-muted-foreground">87.5% of total</p>
           </CardContent>
         </Card>
         
@@ -243,7 +241,7 @@ const MaterialManagement = () => {
           <CardTitle>All Materials</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="w-full">
+          <div className="w-full overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -251,6 +249,7 @@ const MaterialManagement = () => {
                   <TableHead className="hidden sm:table-cell">Type</TableHead>
                   <TableHead className="hidden sm:table-cell">Size</TableHead>
                   <TableHead className="hidden md:table-cell">Upload Date</TableHead>
+                  <TableHead className="hidden sm:table-cell">Downloads</TableHead>
                   <TableHead className="hidden sm:table-cell">Status</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -268,7 +267,7 @@ const MaterialManagement = () => {
                           </div>
                           {/* Show additional info on mobile */}
                           <div className="text-xs text-gray-400 mt-1 sm:hidden">
-                            <span className="capitalize">{material.type}</span> • {material.fileSize} • {material.uploadDate}
+                            <span className="capitalize">{material.type}</span> • {material.fileSize} • {material.uploadDate} • {material.downloads} downloads
                           </div>
                         </div>
                       </div>
@@ -280,6 +279,9 @@ const MaterialManagement = () => {
                     </TableCell>
                     <TableCell className="hidden sm:table-cell">{material.fileSize}</TableCell>
                     <TableCell className="hidden md:table-cell">{material.uploadDate}</TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <span className="text-sm font-medium text-blue-600">{material.downloads}</span>
+                    </TableCell>
                     <TableCell className="hidden sm:table-cell">
                       <span className={`text-sm px-2 py-1 rounded ${
                         material.status === 'Active' 
@@ -398,6 +400,47 @@ const MaterialManagement = () => {
                   placeholder="Enter material description"
                   rows={3}
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label>Current File</Label>
+                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                  {getFileIcon(selectedMaterial.type)}
+                  <div className="flex-1">
+                    <div className="font-medium">{selectedMaterial.title}</div>
+                    <div className="text-sm text-gray-500">
+                      {selectedMaterial.type.toUpperCase()} • {selectedMaterial.fileSize}
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleFileReplace}
+                    className="flex items-center space-x-1"
+                  >
+                    <Replace className="w-4 h-4" />
+                    <span>Replace</span>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="replace-file">Replace File (Optional)</Label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-primary transition-colors">
+                  <Upload className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600 mb-1">
+                    Click to upload or drag and drop
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    PDF, PNG, JPG up to 10MB
+                  </p>
+                  <Input 
+                    id="replace-file" 
+                    type="file" 
+                    className="hidden" 
+                    accept=".pdf,.png,.jpg,.jpeg"
+                  />
+                </div>
               </div>
               
               <div className="space-y-2">

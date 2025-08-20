@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -97,10 +98,10 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="py-8">
+      {/* Category Filter - Adjusted spacing */}
+      <section className="py-4 mb-8">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <div className="flex flex-wrap justify-center gap-2">
             {categories.map(category => (
               <Button
                 key={category}
@@ -116,7 +117,7 @@ const Blog = () => {
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="py-8 pb-16">
+      <section className="pb-16">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map(post => (

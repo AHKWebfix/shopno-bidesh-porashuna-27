@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
@@ -9,6 +8,7 @@ import StudyAbroadProcess from './pages/StudyAbroadProcess';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import StudyMaterials from './pages/StudyMaterials';
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import CounselorLogin from './pages/counselor/Login';
@@ -19,6 +19,7 @@ import Leads from './pages/admin/LeadManagement';
 import Counselors from './pages/admin/CounselorManagement';
 import Documents from './pages/admin/DocumentManagement';
 import DocumentUpload from './pages/admin/DocumentUpload';
+import MaterialManagement from './pages/admin/MaterialManagement';
 import WebsiteManagement from './pages/admin/WebsiteManagement';
 import BlogManagement from './pages/admin/BlogManagement';
 import Settings from './pages/admin/Settings';
@@ -45,6 +46,7 @@ const AppContent = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/study-abroad-process" element={<StudyAbroadProcess />} />
+          <Route path="/study-materials" element={<StudyMaterials />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />
@@ -59,6 +61,7 @@ const AppContent = () => {
             <Route path="leads" element={<Leads />} />
             <Route path="counselors" element={<Counselors />} />
             <Route path="documents" element={<Documents />} />
+            <Route path="materials" element={<MaterialManagement />} />
             <Route path="document-upload" element={<DocumentUpload />} />
             <Route path="blog" element={<BlogManagement />} />
             <Route path="website" element={<WebsiteManagement />} />

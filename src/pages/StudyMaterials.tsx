@@ -1,68 +1,58 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Eye, Download, BookOpen, Image, FileIcon } from 'lucide-react';
-
 const StudyMaterials = () => {
   // Mock data for demonstration
-  const materials = [
-    {
-      id: 1,
-      title: 'IELTS Preparation Guide',
-      description: 'Complete guide for IELTS exam preparation with tips and strategies',
-      type: 'pdf',
-      thumbnail: null,
-      fileSize: '2.5 MB',
-      uploadDate: '2024-01-15'
-    },
-    {
-      id: 2,
-      title: 'Visa Application Checklist',
-      description: 'Essential documents checklist for student visa application',
-      type: 'pdf',
-      thumbnail: null,
-      fileSize: '1.2 MB',
-      uploadDate: '2024-01-12'
-    },
-    {
-      id: 3,
-      title: 'University Selection Guide',
-      description: 'How to choose the right university for your studies abroad',
-      type: 'image',
-      thumbnail: '/placeholder.svg',
-      fileSize: '850 KB',
-      uploadDate: '2024-01-10'
-    },
-    {
-      id: 4,
-      title: 'SOP Writing Template',
-      description: 'Statement of Purpose template and writing guidelines',
-      type: 'pdf',
-      thumbnail: null,
-      fileSize: '1.8 MB',
-      uploadDate: '2024-01-08'
-    },
-    {
-      id: 5,
-      title: 'Scholarship Opportunities',
-      description: 'Comprehensive list of scholarships for international students',
-      type: 'pdf',
-      thumbnail: null,
-      fileSize: '3.1 MB',
-      uploadDate: '2024-01-05'
-    },
-    {
-      id: 6,
-      title: 'Country Comparison Chart',
-      description: 'Visual comparison of study destinations and their benefits',
-      type: 'image',
-      thumbnail: '/placeholder.svg',
-      fileSize: '1.5 MB',
-      uploadDate: '2024-01-03'
-    }
-  ];
-
+  const materials = [{
+    id: 1,
+    title: 'IELTS Preparation Guide',
+    description: 'Complete guide for IELTS exam preparation with tips and strategies',
+    type: 'pdf',
+    thumbnail: null,
+    fileSize: '2.5 MB',
+    uploadDate: '2024-01-15'
+  }, {
+    id: 2,
+    title: 'Visa Application Checklist',
+    description: 'Essential documents checklist for student visa application',
+    type: 'pdf',
+    thumbnail: null,
+    fileSize: '1.2 MB',
+    uploadDate: '2024-01-12'
+  }, {
+    id: 3,
+    title: 'University Selection Guide',
+    description: 'How to choose the right university for your studies abroad',
+    type: 'image',
+    thumbnail: '/placeholder.svg',
+    fileSize: '850 KB',
+    uploadDate: '2024-01-10'
+  }, {
+    id: 4,
+    title: 'SOP Writing Template',
+    description: 'Statement of Purpose template and writing guidelines',
+    type: 'pdf',
+    thumbnail: null,
+    fileSize: '1.8 MB',
+    uploadDate: '2024-01-08'
+  }, {
+    id: 5,
+    title: 'Scholarship Opportunities',
+    description: 'Comprehensive list of scholarships for international students',
+    type: 'pdf',
+    thumbnail: null,
+    fileSize: '3.1 MB',
+    uploadDate: '2024-01-05'
+  }, {
+    id: 6,
+    title: 'Country Comparison Chart',
+    description: 'Visual comparison of study destinations and their benefits',
+    type: 'image',
+    thumbnail: '/placeholder.svg',
+    fileSize: '1.5 MB',
+    uploadDate: '2024-01-03'
+  }];
   const getFileIcon = (type: string) => {
     switch (type) {
       case 'pdf':
@@ -73,17 +63,13 @@ const StudyMaterials = () => {
         return <FileIcon className="w-8 h-8 text-gray-500" />;
     }
   };
-
   const handleView = (material: any) => {
     console.log('Viewing material:', material.title);
   };
-
   const handleDownload = (material: any) => {
     console.log('Downloading material:', material.title);
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50">
+  return <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 text-white">
         <div className="container mx-auto px-4 py-16">
@@ -95,9 +81,7 @@ const StudyMaterials = () => {
             <p className="text-xl md:text-2xl mb-8 leading-relaxed">
               বিদেশে পড়াশোনার জন্য প্রয়োজনীয় সকল গুরুত্বপূর্ণ ডকুমেন্ট এবং গাইডলাইন এক জায়গায়
             </p>
-            <p className="text-lg opacity-90">
-              আপনার স্বপ্নের বিশ্ববিদ্যালয়ে ভর্তি হতে এবং ভিসা পেতে সাহায্য করার জন্য আমাদের বিশেষভাবে তৈরি করা সামগ্রী
-            </p>
+            
           </div>
         </div>
       </div>
@@ -114,24 +98,15 @@ const StudyMaterials = () => {
 
           {/* Materials Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {materials.map((material) => (
-              <Card key={material.id} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md">
+            {materials.map(material => <Card key={material.id} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md">
                 <CardHeader className="pb-4">
                   <div className="flex items-center space-x-3 mb-3">
                     <div className="flex-shrink-0">
-                      {material.type === 'image' && material.thumbnail ? (
-                        <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-gray-200">
-                          <img 
-                            src={material.thumbnail} 
-                            alt={material.title}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ) : (
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                      {material.type === 'image' && material.thumbnail ? <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-gray-200">
+                          <img src={material.thumbnail} alt={material.title} className="w-full h-full object-cover" />
+                        </div> : <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
                           {getFileIcon(material.type)}
-                        </div>
-                      )}
+                        </div>}
                     </div>
                     <div className="flex-1 min-w-0">
                       <CardTitle className="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-primary transition-colors">
@@ -150,25 +125,14 @@ const StudyMaterials = () => {
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <Button
-                      variant="outline"
-                      className="flex-1 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-200"
-                      onClick={() => handleView(material)}
-                    >
-                      <Eye className="w-4 h-4 mr-2" />
-                      দেখুন
-                    </Button>
-                    <Button
-                      className="flex-1 bg-primary hover:bg-primary/90 text-white"
-                      onClick={() => handleDownload(material)}
-                    >
+                    
+                    <Button className="flex-1 bg-primary hover:bg-primary/90 text-white" onClick={() => handleDownload(material)}>
                       <Download className="w-4 h-4 mr-2" />
                       ডাউনলোড
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           {/* Load More Button */}
@@ -196,8 +160,6 @@ const StudyMaterials = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default StudyMaterials;

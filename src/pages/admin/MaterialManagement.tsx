@@ -20,6 +20,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { 
   Plus, 
   FileText, 
@@ -34,6 +44,11 @@ import {
 
 const MaterialManagement = () => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [selectedMaterial, setSelectedMaterial] = useState<any>(null);
+  
   const [materials, setMaterials] = useState([
     {
       id: 1,
@@ -89,16 +104,31 @@ const MaterialManagement = () => {
     setIsUploadModalOpen(false);
   };
 
-  const handleEdit = (id: number) => {
-    console.log('Editing material:', id);
+  const handleView = (material: any) => {
+    setSelectedMaterial(material);
+    setIsViewModalOpen(true);
   };
 
-  const handleDelete = (id: number) => {
-    console.log('Deleting material:', id);
+  const handleEdit = (material: any) => {
+    setSelectedMaterial(material);
+    setIsEditModalOpen(true);
   };
 
-  const handleView = (id: number) => {
-    console.log('Viewing material:', id);
+  const handleDelete = (material: any) => {
+    setSelectedMaterial(material);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = () => {
+    console.log('Deleting material:', selectedMaterial?.id);
+    setIsDeleteDialogOpen(false);
+    setSelectedMaterial(null);
+  };
+
+  const saveEdit = () => {
+    console.log('Saving edit for material:', selectedMaterial?.id);
+    setIsEditModalOpen(false);
+    setSelectedMaterial(null);
   };
 
   return (
@@ -171,7 +201,7 @@ const MaterialManagement = () => {
         </Dialog>
       </div>
 
-      {/* Stats Cards - Removed Storage Used card */}
+      {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -213,7 +243,7 @@ const MaterialManagement = () => {
           <CardTitle>All Materials</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="overflow-x-auto">
+          <div className="w-full">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -264,7 +294,7 @@ const MaterialManagement = () => {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleView(material.id)}
+                          onClick={() => handleView(material)}
                           className="hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
                           title="View material"
                         >
@@ -273,7 +303,7 @@ const MaterialManagement = () => {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleEdit(material.id)}
+                          onClick={() => handleEdit(material)}
                           className="hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"
                           title="Edit material"
                         >
@@ -282,7 +312,7 @@ const MaterialManagement = () => {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleDelete(material.id)}
+                          onClick={() => handleDelete(material)}
                           className="text-red-600 hover:text-red-800 hover:bg-red-50 transition-colors duration-200 cursor-pointer"
                           title="Delete material"
                         >
@@ -297,6 +327,130 @@ const MaterialManagement = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* View Material Modal */}
+      <Dialog open={isViewModalOpen} onOpenChange={setIsViewModalOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>View Material</DialogTitle>
+          </DialogHeader>
+          {selectedMaterial && (
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                {getFileIcon(selectedMaterial.type)}
+                <div>
+                  <h3 className="font-semibold text-lg">{selectedMaterial.title}</h3>
+                  <p className="text-sm text-gray-500">
+                    {selectedMaterial.type.toUpperCase()} • {selectedMaterial.fileSize}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <Label className="text-sm font-medium">Description</Label>
+                <p className="text-sm text-gray-700 mt-1">{selectedMaterial.description}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label className="text-sm font-medium">Upload Date</Label>
+                  <p className="text-sm text-gray-700">{selectedMaterial.uploadDate}</p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">Status</Label>
+                  <p className={`text-sm font-medium ${
+                    selectedMaterial.status === 'Active' ? 'text-green-600' : 'text-yellow-600'
+                  }`}>
+                    {selectedMaterial.status}
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-end pt-4">
+                <Button onClick={() => setIsViewModalOpen(false)}>
+                  Close
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Material Modal */}
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Edit Material</DialogTitle>
+          </DialogHeader>
+          {selectedMaterial && (
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="edit-title">Title</Label>
+                <Input 
+                  id="edit-title" 
+                  defaultValue={selectedMaterial.title}
+                  placeholder="Enter material title" 
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="edit-description">Description</Label>
+                <Textarea 
+                  id="edit-description" 
+                  defaultValue={selectedMaterial.description}
+                  placeholder="Enter material description"
+                  rows={3}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="edit-status">Status</Label>
+                <select 
+                  id="edit-status" 
+                  defaultValue={selectedMaterial.status}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option value="Active">Active</option>
+                  <option value="Draft">Draft</option>
+                </select>
+              </div>
+              
+              <div className="flex justify-end space-x-3 pt-4">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setIsEditModalOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button onClick={saveEdit}>
+                  Save Changes
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the material
+              "{selectedMaterial?.title}" from the system.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={confirmDelete}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

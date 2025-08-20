@@ -171,8 +171,8 @@ const MaterialManagement = () => {
         </Dialog>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      {/* Stats Cards - Removed Storage Used card */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Materials</CardTitle>
@@ -205,17 +205,6 @@ const MaterialManagement = () => {
             <p className="text-xs text-muted-foreground">+15% from last month</p>
           </CardContent>
         </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Storage Used</CardTitle>
-            <Upload className="w-4 h-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">45.2 MB</div>
-            <p className="text-xs text-muted-foreground">of 500 MB limit</p>
-          </CardContent>
-        </Card>
       </div>
 
       {/* Materials Table */}
@@ -229,10 +218,10 @@ const MaterialManagement = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Material</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Size</TableHead>
-                  <TableHead>Upload Date</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead className="hidden sm:table-cell">Type</TableHead>
+                  <TableHead className="hidden sm:table-cell">Size</TableHead>
+                  <TableHead className="hidden md:table-cell">Upload Date</TableHead>
+                  <TableHead className="hidden sm:table-cell">Status</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -242,22 +231,26 @@ const MaterialManagement = () => {
                     <TableCell>
                       <div className="flex items-center space-x-3">
                         {getFileIcon(material.type)}
-                        <div>
-                          <div className="font-medium">{material.title}</div>
-                          <div className="text-sm text-gray-500 line-clamp-1">
+                        <div className="min-w-0 flex-1">
+                          <div className="font-medium truncate">{material.title}</div>
+                          <div className="text-sm text-gray-500 line-clamp-2 sm:line-clamp-1">
                             {material.description}
+                          </div>
+                          {/* Show additional info on mobile */}
+                          <div className="text-xs text-gray-400 mt-1 sm:hidden">
+                            <span className="capitalize">{material.type}</span> • {material.fileSize} • {material.uploadDate}
                           </div>
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="hidden sm:table-cell">
                       <span className="capitalize text-sm bg-gray-100 px-2 py-1 rounded">
                         {material.type}
                       </span>
                     </TableCell>
-                    <TableCell>{material.fileSize}</TableCell>
-                    <TableCell>{material.uploadDate}</TableCell>
-                    <TableCell>
+                    <TableCell className="hidden sm:table-cell">{material.fileSize}</TableCell>
+                    <TableCell className="hidden md:table-cell">{material.uploadDate}</TableCell>
+                    <TableCell className="hidden sm:table-cell">
                       <span className={`text-sm px-2 py-1 rounded ${
                         material.status === 'Active' 
                           ? 'bg-green-100 text-green-800' 
@@ -267,11 +260,13 @@ const MaterialManagement = () => {
                       </span>
                     </TableCell>
                     <TableCell className="text-right">
-                      <div className="flex justify-end space-x-2">
+                      <div className="flex justify-end space-x-1 sm:space-x-2">
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => handleView(material.id)}
+                          className="hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
+                          title="View material"
                         >
                           <Eye className="w-4 h-4" />
                         </Button>
@@ -279,6 +274,8 @@ const MaterialManagement = () => {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleEdit(material.id)}
+                          className="hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"
+                          title="Edit material"
                         >
                           <Edit className="w-4 h-4" />
                         </Button>
@@ -286,7 +283,8 @@ const MaterialManagement = () => {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleDelete(material.id)}
-                          className="text-red-600 hover:text-red-800"
+                          className="text-red-600 hover:text-red-800 hover:bg-red-50 transition-colors duration-200 cursor-pointer"
+                          title="Delete material"
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>

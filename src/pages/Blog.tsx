@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, Tag, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 const Blog = () => {
   // Mock blog data
   const blogPosts = [{
@@ -72,7 +73,7 @@ const Blog = () => {
   const filteredPosts = selectedCategory === 'সব' ? allPosts : allPosts.filter(post => post.category === selectedCategory);
   return <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
       {/* Hero Section */}
-      <section className="py-12 lg:py-24">
+      <section className="py-12 lg:py-24 bg-gradient-to-br from-primary/10 to-brand-blue/10">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-12">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-800 mb-6">
@@ -144,4 +145,5 @@ const Blog = () => {
       </section>
     </div>;
 };
+
 export default Blog;

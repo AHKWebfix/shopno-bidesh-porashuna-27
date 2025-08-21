@@ -4,94 +4,53 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { 
-  Plus, 
-  FileText, 
-  Image, 
-  FileIcon, 
-  Edit, 
-  Trash2, 
-  Upload,
-  Eye,
-  Download,
-  Replace
-} from 'lucide-react';
-
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import { Plus, FileText, Image, FileIcon, Edit, Trash2, Upload, Eye, Download, Replace } from 'lucide-react';
 const MaterialManagement = () => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [selectedMaterial, setSelectedMaterial] = useState<any>(null);
-  
-  const [materials, setMaterials] = useState([
-    {
-      id: 1,
-      title: 'IELTS Preparation Guide',
-      description: 'Complete guide for IELTS exam preparation with tips and strategies',
-      type: 'pdf',
-      fileSize: '2.5 MB',
-      uploadDate: '2024-01-15',
-      status: 'Active',
-      downloads: 245
-    },
-    {
-      id: 2,
-      title: 'Visa Application Checklist',
-      description: 'Essential documents checklist for student visa application',
-      type: 'pdf',
-      fileSize: '1.2 MB',
-      uploadDate: '2024-01-12',
-      status: 'Active',
-      downloads: 189
-    },
-    {
-      id: 3,
-      title: 'University Selection Guide',
-      description: 'How to choose the right university for your studies abroad',
-      type: 'image',
-      fileSize: '850 KB',
-      uploadDate: '2024-01-10',
-      status: 'Active',
-      downloads: 156
-    },
-    {
-      id: 4,
-      title: 'SOP Writing Template',
-      description: 'Statement of Purpose template and writing guidelines',
-      type: 'pdf',
-      fileSize: '1.8 MB',
-      uploadDate: '2024-01-08',
-      status: 'Draft',
-      downloads: 78
-    }
-  ]);
-
+  const [materials, setMaterials] = useState([{
+    id: 1,
+    title: 'IELTS Preparation Guide',
+    description: 'Complete guide for IELTS exam preparation with tips and strategies',
+    type: 'pdf',
+    fileSize: '2.5 MB',
+    uploadDate: '2024-01-15',
+    status: 'Active',
+    downloads: 245
+  }, {
+    id: 2,
+    title: 'Visa Application Checklist',
+    description: 'Essential documents checklist for student visa application',
+    type: 'pdf',
+    fileSize: '1.2 MB',
+    uploadDate: '2024-01-12',
+    status: 'Active',
+    downloads: 189
+  }, {
+    id: 3,
+    title: 'University Selection Guide',
+    description: 'How to choose the right university for your studies abroad',
+    type: 'image',
+    fileSize: '850 KB',
+    uploadDate: '2024-01-10',
+    status: 'Active',
+    downloads: 156
+  }, {
+    id: 4,
+    title: 'SOP Writing Template',
+    description: 'Statement of Purpose template and writing guidelines',
+    type: 'pdf',
+    fileSize: '1.8 MB',
+    uploadDate: '2024-01-08',
+    status: 'Draft',
+    downloads: 78
+  }]);
   const getFileIcon = (type: string) => {
     switch (type) {
       case 'pdf':
@@ -102,46 +61,37 @@ const MaterialManagement = () => {
         return <FileIcon className="w-5 h-5 text-gray-500" />;
     }
   };
-
   const handleUpload = () => {
     console.log('Uploading new material...');
     setIsUploadModalOpen(false);
   };
-
   const handleView = (material: any) => {
     setSelectedMaterial(material);
     setIsViewModalOpen(true);
   };
-
   const handleEdit = (material: any) => {
     setSelectedMaterial(material);
     setIsEditModalOpen(true);
   };
-
   const handleDelete = (material: any) => {
     setSelectedMaterial(material);
     setIsDeleteDialogOpen(true);
   };
-
   const confirmDelete = () => {
     console.log('Deleting material:', selectedMaterial?.id);
     setIsDeleteDialogOpen(false);
     setSelectedMaterial(null);
   };
-
   const saveEdit = () => {
     console.log('Saving edit for material:', selectedMaterial?.id);
     setIsEditModalOpen(false);
     setSelectedMaterial(null);
   };
-
   const handleFileReplace = () => {
     console.log('Replacing file for material:', selectedMaterial?.id);
     // File replacement logic would go here
   };
-
-  return (
-    <div className="p-6 space-y-6">
+  return <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
@@ -168,11 +118,7 @@ const MaterialManagement = () => {
               
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
-                <Textarea 
-                  id="description" 
-                  placeholder="Enter material description"
-                  rows={3}
-                />
+                <Textarea id="description" placeholder="Enter material description" rows={3} />
               </div>
               
               <div className="space-y-2">
@@ -185,20 +131,12 @@ const MaterialManagement = () => {
                   <p className="text-xs text-gray-500">
                     PDF, PNG, JPG up to 10MB
                   </p>
-                  <Input 
-                    id="file" 
-                    type="file" 
-                    className="hidden" 
-                    accept=".pdf,.png,.jpg,.jpeg"
-                  />
+                  <Input id="file" type="file" className="hidden" accept=".pdf,.png,.jpg,.jpeg" />
                 </div>
               </div>
               
               <div className="flex justify-end space-x-3 pt-4">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setIsUploadModalOpen(false)}
-                >
+                <Button variant="outline" onClick={() => setIsUploadModalOpen(false)}>
                   Cancel
                 </Button>
                 <Button onClick={handleUpload}>
@@ -255,8 +193,7 @@ const MaterialManagement = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {materials.map((material) => (
-                  <TableRow key={material.id}>
+                {materials.map(material => <TableRow key={material.id}>
                     <TableCell>
                       <div className="flex items-center space-x-3">
                         {getFileIcon(material.type)}
@@ -283,47 +220,24 @@ const MaterialManagement = () => {
                       <span className="text-sm font-medium text-blue-600">{material.downloads}</span>
                     </TableCell>
                     <TableCell className="hidden sm:table-cell">
-                      <span className={`text-sm px-2 py-1 rounded ${
-                        material.status === 'Active' 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}>
+                      <span className={`text-sm px-2 py-1 rounded ${material.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
                         {material.status}
                       </span>
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end space-x-1 sm:space-x-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleView(material)}
-                          className="hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
-                          title="View material"
-                        >
+                        <Button variant="ghost" size="sm" onClick={() => handleView(material)} className="hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 cursor-pointer" title="View material">
                           <Eye className="w-4 h-4" />
                         </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleEdit(material)}
-                          className="hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"
-                          title="Edit material"
-                        >
+                        <Button variant="ghost" size="sm" onClick={() => handleEdit(material)} className="hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer" title="Edit material">
                           <Edit className="w-4 h-4" />
                         </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleDelete(material)}
-                          className="text-red-600 hover:text-red-800 hover:bg-red-50 transition-colors duration-200 cursor-pointer"
-                          title="Delete material"
-                        >
+                        <Button variant="ghost" size="sm" onClick={() => handleDelete(material)} className="text-red-600 hover:text-red-800 hover:bg-red-50 transition-colors duration-200 cursor-pointer" title="Delete material">
                           <Trash2 className="w-4 h-4" />
                         </Button>
                       </div>
                     </TableCell>
-                  </TableRow>
-                ))}
+                  </TableRow>)}
               </TableBody>
             </Table>
           </div>
@@ -336,8 +250,7 @@ const MaterialManagement = () => {
           <DialogHeader>
             <DialogTitle>View Material</DialogTitle>
           </DialogHeader>
-          {selectedMaterial && (
-            <div className="space-y-4">
+          {selectedMaterial && <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 {getFileIcon(selectedMaterial.type)}
                 <div>
@@ -358,9 +271,7 @@ const MaterialManagement = () => {
                 </div>
                 <div>
                   <Label className="text-sm font-medium">Status</Label>
-                  <p className={`text-sm font-medium ${
-                    selectedMaterial.status === 'Active' ? 'text-green-600' : 'text-yellow-600'
-                  }`}>
+                  <p className={`text-sm font-medium ${selectedMaterial.status === 'Active' ? 'text-green-600' : 'text-yellow-600'}`}>
                     {selectedMaterial.status}
                   </p>
                 </div>
@@ -370,8 +281,7 @@ const MaterialManagement = () => {
                   Close
                 </Button>
               </div>
-            </div>
-          )}
+            </div>}
         </DialogContent>
       </Dialog>
 
@@ -381,25 +291,15 @@ const MaterialManagement = () => {
           <DialogHeader>
             <DialogTitle>Edit Material</DialogTitle>
           </DialogHeader>
-          {selectedMaterial && (
-            <div className="space-y-4">
+          {selectedMaterial && <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="edit-title">Title</Label>
-                <Input 
-                  id="edit-title" 
-                  defaultValue={selectedMaterial.title}
-                  placeholder="Enter material title" 
-                />
+                <Input id="edit-title" defaultValue={selectedMaterial.title} placeholder="Enter material title" />
               </div>
               
               <div className="space-y-2">
                 <Label htmlFor="edit-description">Description</Label>
-                <Textarea 
-                  id="edit-description" 
-                  defaultValue={selectedMaterial.description}
-                  placeholder="Enter material description"
-                  rows={3}
-                />
+                <Textarea id="edit-description" defaultValue={selectedMaterial.description} placeholder="Enter material description" rows={3} />
               </div>
 
               <div className="space-y-2">
@@ -412,15 +312,7 @@ const MaterialManagement = () => {
                       {selectedMaterial.type.toUpperCase()} • {selectedMaterial.fileSize}
                     </div>
                   </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleFileReplace}
-                    className="flex items-center space-x-1"
-                  >
-                    <Replace className="w-4 h-4" />
-                    <span>Replace</span>
-                  </Button>
+                  
                 </div>
               </div>
 
@@ -434,40 +326,27 @@ const MaterialManagement = () => {
                   <p className="text-xs text-gray-500">
                     PDF, PNG, JPG up to 10MB
                   </p>
-                  <Input 
-                    id="replace-file" 
-                    type="file" 
-                    className="hidden" 
-                    accept=".pdf,.png,.jpg,.jpeg"
-                  />
+                  <Input id="replace-file" type="file" className="hidden" accept=".pdf,.png,.jpg,.jpeg" />
                 </div>
               </div>
               
               <div className="space-y-2">
                 <Label htmlFor="edit-status">Status</Label>
-                <select 
-                  id="edit-status" 
-                  defaultValue={selectedMaterial.status}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                >
+                <select id="edit-status" defaultValue={selectedMaterial.status} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                   <option value="Active">Active</option>
                   <option value="Draft">Draft</option>
                 </select>
               </div>
               
               <div className="flex justify-end space-x-3 pt-4">
-                <Button 
-                  variant="outline" 
-                  onClick={() => setIsEditModalOpen(false)}
-                >
+                <Button variant="outline" onClick={() => setIsEditModalOpen(false)}>
                   Cancel
                 </Button>
                 <Button onClick={saveEdit}>
                   Save Changes
                 </Button>
               </div>
-            </div>
-          )}
+            </div>}
         </DialogContent>
       </Dialog>
 
@@ -485,17 +364,12 @@ const MaterialManagement = () => {
             <AlertDialogCancel onClick={() => setIsDeleteDialogOpen(false)}>
               Cancel
             </AlertDialogCancel>
-            <AlertDialogAction 
-              onClick={confirmDelete}
-              className="bg-red-600 hover:bg-red-700"
-            >
+            <AlertDialogAction onClick={confirmDelete} className="bg-red-600 hover:bg-red-700">
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
-  );
+    </div>;
 };
-
 export default MaterialManagement;

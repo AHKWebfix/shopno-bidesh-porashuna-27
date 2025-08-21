@@ -73,13 +73,13 @@ const Blog = () => {
   const filteredPosts = selectedCategory === 'সব' ? allPosts : allPosts.filter(post => post.category === selectedCategory);
   return <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
       {/* Hero Section */}
-      <section className="py-12 lg:py-24 bg-gradient-to-br from-primary/10 to-brand-blue/10">
+      <section className="py-12 lg:py-24 bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 text-white">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-12">
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-800 mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-6">
               আমাদের ব্লগ
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto px-2">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto px-2">
               বিদেশে উচ্চশিক্ষা সম্পর্কে সর্বশেষ তথ্য, টিপস এবং গাইডলাইন পান আমাদের ব্লগ থেকে।
             </p>
           </div>

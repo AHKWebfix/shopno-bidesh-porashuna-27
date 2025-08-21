@@ -8,7 +8,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Plus, FileText, Image, FileIcon, Edit, Trash2, Upload, Eye, Download, Replace } from 'lucide-react';
-
 const MaterialManagement = () => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
@@ -52,7 +51,6 @@ const MaterialManagement = () => {
     status: 'Draft',
     downloads: 78
   }]);
-
   const getFileIcon = (type: string) => {
     switch (type) {
       case 'pdf':
@@ -63,46 +61,37 @@ const MaterialManagement = () => {
         return <FileIcon className="w-5 h-5 text-gray-500" />;
     }
   };
-
   const handleUpload = () => {
     console.log('Uploading new material...');
     setIsUploadModalOpen(false);
   };
-
   const handleView = (material: any) => {
     setSelectedMaterial(material);
     setIsViewModalOpen(true);
   };
-
   const handleEdit = (material: any) => {
     setSelectedMaterial(material);
     setIsEditModalOpen(true);
   };
-
   const handleDelete = (material: any) => {
     setSelectedMaterial(material);
     setIsDeleteDialogOpen(true);
   };
-
   const confirmDelete = () => {
     console.log('Deleting material:', selectedMaterial?.id);
     setIsDeleteDialogOpen(false);
     setSelectedMaterial(null);
   };
-
   const saveEdit = () => {
     console.log('Saving edit for material:', selectedMaterial?.id);
     setIsEditModalOpen(false);
     setSelectedMaterial(null);
   };
-
   const handleFileReplace = () => {
     console.log('Replacing file for material:', selectedMaterial?.id);
     // File replacement logic would go here
   };
-
-  return (
-    <div className="p-6 space-y-6">
+  return <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
@@ -205,8 +194,7 @@ const MaterialManagement = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {materials.map(material => (
-                  <TableRow key={material.id}>
+                {materials.map(material => <TableRow key={material.id}>
                     <TableCell>
                       <div className="flex items-center space-x-3">
                         {getFileIcon(material.type)}
@@ -246,16 +234,14 @@ const MaterialManagement = () => {
                         </Button>
                       </div>
                     </TableCell>
-                  </TableRow>
-                ))}
+                  </TableRow>)}
               </TableBody>
             </Table>
           </div>
 
           {/* Mobile Card View */}
           <div className="md:hidden space-y-4">
-            {materials.map(material => (
-              <div key={material.id} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+            {materials.map(material => <div key={material.id} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center space-x-3 flex-1 min-w-0">
                     {getFileIcon(material.type)}
@@ -306,8 +292,7 @@ const MaterialManagement = () => {
                     </Button>
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </CardContent>
       </Card>
@@ -318,8 +303,7 @@ const MaterialManagement = () => {
           <DialogHeader>
             <DialogTitle>View Material</DialogTitle>
           </DialogHeader>
-          {selectedMaterial && (
-            <div className="space-y-4">
+          {selectedMaterial && <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 {getFileIcon(selectedMaterial.type)}
                 <div>
@@ -354,8 +338,7 @@ const MaterialManagement = () => {
                   Close
                 </Button>
               </div>
-            </div>
-          )}
+            </div>}
         </DialogContent>
       </Dialog>
 
@@ -365,8 +348,7 @@ const MaterialManagement = () => {
           <DialogHeader>
             <DialogTitle>Edit Material</DialogTitle>
           </DialogHeader>
-          {selectedMaterial && (
-            <div className="space-y-4">
+          {selectedMaterial && <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="edit-title">Title</Label>
                 <Input id="edit-title" defaultValue={selectedMaterial.title} placeholder="Enter material title" />
@@ -387,10 +369,7 @@ const MaterialManagement = () => {
                       {selectedMaterial.type.toUpperCase()} • {selectedMaterial.fileSize}
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" onClick={handleFileReplace} className="text-sm">
-                    <Replace className="w-4 h-4 mr-1" />
-                    Replace
-                  </Button>
+                  
                 </div>
               </div>
 
@@ -424,8 +403,7 @@ const MaterialManagement = () => {
                   Save Changes
                 </Button>
               </div>
-            </div>
-          )}
+            </div>}
         </DialogContent>
       </Dialog>
 
@@ -449,8 +427,6 @@ const MaterialManagement = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
-  );
+    </div>;
 };
-
 export default MaterialManagement;

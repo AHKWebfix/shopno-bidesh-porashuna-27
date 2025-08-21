@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, Download, BookOpen, Image, FileIcon } from 'lucide-react';
-
 const StudyMaterials = () => {
   // Mock data for demonstration
   const materials = [{
@@ -55,7 +53,6 @@ const StudyMaterials = () => {
     fileSize: '1.5 MB',
     uploadDate: '2024-01-03'
   }];
-
   const getFileIcon = (type: string) => {
     switch (type) {
       case 'pdf':
@@ -66,13 +63,10 @@ const StudyMaterials = () => {
         return <FileIcon className="w-8 h-8 text-gray-500" />;
     }
   };
-
   const handleDownload = (material: any) => {
     console.log('Downloading material:', material.title);
   };
-
-  return (
-    <div className="min-h-screen bg-gray-50">
+  return <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 text-white">
         <div className="container mx-auto px-4 py-16">
@@ -100,20 +94,15 @@ const StudyMaterials = () => {
 
           {/* Materials Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {materials.map(material => (
-              <Card key={material.id} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md">
+            {materials.map(material => <Card key={material.id} className="group hover:shadow-lg transition-all duration-300 border-0 shadow-md">
                 <CardHeader className="pb-4">
                   <div className="flex items-center space-x-3 mb-3">
                     <div className="flex-shrink-0">
-                      {material.type === 'image' && material.thumbnail ? (
-                        <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-gray-200">
+                      {material.type === 'image' && material.thumbnail ? <div className="w-16 h-16 rounded-lg overflow-hidden border-2 border-gray-200">
                           <img src={material.thumbnail} alt={material.title} className="w-full h-full object-cover" />
-                        </div>
-                      ) : (
-                        <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                        </div> : <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
                           {getFileIcon(material.type)}
-                        </div>
-                      )}
+                        </div>}
                     </div>
                     <div className="flex-1 min-w-0">
                       <CardTitle className="text-lg font-semibold text-gray-900 line-clamp-2 group-hover:text-primary transition-colors">
@@ -132,17 +121,13 @@ const StudyMaterials = () => {
                   </p>
                   
                   <div className="flex justify-center">
-                    <Button 
-                      className="w-full bg-primary hover:bg-primary/90 text-white" 
-                      onClick={() => handleDownload(material)}
-                    >
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white" onClick={() => handleDownload(material)}>
                       <Download className="w-4 h-4 mr-2" />
                       ডাউনলোড
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           {/* Load More Button */}
@@ -156,22 +141,8 @@ const StudyMaterials = () => {
 
       {/* Call to Action Section */}
       <div className="bg-white border-t">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              আরো সাহায্য প্রয়োজন?
-            </h3>
-            <p className="text-lg text-gray-600 mb-8">
-              আমাদের অভিজ্ঞ কাউন্সেলরদের সাথে বিনামূল্যে পরামর্শ নিন
-            </p>
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8">
-              ফ্রি কনসাল্টেশন বুক করুন
-            </Button>
-          </div>
-        </div>
+        
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default StudyMaterials;

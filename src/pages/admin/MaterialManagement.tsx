@@ -101,7 +101,8 @@ const MaterialManagement = () => {
     // File replacement logic would go here
   };
 
-  return <div className="p-6 space-y-6">
+  return (
+    <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
@@ -315,7 +316,8 @@ const MaterialManagement = () => {
           <DialogHeader>
             <DialogTitle>View Material</DialogTitle>
           </DialogHeader>
-          {selectedMaterial && <div className="space-y-4">
+          {selectedMaterial && (
+            <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 {getFileIcon(selectedMaterial.type)}
                 <div>
@@ -350,7 +352,8 @@ const MaterialManagement = () => {
                   Close
                 </Button>
               </div>
-            </div>}
+            </div>
+          )}
         </DialogContent>
       </Dialog>
 
@@ -360,7 +363,8 @@ const MaterialManagement = () => {
           <DialogHeader>
             <DialogTitle>Edit Material</DialogTitle>
           </DialogHeader>
-          {selectedMaterial && <div className="space-y-4">
+          {selectedMaterial && (
+            <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="edit-title">Title</Label>
                 <Input id="edit-title" defaultValue={selectedMaterial.title} placeholder="Enter material title" />
@@ -418,7 +422,8 @@ const MaterialManagement = () => {
                   Save Changes
                 </Button>
               </div>
-            </div>}
+            </div>
+          )}
         </DialogContent>
       </Dialog>
 
@@ -440,9 +445,10 @@ const MaterialManagement = () => {
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>
-        </AlertDialogFooter>
+        </AlertDialogContent>
       </AlertDialog>
-    </div>;
+    </div>
+  );
 };
 
 export default MaterialManagement;

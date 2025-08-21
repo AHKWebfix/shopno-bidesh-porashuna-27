@@ -234,7 +234,7 @@ const MaterialManagement = () => {
                       </span>
                     </TableCell>
                     <TableCell className="text-right">
-                      <div className="flex justify-end space-x-2">
+                      <div className="flex justify-end space-x-1">
                         <Button variant="ghost" size="sm" onClick={() => handleView(material)} className="hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200" title="View material">
                           <Eye className="w-4 h-4" />
                         </Button>
@@ -257,52 +257,54 @@ const MaterialManagement = () => {
             {materials.map(material => (
               <div key={material.id} className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
                 <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center space-x-3 flex-1">
+                  <div className="flex items-center space-x-3 flex-1 min-w-0">
                     {getFileIcon(material.type)}
                     <div className="min-w-0 flex-1">
                       <h3 className="font-medium text-gray-900 truncate">{material.title}</h3>
                       <p className="text-sm text-gray-500 line-clamp-2">{material.description}</p>
                     </div>
                   </div>
-                  <div className="flex space-x-1 ml-2">
-                    <Button variant="ghost" size="sm" onClick={() => handleView(material)} className="hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200" title="View material">
-                      <Eye className="w-4 h-4" />
-                    </Button>
-                    <Button variant="ghost" size="sm" onClick={() => handleEdit(material)} className="hover:bg-green-50 hover:text-green-600 transition-colors duration-200" title="Edit material">
-                      <Edit className="w-4 h-4" />
-                    </Button>
-                    <Button variant="ghost" size="sm" onClick={() => handleDelete(material)} className="text-red-600 hover:text-red-800 hover:bg-red-50 transition-colors duration-200" title="Delete material">
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
-                  </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <span className="text-gray-500">Type:</span>
-                    <span className="ml-2 capitalize bg-gray-100 px-2 py-1 rounded text-xs">
+                <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+                  <div className="flex flex-col">
+                    <span className="text-gray-500 text-xs">Type</span>
+                    <span className="capitalize bg-gray-100 px-2 py-1 rounded text-xs inline-block w-fit">
                       {material.type}
                     </span>
                   </div>
-                  <div>
-                    <span className="text-gray-500">Size:</span>
-                    <span className="ml-2 text-gray-900">{material.fileSize}</span>
+                  <div className="flex flex-col">
+                    <span className="text-gray-500 text-xs">Size</span>
+                    <span className="text-gray-900 text-sm">{material.fileSize}</span>
                   </div>
-                  <div>
-                    <span className="text-gray-500">Uploaded:</span>
-                    <span className="ml-2 text-gray-900">{material.uploadDate}</span>
+                  <div className="flex flex-col">
+                    <span className="text-gray-500 text-xs">Uploaded</span>
+                    <span className="text-gray-900 text-sm">{material.uploadDate}</span>
                   </div>
-                  <div>
-                    <span className="text-gray-500">Downloads:</span>
-                    <span className="ml-2 font-medium text-blue-600">{material.downloads}</span>
+                  <div className="flex flex-col">
+                    <span className="text-gray-500 text-xs">Downloads</span>
+                    <span className="font-medium text-blue-600 text-sm">{material.downloads}</span>
                   </div>
                 </div>
                 
-                <div className="mt-3 pt-3 border-t border-gray-100">
-                  <span className="text-gray-500 text-sm">Status:</span>
-                  <span className={`ml-2 text-sm px-2 py-1 rounded ${material.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
-                    {material.status}
-                  </span>
+                <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <div>
+                    <span className="text-gray-500 text-xs">Status: </span>
+                    <span className={`text-xs px-2 py-1 rounded ${material.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                      {material.status}
+                    </span>
+                  </div>
+                  <div className="flex space-x-2">
+                    <Button variant="ghost" size="sm" onClick={() => handleView(material)} className="hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 p-2" title="View material">
+                      <Eye className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => handleEdit(material)} className="hover:bg-green-50 hover:text-green-600 transition-colors duration-200 p-2" title="Edit material">
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => handleDelete(material)} className="text-red-600 hover:text-red-800 hover:bg-red-50 transition-colors duration-200 p-2" title="Delete material">
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}

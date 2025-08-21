@@ -1,97 +1,84 @@
-
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, Tag, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const Blog = () => {
   // Mock blog data
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'কানাডায় উচ্চশিক্ষার জন্য প্রয়োজনীয় প্রস্তুতি',
-      excerpt: 'কানাডায় পড়াশোনার জন্য কী কী প্রয়োজন এবং কীভাবে প্রস্তুতি নিবেন তা নিয়ে বিস্তারিত আলোচনা।',
-      author: 'Admin',
-      date: '২০২৪-০১-১৫',
-      readTime: '৫ মিনিট',
-      category: 'কানাডা',
-      image: '/placeholder.svg',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'IELTS পরীক্ষার প্রস্তুতি গাইড',
-      excerpt: 'IELTS পরীক্ষায় ভালো স্কোর পাওয়ার জন্য কার্যকর টিপস এবং কৌশল।',
-      author: 'Admin',
-      date: '২০২৪-০১-১০',
-      readTime: '৮ মিনিট',
-      category: 'পরীক্ষা প্রস্তুতি',
-      image: '/placeholder.svg',
-      featured: false
-    },
-    {
-      id: 3,
-      title: 'অস্ট্রেলিয়ায় স্কলারশিপের সুযোগ',
-      excerpt: 'অস্ট্রেলিয়ায় বিভিন্ন বিশ্ববিদ্যালয়ের স্কলারশিপ প্রোগ্রাম সম্পর্কে জানুন।',
-      author: 'Admin',
-      date: '২০২৪-০১-০৫',
-      readTime: '৬ মিনিট',
-      category: 'অস্ট্রেলিয়া',
-      image: '/placeholder.svg',
-      featured: false
-    },
-    {
-      id: 4,
-      title: 'যুক্তরাজ্যে স্টুডেন্ট ভিসা আবেদন প্রক্রিয়া',
-      excerpt: 'যুক্তরাজ্যে স্টুডেন্ট ভিসার জন্য আবেদন প্রক্রিয়া এবং প্রয়োজনীয় কাগজপত্র।',
-      author: 'Admin',
-      date: '২০২৩-১২-২৮',
-      readTime: '৭ মিনিট',
-      category: 'যুক্তরাজ্য',
-      image: '/placeholder.svg',
-      featured: false
-    },
-    {
-      id: 5,
-      title: 'আমেরিকায় উচ্চশিক্ষার খরচ',
-      excerpt: 'আমেরিকায় পড়াশোনার খরচ এবং খরচ কমানোর উপায় সম্পর্কে বিস্তারিত।',
-      author: 'Admin',
-      date: '২০২৩-১২-২০',
-      readTime: '১০ মিনিট',
-      category: 'আমেরিকা',
-      image: '/placeholder.svg',
-      featured: false
-    },
-    {
-      id: 6,
-      title: 'জার্মানিতে ফ্রি শিক্ষার সুযোগ',
-      excerpt: 'জার্মানিতে ফ্রি শিক্ষার সুযোগ এবং কীভাবে আবেদন করবেন তা জানুন।',
-      author: 'Admin',
-      date: '২০২৩-১২-১৫',
-      readTime: '৯ মিনিট',
-      category: 'জার্মানি',
-      image: '/placeholder.svg',
-      featured: false
-    }
-  ];
-
+  const blogPosts = [{
+    id: 1,
+    title: 'কানাডায় উচ্চশিক্ষার জন্য প্রয়োজনীয় প্রস্তুতি',
+    excerpt: 'কানাডায় পড়াশোনার জন্য কী কী প্রয়োজন এবং কীভাবে প্রস্তুতি নিবেন তা নিয়ে বিস্তারিত আলোচনা।',
+    author: 'Admin',
+    date: '২০২৪-০১-১৫',
+    readTime: '৫ মিনিট',
+    category: 'কানাডা',
+    image: '/placeholder.svg',
+    featured: true
+  }, {
+    id: 2,
+    title: 'IELTS পরীক্ষার প্রস্তুতি গাইড',
+    excerpt: 'IELTS পরীক্ষায় ভালো স্কোর পাওয়ার জন্য কার্যকর টিপস এবং কৌশল।',
+    author: 'Admin',
+    date: '২০২৪-০১-১০',
+    readTime: '৮ মিনিট',
+    category: 'পরীক্ষা প্রস্তুতি',
+    image: '/placeholder.svg',
+    featured: false
+  }, {
+    id: 3,
+    title: 'অস্ট্রেলিয়ায় স্কলারশিপের সুযোগ',
+    excerpt: 'অস্ট্রেলিয়ায় বিভিন্ন বিশ্ববিদ্যালয়ের স্কলারশিপ প্রোগ্রাম সম্পর্কে জানুন।',
+    author: 'Admin',
+    date: '২০২৪-০১-০৫',
+    readTime: '৬ মিনিট',
+    category: 'অস্ট্রেলিয়া',
+    image: '/placeholder.svg',
+    featured: false
+  }, {
+    id: 4,
+    title: 'যুক্তরাজ্যে স্টুডেন্ট ভিসা আবেদন প্রক্রিয়া',
+    excerpt: 'যুক্তরাজ্যে স্টুডেন্ট ভিসার জন্য আবেদন প্রক্রিয়া এবং প্রয়োজনীয় কাগজপত্র।',
+    author: 'Admin',
+    date: '২০২৩-১২-২৮',
+    readTime: '৭ মিনিট',
+    category: 'যুক্তরাজ্য',
+    image: '/placeholder.svg',
+    featured: false
+  }, {
+    id: 5,
+    title: 'আমেরিকায় উচ্চশিক্ষার খরচ',
+    excerpt: 'আমেরিকায় পড়াশোনার খরচ এবং খরচ কমানোর উপায় সম্পর্কে বিস্তারিত।',
+    author: 'Admin',
+    date: '২০২৩-১২-২০',
+    readTime: '১০ মিনিট',
+    category: 'আমেরিকা',
+    image: '/placeholder.svg',
+    featured: false
+  }, {
+    id: 6,
+    title: 'জার্মানিতে ফ্রি শিক্ষার সুযোগ',
+    excerpt: 'জার্মানিতে ফ্রি শিক্ষার সুযোগ এবং কীভাবে আবেদন করবেন তা জানুন।',
+    author: 'Admin',
+    date: '২০২৩-১২-১৫',
+    readTime: '৯ মিনিট',
+    category: 'জার্মানি',
+    image: '/placeholder.svg',
+    featured: false
+  }];
   const categories = ['সব', 'কানাডা', 'অস্ট্রেলিয়া', 'যুক্তরাজ্য', 'আমেরিকা', 'জার্মানি', 'পরীক্ষা প্রস্তুতি'];
   const [selectedCategory, setSelectedCategory] = React.useState('সব');
-  
   const allPosts = blogPosts;
   const filteredPosts = selectedCategory === 'সব' ? allPosts : allPosts.filter(post => post.category === selectedCategory);
-
-  return (
-    <div className="min-h-screen font-bangla bg-background">
+  return <div className="min-h-screen font-bangla bg-gradient-to-br from-blue-50 to-sky-100">
       {/* Hero Section */}
-      <section className="py-12 lg:py-24 bg-gradient-to-br from-brand-purple to-brand-blue">
+      <section className="py-12 lg:py-24">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-12">
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-800 mb-6">
               আমাদের ব্লগ
             </h1>
-            <p className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto px-2">
+            <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto px-2">
               বিদেশে উচ্চশিক্ষা সম্পর্কে সর্বশেষ তথ্য, টিপস এবং গাইডলাইন পান আমাদের ব্লগ থেকে।
             </p>
           </div>
@@ -99,19 +86,12 @@ const Blog = () => {
       </section>
 
       {/* Category Filter - Adjusted spacing */}
-      <section className="py-4 mb-8">
+      <section className="mb-8 py-[60px]">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex flex-wrap justify-center gap-2">
-            {categories.map(category => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                className={`${selectedCategory === category ? 'bg-brand-blue text-white' : 'border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white'}`}
-              >
+            {categories.map(category => <Button key={category} variant={selectedCategory === category ? "default" : "outline"} onClick={() => setSelectedCategory(category)} className={`${selectedCategory === category ? 'bg-brand-blue text-white' : 'border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white'}`}>
                 {category}
-              </Button>
-            ))}
+              </Button>)}
           </div>
         </div>
       </section>
@@ -120,14 +100,9 @@ const Blog = () => {
       <section className="pb-16">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredPosts.map(post => (
-              <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-0 shadow-lg">
+            {filteredPosts.map(post => <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 border-0 shadow-lg">
                 <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={post.image} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" 
-                  />
+                  <img src={post.image} alt={post.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-3">
@@ -163,13 +138,10 @@ const Blog = () => {
                     </Link>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Blog;

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Users, FileText, GraduationCap, Globe, Shield, Plane, Clock, Award, Target } from 'lucide-react';
+import { CheckCircle, Users, FileText, GraduationCap, Globe, Shield, Plane, Clock, Award, Target, MapPin, Heart, CreditCard, Stethoscope, BookOpen, Home } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
+
 const StudyAbroadProcess = () => {
-  const agencyServices = [{
+  const preDepartureServices = [{
     icon: <GraduationCap className="text-purple-600" size={32} />,
     title: "বিশ্ববিদ্যালয় ও কোর্স নির্বাচনে সহায়তা",
     description: "আপনার পছন্দ ও যোগ্যতা অনুযায়ী সঠিক বিশ্ববিদ্যালয় ও কোর্স নির্বাচন"
@@ -46,9 +47,44 @@ const StudyAbroadProcess = () => {
     description: "প্রয়োজনে ভিসা ইন্টারভিউয়ের জন্য প্রস্তুতি সহায়তা"
   }, {
     icon: <Plane className="text-emerald-600" size={32} />,
-    title: "প্রাক-যাত্রা ব্রিফিং বা মৌলিক প্রশিক্ষণ",
+    title: "প্রাক-যাত্রা ব্রিফিং বা মূলিক প্রশিক্ষণ",
     description: "বিদেশ যাওয়ার আগে প্রয়োজনীয় তথ্য ও প্রশিক্ষণ প্রদান"
   }];
+
+  const postArrivalServices = [{
+    icon: <Plane className="text-blue-600" size={32} />,
+    title: "বিমানবন্দর ও আগমন সহায়তা",
+    description: "বিমানবন্দর থেকে থাকার জায়গায় পৌঁছানো, স্থানীয় সিম কার্ড, পরিবহন ও মুদ্রা বিনিময়ে সহায়তা"
+  }, {
+    icon: <Home className="text-green-600" size={32} />,
+    title: "থাকার ব্যবস্থা সেটআপ",
+    description: "থাকার জায়গায় পৌঁছানো, আসবাবপত্র সাজানো এবং মৌলিক সুবিধা প্রস্তুত করতে সহায়তা"
+  }, {
+    icon: <MapPin className="text-purple-600" size={32} />,
+    title: "অভিমুখীকরণ ও স্থানীয় গাইডেন্স",
+    description: "ক্যাম্পাস ও শহর পরিচিতি, লাইব্রেরি, ল্যাব, ক্লাসরুম, পরিবহন রুট এবং স্থানীয় আইন ও জরুরি সেবার তথ্য"
+  }, {
+    icon: <BookOpen className="text-indigo-600" size={32} />,
+    title: "একাডেমিক সহায়তা",
+    description: "কোর্স রেজিস্ট্রেশন, সময়সূচী তৈরি, লাইব্রেরি অ্যাক্সেস এবং অধ্যাপকদের সাথে পরিচয়"
+  }, {
+    icon: <Stethoscope className="text-red-600" size={32} />,
+    title: "স্বাস্থ্যসেবা ও বীমা",
+    description: "স্থানীয় ডাক্তার/ক্লিনিকে রেজিস্ট্রেশন, স্বাস্থ্য বীমার ক্লেইম এবং জরুরি চিকিৎসা সহায়তা"
+  }, {
+    icon: <CreditCard className="text-cyan-600" size={32} />,
+    title: "ব্যাংকিং ও আর্থিক সহায়তা",
+    description: "স্থানীয় ব্যাংক অ্যাকাউন্ট খোলা, ডেবিট/ক্রেডিট কার্ড সেটআপ এবং অর্থ স্থানান্তরে সহায়তা"
+  }, {
+    icon: <Heart className="text-pink-600" size={32} />,
+    title: "সামাজিক ও সাংস্কৃতিক অভিযোজন",
+    description: "স্থানীয় সংস্কৃতি ও ভাষা বুঝতে সহায়তা এবং কমিউনিটি গ্রুপ, স্টুডেন্ট ক্লাবের সাথে যোগাযোগ"
+  }, {
+    icon: <Users className="text-orange-600" size={32} />,
+    title: "নিয়মিত পর্যবেক্ষণ ও পরামর্শ",
+    description: "একাডেমিক অগ্রগতি পর্যবেক্ষণ, মানসিক সহায়তা, দেশের জন্য মন কেমন সামলানো এবং পার্ট-টাইম চাকরিতে গাইডেন্স"
+  }];
+
   const studentSteps = [{
     icon: <FileText className="text-gray-700" size={28} />,
     title: "পাসপোর্টের জন্য আবেদন করুন",
@@ -86,6 +122,7 @@ const StudyAbroadProcess = () => {
     title: "মূল ব্যক্তিগত ডকুমেন্ট জমা দিন",
     description: "প্রয়োজন অনুযায়ী মূল কাগজপত্র জমা দিন"
   }];
+
   return <div className="min-h-screen font-bangla bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
       {/* Hero Section */}
       <section className="py-16 lg:py-24">
@@ -101,31 +138,65 @@ const StudyAbroadProcess = () => {
         </div>
       </section>
 
-      {/* Agency Services Section - Premium Design */}
+      {/* Services Section - Two Boxes */}
       <section className="py-16 bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-6">আমাদের সেবাসমূহ</h2>
-            <p className="text-xl opacity-90">এজেন্সি সাধারণত আপনার জন্য যা করে থাকে</p>
+            <p className="text-xl opacity-90">বাংলাদেশে থাকাকালীন এবং বিদেশে পৌঁছানোর পর আমাদের সম্পূর্ণ সহায়তা</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {agencyServices.map((service, index) => <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-300 hover:-translate-y-2 group">
-                <CardHeader className="text-center pb-4">
-                  <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 bg-slate-50">
-                      {service.icon}
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Pre-Departure Services */}
+            <div className="bg-white/10 backdrop-blur-sm border-white/20 rounded-xl p-6">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold mb-2">প্রাক-যাত্রা সেবা</h3>
+                <p className="text-white/90">বাংলাদেশে থাকাকালীন আমাদের সহায়তা</p>
+              </div>
+              <div className="grid gap-4 max-h-96 overflow-y-auto">
+                {preDepartureServices.map((service, index) => 
+                  <div key={index} className="bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300">
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white/20">
+                          {service.icon}
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1 text-sm leading-relaxed">{service.title}</h4>
+                        <p className="text-white/80 text-xs leading-relaxed">{service.description}</p>
+                      </div>
                     </div>
                   </div>
-                  <CardTitle className="text-lg font-bold leading-relaxed text-center">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-white/90 text-center leading-relaxed text-sm">{service.description}</p>
-                </CardContent>
-              </Card>)}
+                )}
+              </div>
+            </div>
+
+            {/* Post-Arrival Services */}
+            <div className="bg-white/10 backdrop-blur-sm border-white/20 rounded-xl p-6">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold mb-2">সফলভাবে পৌঁছানোর পর</h3>
+                <p className="text-white/90">বিদেশে পৌঁছানোর পর আমাদের সেবা</p>
+              </div>
+              <div className="grid gap-4 max-h-96 overflow-y-auto">
+                {postArrivalServices.map((service, index) => 
+                  <div key={index} className="bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300">
+                    <div className="flex items-start space-x-3">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white/20">
+                          {service.icon}
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1 text-sm leading-relaxed">{service.title}</h4>
+                        <p className="text-white/80 text-xs leading-relaxed">{service.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -182,4 +253,5 @@ const StudyAbroadProcess = () => {
       </section>
     </div>;
 };
+
 export default StudyAbroadProcess;

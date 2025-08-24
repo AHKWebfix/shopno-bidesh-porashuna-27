@@ -6,83 +6,83 @@ import { Link } from 'react-router-dom';
 
 const StudyAbroadProcess = () => {
   const preDepartureServices = [{
-    icon: <GraduationCap className="text-purple-600" size={32} />,
+    icon: <GraduationCap className="text-purple-600" size={40} />,
     title: "বিশ্ববিদ্যালয় ও কোর্স নির্বাচনে সহায়তা",
-    description: "আপনার পছন্দ ও যোগ্যতা অনুযায়ী সঠিক বিশ্ববিদ্যালয় ও কোর্স নির্বাচন"
+    description: "আপনার পছন্দ ও যোগ্যতা অনুযায়ী সঠিক বিশ্ববিদ্যালয় ও কোর্স নির্বাচন করতে পূর্ণ সহায়তা প্রদান।"
   }, {
-    icon: <FileText className="text-blue-600" size={32} />,
+    icon: <FileText className="text-blue-600" size={40} />,
     title: "বিশ্ববিদ্যালয়ে আবেদন জমা দেওয়া",
-    description: "আপনার পক্ষে বিশ্ববিদ্যালয়ে আবেদনপত্র জমা দেওয়া"
+    description: "আপনার পক্ষে বিশ্ববিদ্যালয়ে সম্পূর্ণ আবেদনপত্র প্রস্তুত করে জমা দেওয়ার ব্যবস্থা।"
   }, {
-    icon: <Award className="text-green-600" size={32} />,
+    icon: <Award className="text-green-600" size={40} />,
     title: "অফার লেটার সংগ্রহ",
-    description: "বিশ্ববিদ্যালয় থেকে অফার লেটার সংগ্রহ করা"
+    description: "বিশ্ববিদ্যালয় থেকে অফার লেটার সংগ্রহ করে আপনার কাছে পৌঁছে দেওয়া।"
   }, {
-    icon: <Globe className="text-indigo-600" size={32} />,
+    icon: <Globe className="text-indigo-600" size={40} />,
     title: "ভিসা আবেদন প্রক্রিয়া পরিচালনা (Subclass 500)",
-    description: "সম্পূর্ণ ভিসা আবেদন প্রক্রিয়া পরিচালনা"
+    description: "সম্পূর্ণ ভিসা আবেদন প্রক্রিয়া শুরু থেকে শেষ পর্যন্ত পরিচালনা করা।"
   }, {
-    icon: <FileText className="text-cyan-600" size={32} />,
+    icon: <FileText className="text-cyan-600" size={40} />,
     title: "GTE স্টেটমেন্ট প্রস্তুতি",
-    description: "আপনার প্রদানকৃত তথ্যের ভিত্তিতে GTE স্টেটমেন্ট প্রস্তুত করা"
+    description: "আপনার প্রদানকৃত তথ্যের ভিত্তিতে পেশাদার GTE স্টেটমেন্ট প্রস্তুত করা।"
   }, {
-    icon: <Shield className="text-red-600" size={32} />,
+    icon: <Shield className="text-red-600" size={40} />,
     title: "OSHC স্বাস্থ্য বীমার ব্যবস্থা",
-    description: "ওভারসিজ স্টুডেন্ট হেলথ কভার বীমার ব্যবস্থা"
+    description: "ওভারসিজ স্টুডেন্ট হেলথ কভার বীমার সম্পূর্ণ ব্যবস্থাপনা।"
   }, {
-    icon: <Target className="text-orange-600" size={32} />,
+    icon: <Target className="text-orange-600" size={40} />,
     title: "CoE সংগ্রহ",
-    description: "বিশ্ববিদ্যালয় থেকে কনফার্মেশন অফ এনরোলমেন্ট সংগ্রহ"
+    description: "বিশ্ববিদ্যালয় থেকে কনফার্মেশন অফ এনরোলমেন্ট দ্রুত সংগ্রহ করা।"
   }, {
-    icon: <CheckCircle className="text-teal-600" size={32} />,
+    icon: <CheckCircle className="text-teal-600" size={40} />,
     title: "ডকুমেন্ট চেকলিস্ট ও প্রস্তুতির গাইডলাইন",
-    description: "প্রয়োজনীয় কাগজপত্রের তালিকা ও প্রস্তুতির নির্দেশনা"
+    description: "প্রয়োজনীয় সকল কাগজপত্রের বিস্তারিত তালিকা ও প্রস্তুতির স্পষ্ট নির্দেশনা।"
   }, {
-    icon: <Users className="text-pink-600" size={32} />,
+    icon: <Users className="text-pink-600" size={40} />,
     title: "মেডিকেল ও PCC নির্দেশনা",
-    description: "স্বাস্থ্য পরীক্ষা ও পুলিশ ক্লিয়ারেন্সের নির্দেশনা"
+    description: "স্বাস্থ্য পরীক্ষা ও পুলিশ ক্লিয়ারেন্স সার্টিফিকেটের বিস্তারিত নির্দেশনা।"
   }, {
-    icon: <Globe className="text-violet-600" size={32} />,
+    icon: <Globe className="text-violet-600" size={40} />,
     title: "ভিসা ইন্টারভিউ প্রস্তুতিতে সহায়তা",
-    description: "প্রয়োজনে ভিসা ইন্টারভিউয়ের জন্য প্রস্তুতি সহায়তা"
+    description: "প্রয়োজনে ভিসা ইন্টারভিউয়ের জন্য সম্পূর্ণ প্রস্তুতি ও মক ইন্টারভিউ।"
   }, {
-    icon: <Plane className="text-emerald-600" size={32} />,
+    icon: <Plane className="text-emerald-600" size={40} />,
     title: "প্রাক-যাত্রা ব্রিফিং বা মূলিক প্রশিক্ষণ",
-    description: "বিদেশ যাওয়ার আগে প্রয়োজনীয় তথ্য ও প্রশিক্ষণ প্রদান"
+    description: "বিদেশ যাওয়ার আগে প্রয়োজনীয় সকল তথ্য ও বিশেষ প্রশিক্ষণ প্রদান।"
   }];
 
   const postArrivalServices = [{
-    icon: <Plane className="text-blue-600" size={32} />,
+    icon: <Plane className="text-blue-600" size={40} />,
     title: "বিমানবন্দর ও আগমন সহায়তা",
-    description: "বিমানবন্দর থেকে থাকার জায়গায় পৌঁছানো, স্থানীয় সিম কার্ড, পরিবহন ও মুদ্রা বিনিময়ে সহায়তা"
+    description: "বিমানবন্দর থেকে থাকার জায়গায় নিরাপদে পৌঁছানো, স্থানীয় সিম কার্ড সংগ্রহ, পরিবহন ব্যবস্থা ও মুদ্রা বিনিময়ে সম্পূর্ণ সহায়তা।"
   }, {
-    icon: <Home className="text-green-600" size={32} />,
+    icon: <Home className="text-green-600" size={40} />,
     title: "থাকার ব্যবস্থা সেটআপ",
-    description: "থাকার জায়গায় পৌঁছানো, আসবাবপত্র সাজানো এবং মৌলিক সুবিধা প্রস্তুত করতে সহায়তা"
+    description: "আপনার থাকার জায়গায় পৌঁছে আসবাবপত্র সাজানো এবং মৌলিক সুবিধাদি প্রস্তুত করতে হাতে-কলমে সহায়তা।"
   }, {
-    icon: <MapPin className="text-purple-600" size={32} />,
+    icon: <MapPin className="text-purple-600" size={40} />,
     title: "অভিমুখীকরণ ও স্থানীয় গাইডেন্স",
-    description: "ক্যাম্পাস ও শহর পরিচিতি, লাইব্রেরি, ল্যাব, ক্লাসরুম, পরিবহন রুট এবং স্থানীয় আইন ও জরুরি সেবার তথ্য"
+    description: "ক্যাম্পাস ও শহর পরিচিতি, লাইব্রেরি, ল্যাব, ক্লাসরুম, পরিবহন রুট সহ স্থানীয় আইন ও জরুরি সেবার সম্পূর্ণ তথ্য প্রদান।"
   }, {
-    icon: <BookOpen className="text-indigo-600" size={32} />,
+    icon: <BookOpen className="text-indigo-600" size={40} />,
     title: "একাডেমিক সহায়তা",
-    description: "কোর্স রেজিস্ট্রেশন, সময়সূচী তৈরি, লাইব্রেরি অ্যাক্সেস এবং অধ্যাপকদের সাথে পরিচয়"
+    description: "কোর্স রেজিস্ট্রেশন, সময়সূচী তৈরি, লাইব্রেরি অ্যাক্সেস সেটআপ এবং অধ্যাপকদের সাথে পরিচয় করিয়ে দেওয়া।"
   }, {
-    icon: <Stethoscope className="text-red-600" size={32} />,
+    icon: <Stethoscope className="text-red-600" size={40} />,
     title: "স্বাস্থ্যসেবা ও বীমা",
-    description: "স্থানীয় ডাক্তার/ক্লিনিকে রেজিস্ট্রেশন, স্বাস্থ্য বীমার ক্লেইম এবং জরুরি চিকিৎসা সহায়তা"
+    description: "স্থানীয় ডাক্তার ও ক্লিনিকে রেজিস্ট্রেশন, স্বাস্থ্য বীমার ক্লেইম প্রক্রিয়া এবং জরুরি চিকিৎসা সেবায় সহায়তা।"
   }, {
-    icon: <CreditCard className="text-cyan-600" size={32} />,
+    icon: <CreditCard className="text-cyan-600" size={40} />,
     title: "ব্যাংকিং ও আর্থিক সহায়তা",
-    description: "স্থানীয় ব্যাংক অ্যাকাউন্ট খোলা, ডেবিট/ক্রেডিট কার্ড সেটআপ এবং অর্থ স্থানান্তরে সহায়তা"
+    description: "স্থানীয় ব্যাংক অ্যাকাউন্ট খোলা, ডেবিট ও ক্রেডিট কার্ড সেটআপ এবং দেশ থেকে অর্থ স্থানান্তরে সহায়তা।"
   }, {
-    icon: <Heart className="text-pink-600" size={32} />,
+    icon: <Heart className="text-pink-600" size={40} />,
     title: "সামাজিক ও সাংস্কৃতিক অভিযোজন",
-    description: "স্থানীয় সংস্কৃতি ও ভাষা বুঝতে সহায়তা এবং কমিউনিটি গ্রুপ, স্টুডেন্ট ক্লাবের সাথে যোগাযোগ"
+    description: "স্থানীয় সংস্কৃতি ও ভাষা বুঝতে সহায়তা এবং কমিউনিটি গ্রুপ, স্টুডেন্ট ক্লাবের সাথে যোগাযোগ স্থাপন।"
   }, {
-    icon: <Users className="text-orange-600" size={32} />,
+    icon: <Users className="text-orange-600" size={40} />,
     title: "নিয়মিত পর্যবেক্ষণ ও পরামর্শ",
-    description: "একাডেমিক অগ্রগতি পর্যবেক্ষণ, মানসিক সহায়তা, দেশের জন্য মন কেমন সামলানো এবং পার্ট-টাইম চাকরিতে গাইডেন্স"
+    description: "একাডেমিক অগ্রগতি পর্যবেক্ষণ, মানসিক সহায়তা প্রদান, দেশের জন্য মনকেমন সামলানো এবং পার্ট-টাইম চাকরিতে গাইডেন্স।"
   }];
 
   const studentSteps = [{
@@ -139,33 +139,35 @@ const StudyAbroadProcess = () => {
       </section>
 
       {/* Services Section - Two Boxes */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 text-white relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-r from-purple-600 via-blue-600 to-green-500 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="container mx-auto px-4 relative">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">আমাদের সেবাসমূহ</h2>
-            <p className="text-xl opacity-90">বাংলাদেশে থাকাকালীন এবং বিদেশে পৌঁছানোর পর আমাদের সম্পূর্ণ সহায়তা</p>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold mb-8">আমাদের সেবাসমূহ</h2>
+            <p className="text-2xl opacity-90 leading-relaxed max-w-4xl mx-auto">
+              বাংলাদেশে থাকাকালীন এবং বিদেশে পৌঁছানোর পর আমাদের সম্পূর্ণ সহায়তা
+            </p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-10">
             {/* Pre-Departure Services */}
-            <div className="bg-white/10 backdrop-blur-sm border-white/20 rounded-xl p-6">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold mb-2">প্রাক-যাত্রা সেবা</h3>
-                <p className="text-white/90">বাংলাদেশে থাকাকালীন আমাদের সহায়তা</p>
+            <div className="bg-white/15 backdrop-blur-lg border border-white/30 rounded-2xl p-8 shadow-2xl">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl font-bold mb-4">প্রাক-যাত্রা সেবা</h3>
+                <p className="text-white/90 text-lg leading-relaxed">বাংলাদেশে থাকাকালীন আমাদের সহায়তা</p>
               </div>
-              <div className="grid gap-4 max-h-96 overflow-y-auto">
+              <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2">
                 {preDepartureServices.map((service, index) => 
-                  <div key={index} className="bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300">
-                    <div className="flex items-start space-x-3">
+                  <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 transform hover:scale-[1.02]">
+                    <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white/20">
+                        <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-white/25 backdrop-blur-sm">
                           {service.icon}
                         </div>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold mb-1 text-sm leading-relaxed">{service.title}</h4>
-                        <p className="text-white/80 text-xs leading-relaxed">{service.description}</p>
+                        <h4 className="font-bold mb-3 text-lg leading-relaxed text-white">{service.title}</h4>
+                        <p className="text-white/90 leading-relaxed">{service.description}</p>
                       </div>
                     </div>
                   </div>
@@ -174,23 +176,23 @@ const StudyAbroadProcess = () => {
             </div>
 
             {/* Post-Arrival Services */}
-            <div className="bg-white/10 backdrop-blur-sm border-white/20 rounded-xl p-6">
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold mb-2">সফলভাবে পৌঁছানোর পর</h3>
-                <p className="text-white/90">বিদেশে পৌঁছানোর পর আমাদের সেবা</p>
+            <div className="bg-white/15 backdrop-blur-lg border border-white/30 rounded-2xl p-8 shadow-2xl">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl font-bold mb-4">সফলভাবে পৌঁছানোর পর</h3>
+                <p className="text-white/90 text-lg leading-relaxed">বিদেশে পৌঁছানোর পর আমাদের সেবা</p>
               </div>
-              <div className="grid gap-4 max-h-96 overflow-y-auto">
+              <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2">
                 {postArrivalServices.map((service, index) => 
-                  <div key={index} className="bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300">
-                    <div className="flex items-start space-x-3">
+                  <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover:bg-white/20 transition-all duration-300 transform hover:scale-[1.02]">
+                    <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white/20">
+                        <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-white/25 backdrop-blur-sm">
                           {service.icon}
                         </div>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold mb-1 text-sm leading-relaxed">{service.title}</h4>
-                        <p className="text-white/80 text-xs leading-relaxed">{service.description}</p>
+                        <h4 className="font-bold mb-3 text-lg leading-relaxed text-white">{service.title}</h4>
+                        <p className="text-white/90 leading-relaxed">{service.description}</p>
                       </div>
                     </div>
                   </div>
